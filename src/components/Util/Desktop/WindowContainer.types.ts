@@ -7,5 +7,6 @@ export type WindowContainerProps = {
 	height?: string;
 	className?: string;
 	icon?: string; // TS seems to cast/alias image imports to just a string.
-	onClick?: Function;
+	zIndex?: number;
+	windowKey?: string;
 }

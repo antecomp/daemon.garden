@@ -2,6 +2,10 @@
 	position: fixed;
 }
 
+.window-handle .close-icon {
+	cursor: pointer;
+}
+
 .window-handle {
 	user-select: none;
 	background: url('@/assets/ui/window/titlebar_texture.png');
