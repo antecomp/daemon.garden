@@ -1,0 +1,35 @@
+.window-footer {
+	display: flex;
+	height: 8px;
+	position: relative;
+	top: -1px;
+}
+
+.window-footer img {
+	position: relative;
+	user-select: none;
+	-webkit-user-drag: none;
+}
+
+.window-footer span {
+	flex-grow: 1;
+	border-bottom: 1px solid var(--fgc);
+	background: none;
+}
+
+.window-content {
+	border: solid 1px var(--fgc);
+	border-bottom: 0;
+	padding: 15px;
+	background-color: var(--bgc);
+	overflow: auto;
+	max-height: 40vh;
+}
+
+.window-content img {
+	max-width: 90%;
+}
+
+.window-footer img {
+	top:0.81px;
+}

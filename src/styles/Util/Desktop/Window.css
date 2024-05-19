@@ -1,0 +1,21 @@
+.window {
+	position: fixed;
+}
+
+.window-handle {
+	user-select: none;
+	background: url('@/assets/ui/window/titlebar_texture.png');
+	height: 11px;
+	border: solid 1px var(--fgc);
+	border-bottom: none;
+	display: flex;
+}
+
+.window-handle span {
+	flex-grow: 1;
+}
+
+.window-handle img {
+	-webkit-user-drag: none;
+	user-select: none;
+}

@@ -1,0 +1,86 @@
+/* index.css should include all the fonts, standard vars, colourscheme vars etc. All other CSS files should reference the vars, fonts, etc defined here. */
+
+/* FONTS */
+@font-face {
+	font-family: 'main';
+	src: url(../assets/fonts/Piksel-JAGa.ttf);
+}
+
+@font-face {
+	font-family: 'teeny';
+	src: url(../assets/fonts/TeenyTinyPixls-o2zo.ttf);
+}
+
+@font-face {
+	font-family: 'enoch';
+	src: url(../assets/fonts/NVEnochian.otf);
+}
+
+@font-face {
+	font-family: 'erth';
+	src: url(../assets/fonts/earthbound-beginnings.ttf);
+}
+
+@font-face {
+	font-family: "pixl-wd";
+	src: url('../assets/fonts/pixelated-wingdings.ttf');
+}
+
+:root {
+	--fgc: white;
+	--bgc: black;
+	--empc: yellow;
+	--altfgc: #444;
+	--outlinec: black;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+}
+
+html {
+	image-rendering: pixelated;
+}
+
+body {
+	background-color: var(--bgc);
+	font-family: "main";
+	color: var(--fgc);
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    background-color: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+    color: var(--fgc);
+    background-color: var(--fgc);
+}
+
+::-webkit-scrollbar-button {
+    display: none; /* Hide the scrollbar buttons */
+}
+
+h1, h2, h3 h4, h5, h6 {
+	font-weight: normal;
+}
+
+/* move to desktop.css when written. */
+#desktop {
+	height: 100vh;
+	width: 100vw;
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+::-moz-selection {
+	background: var(--altfgc);
+}
+
+::selection {
+	background: none;
+	color: var(--altfgc);
+}
