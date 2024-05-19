@@ -1,9 +1,13 @@
 import titleImg from '@/assets/images/title.png'
+import { useState } from 'react'
 
 export default function IntroText() {
+      const [count, setCount] = useState(0);
 	return (
 		<>
             <h1 style={{ 'fontWeight': 'normal' }}>RECOVERED DOCUMENT</h1>
+            <h2>state test: count is {count}</h2>
+            <button onClick={() => setCount(prev => prev +1)}>inc count</button>
             <hr />
             <br /><br />
             <div style={{ 'textAlign': 'center' }} ><img src={titleImg} /></div>
