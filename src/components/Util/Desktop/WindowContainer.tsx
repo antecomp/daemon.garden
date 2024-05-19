@@ -2,7 +2,7 @@ import Draggable from "react-draggable"
 import { WindowContainerProps } from "./WindowContainer.types"
 import eyeIcon from '@/assets/ui/window/icons/eye.png'
 import closeIcon from '@/assets/ui/window/window_close.png'
-import '@/styles/Util/Desktop/Window.css'
+import '@/styles/Util/Desktop/WindowContainer.css'
 
 const WindowContainer = ({children, width, height, icon = eyeIcon} : WindowContainerProps) => {
 	return (

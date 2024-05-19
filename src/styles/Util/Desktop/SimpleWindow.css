@@ -14,7 +14,7 @@
 .window-footer span {
 	flex-grow: 1;
 	border-bottom: 1px solid var(--fgc);
-	background: none;
+	background: var(--bgc);
 }
 
 .window-content {
