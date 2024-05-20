@@ -1,0 +1,1 @@
+export const closeFadeDuration = 250

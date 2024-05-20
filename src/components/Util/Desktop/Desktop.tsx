@@ -16,6 +16,7 @@ const Desktop = () => {
 
 	// Should this be moved to a global zustand state?
 	const [windows, setWindows] = useState<Map<WindowKey, WindowData>>(new Map<WindowKey, WindowData>());
+	const [maxZIndex, setMaxZIndex] = useState(1);
 	
 	const addWindow = (key: WindowKey, data: WindowData) => {
 
@@ -36,8 +37,17 @@ const Desktop = () => {
 		})
 	}
 
+	// Just keep increasing z-index's lol.
 	const raiseWindow = (key: WindowKey) => {
+		const win = windows.get(key);
 
+		if(!win) {
+			console.error('raiseWindow() failed. Window not found.')
+			return;
+		}
+
+		win.zIndex = maxZIndex + 1;
+		setMaxZIndex(prev => prev +1);
 	}
 
 	// Remember, the map key (first argument) must match the windowKey!
@@ -56,13 +66,19 @@ const Desktop = () => {
 			width: '50ch'
 		})
 
+		addWindow("third", {
+			content: (<SimpleWindow>
+				Sloppum soyim ipsum cummum.
+			</SimpleWindow>)
+		})
+
 	}, [])
 
 
 	return (
 		<DesktopContext.Provider value={{addWindow, removeWindow, raiseWindow}}>
 		<div id="desktop">
-			{[...windows.entries()].map(([key, windowData]) => {
+			{[...windows.entries()].map(([key, windowData]) => { // maybe move this stuff to a global context thingy, so we can access the other actually rendered windows from anywhere :)
 				const {content, ...rest} = windowData;
 				// first key is for the iterator stuff, second is the key within the map. I hate programming.
 				return cloneElement(content, {key, ...rest, windowKey: key}); // according to the react docs this is bad practice but their alternative doesnt work?? lmao???

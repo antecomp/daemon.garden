@@ -23,3 +23,14 @@
 	-webkit-user-drag: none;
 	user-select: none;
 }
+
+
+/* closing animation */
+.window {
+	opacity: 1;
+}
+
+.window.closing {
+	transition: opacity var(--fadeDuration) ease-in;
+	opacity: 0;
+}

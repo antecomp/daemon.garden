@@ -5,7 +5,7 @@ export interface WindowData {
 	width?: string;
 	height?: string;
 	icon?: string;
-	zIndex?: number;
+	zIndex?: number; // if undefined, we know its gonna be 0.
 	content: React.ReactElement; // Can/Should I enforce that stuff needs to be wrapped in WindowContainer, at some level??
 }
 
