@@ -22,8 +22,8 @@ const WindowContainer = ({ children, width, height, icon = eyeIcon, className = 
 	const centerWindow = () => {
 		if (windowRef?.current?.offsetHeight) {
 			setWindowPos({
-				x: (vpd.width / 2) - (windowRef.current.offsetWidth / 2),
-				y: (vpd.height / 2) - (windowRef.current.offsetHeight / 2)
+				x: Math.round((vpd.width / 2) - (windowRef.current.offsetWidth / 2)),
+				y: Math.round((vpd.height / 2) - (windowRef.current.offsetHeight / 2))
 			})
 		}
 	}

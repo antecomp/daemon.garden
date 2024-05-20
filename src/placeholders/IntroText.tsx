@@ -1,6 +1,7 @@
 import titleImg from '@/assets/images/title.png'
 import Modal from '@/components/Util/Modal/Modal';
 import { useState } from 'react'
+import useNSTStore from '@/store';
 
 
 const testComp = () => {
@@ -12,6 +13,13 @@ const testComp = () => {
 
 export default function IntroText() {
       const [count, setCount] = useState(0);
+
+
+      //const connectedNodes = useNSTStore((state) => state.connected)
+      //const addNode = useNSTStore((state) => state.addNode)
+      const {connectedNodes, addNode, removeNode} = useNSTStore()
+
+
 	return (
 		<>
             <h1 style={{ 'fontWeight': 'normal' }}>RECOVERED DOCUMENT</h1>
@@ -21,6 +29,9 @@ export default function IntroText() {
                   onClick={() => Modal.open(testComp)}
             >
                   Open Test Modal</button>
+            <hr />
+            <button onClick={() => addNode('slop')}>test add NSTSave</button>
+            <button onClick={() => removeNode('slop')}>test remove NSTSave</button>
             <hr />
             <br /><br />
             <div style={{ 'textAlign': 'center' }} ><img src={titleImg} /></div>

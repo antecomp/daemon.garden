@@ -3,3 +3,10 @@
     border: double 3px var(--fgc);
     background: url('@/components/NSTracer/assets/NSTracerBG.png');
 }
+
+.NST-reset-zoom-button {
+    position: absolute;
+    top: 20px;
+    right: 8px;
+    z-index: 10;
+}
