@@ -1,4 +1,4 @@
-export interface NodeData {
+export interface NodeData { /* interface for the NSMap in data, ensure node data integrity for render. */
     id: string
     // default dx,dy to 0 on undefined?
     dx?: number 
