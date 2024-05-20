@@ -17,6 +17,7 @@
     "react-modal-global": "^2.3.4",
     "react-toastify": "^10.0.5",
     "react-zoom-pan-pinch": "^3.4.4",
+    "sass": "^1.77.2",
     "zustand": "^4.5.2"
   },
   "devDependencies": {

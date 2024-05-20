@@ -1,5 +1,14 @@
 import titleImg from '@/assets/images/title.png'
+import Modal from '@/components/Util/Modal/Modal';
 import { useState } from 'react'
+
+
+const testComp = () => {
+      return (
+            <div>This is a test</div>
+      )
+}
+
 
 export default function IntroText() {
       const [count, setCount] = useState(0);
@@ -8,6 +17,10 @@ export default function IntroText() {
             <h1 style={{ 'fontWeight': 'normal' }}>RECOVERED DOCUMENT</h1>
             <h2>state test: count is {count}</h2>
             <button onClick={() => setCount(prev => prev +1)}>inc count</button>
+            <button
+                  onClick={() => Modal.open(testComp)}
+            >
+                  Open Test Modal</button>
             <hr />
             <br /><br />
             <div style={{ 'textAlign': 'center' }} ><img src={titleImg} /></div>

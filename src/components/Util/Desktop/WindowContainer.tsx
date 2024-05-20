@@ -8,7 +8,8 @@ import { useContext, useEffect, useRef, useState } from "react"
 import useViewportDimensions from "@/hooks/useViewportDimensions"
 import { CLOSE_FADE_DURATION } from "./WindowContainer.config"
 
-
+// Note that other programs that use windows should have an extension of the WindowContainerProps type.
+// idk if I can enforce this any way tho
 const WindowContainer = ({ children, width, height, icon = eyeIcon, className = '', zIndex = 0, windowKey }: WindowContainerProps) => {
 
 	const DKT = useContext(DesktopContext);

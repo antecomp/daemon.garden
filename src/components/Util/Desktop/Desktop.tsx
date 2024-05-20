@@ -8,6 +8,7 @@ import '@/styles/Util/Desktop/Desktop.css'
 import { WindowKey, WindowData, DesktopContextType } from './Desktop.types';
 import SimpleWindow from './SimpleWindow';
 import IntroText from '@/placeholders/IntroText';
+import NSTracer from '@/components/NSTracer/NSTracer';
 
 // TypeScript why.
 export const DesktopContext = createContext<DesktopContextType | null>(null);
@@ -50,7 +51,6 @@ const Desktop = () => {
 		setMaxZIndex(prev => prev +1);
 	}
 
-	// Remember, the map key (first argument) must match the windowKey!
 	useEffect(() => {
 		addWindow("introtext", {
 			content: (<SimpleWindow className='slop'>
@@ -70,6 +70,10 @@ const Desktop = () => {
 			content: (<SimpleWindow>
 				Sloppum soyim ipsum cummum.
 			</SimpleWindow>)
+		})
+
+		addWindow("NST", {
+			content: (<NSTracer/>)
 		})
 
 	}, [])
