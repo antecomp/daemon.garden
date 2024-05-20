@@ -1,0 +1,5 @@
+.NST-body {
+    overflow: hidden;
+    border: double 3px var(--fgc);
+    background: url('@/components/NSTracer/assets/NSTracerBG.png');
+}

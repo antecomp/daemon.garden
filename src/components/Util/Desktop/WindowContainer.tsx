@@ -57,7 +57,7 @@ const WindowContainer = ({ children, width, height, icon = eyeIcon, className = 
 			onDrag={(_, d) => { setWindowPos({ x: d.x, y: d.y }) }} // Oh you want to externally change position? Fuck you now you have to add your own drag event handler!!! - cool library that doesn't piss me off.
 			scale={1}
 			bounds='#desktop'
-			//onMouseDown={() => DKT?.raiseWindow(windowKey)}  // THIS IS CAUSING A FUCKTON OF WEIRD PROPOGATION ERRORS HELP!!!!
+			onMouseDown={() => DKT?.raiseWindow(windowKey)}  // THIS IS CAUSING A FUCKTON OF WEIRD PROPOGATION ERRORS HELP!!!!
 		>
 			<div
 				className={`window ${className} ${isClosing ? 'closing' : ''}`}

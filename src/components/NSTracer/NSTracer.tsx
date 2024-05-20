@@ -4,20 +4,22 @@ import { TransformWrapper, TransformComponent, useControls } from "react-zoom-pa
 import WindowContainer from "../Util/Desktop/WindowContainer";
 import { WindowContainerClientProps } from "../Util/Desktop/WindowContainer.types";
 import { NST_SVG_DIMENSIONS } from "./NSTracer.config";
+import '@/styles/NSTracer/NSTracer.css'
 
 const NSTracer= ({width = "650px", height, icon, className = "NST-window", zIndex = 0, windowKey} : WindowContainerClientProps) => {
 
     const Controls = () => {
-        //const { resetTransform } = useControls();
+        const { resetTransform } = useControls();
 
         const handleResetClick: MouseEventHandler = (e) => {
             //e.stopPropagation();
-            console.log('Inner clicked!');
+            //console.log('Inner clicked!');
+            resetTransform()
           };
 
         return (
-          
-               <button onClick={handleResetClick}>please work I swear</button>
+                // this is fucking terrible lol. For some reason we only need to do this if button is a component deep. Window-level buttons work??
+               <button onMouseDown={e => e.stopPropagation()} onClick={handleResetClick}>reset zoom</button>
            
         )
     }
@@ -32,7 +34,7 @@ const NSTracer= ({width = "650px", height, icon, className = "NST-window", zInde
                     doubleClick={{disabled: true}}
                 >
                      <Controls/>
-                    <button onClick={() => console.log("Nightmare")}>AAAAAAAAA</button>   
+                    {/* <button onClick={() => console.log("Nightmare")}>AAAAAAAAA</button> // for some god-forsaken reason this button doesnt need to stopProp on onMouseDown  */} 
                     <TransformComponent>
                         <svg className="NST-graph" width={NST_SVG_DIMENSIONS.width} height={NST_SVG_DIMENSIONS.height}> {/* TODO: make a system to determine size?? */}
                             {/* 
