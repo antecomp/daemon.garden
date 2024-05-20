@@ -1,4 +1,5 @@
 //import { root } from "@/data/NSMap"
+import { MouseEventHandler } from "react";
 import { TransformWrapper, TransformComponent, useControls } from "react-zoom-pan-pinch"
 import WindowContainer from "../Util/Desktop/WindowContainer";
 import { WindowContainerClientProps } from "../Util/Desktop/WindowContainer.types";
@@ -9,10 +10,10 @@ const NSTracer= ({width = "650px", height, icon, className = "NST-window", zInde
     const Controls = () => {
         //const { resetTransform } = useControls();
 
-        function handleResetClick(e: React.MouseEvent) {
-            e.stopPropagation;
-            console.log("trigger");
-        }
+        const handleResetClick: MouseEventHandler = (e) => {
+            //e.stopPropagation();
+            console.log('Inner clicked!');
+          };
 
         return (
           
