@@ -1,25 +1,18 @@
 //import { root } from "@/data/NSMap"
-import { MouseEventHandler } from "react";
 import { TransformWrapper, TransformComponent, useControls } from "react-zoom-pan-pinch"
 import WindowContainer from "../Util/Desktop/WindowContainer";
-import { WindowContainerClientProps } from "../Util/Desktop/WindowContainer.types";
+import { WindowProps } from "../Util/Desktop/WindowContainer.types";
 import { NST_SVG_DIMENSIONS } from "./NSTracer.config";
 import '@/styles/NSTracer/NSTracer.css'
 
-const NSTracer= ({width = "650px", height, icon, className = "NST-window", zIndex = 0, windowKey} : WindowContainerClientProps) => {
+const NSTracer= ({width = "650px", height, icon, className = "NST-window", zIndex = 0, windowKey} : WindowProps) => {
 
     const Controls = () => {
         const { resetTransform } = useControls();
 
-        const handleResetClick: MouseEventHandler = (e) => {
-            //e.stopPropagation();
-            //console.log('Inner clicked!');
-            resetTransform()
-          };
-
         return (
                 // this is fucking terrible lol. For some reason we only need to do this if button is a component deep. Window-level buttons work??
-               <button onMouseDown={e => e.stopPropagation()} onClick={handleResetClick}>reset zoom</button>
+               <button onMouseDown={e => e.stopPropagation()} onClick={() => resetTransform()}>reset zoom</button>
            
         )
     }
