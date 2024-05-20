@@ -6,7 +6,7 @@ import '@/styles/Util/Desktop/WindowContainer.css'
 import { DesktopContext } from "./Desktop"
 import { useContext, useEffect, useRef, useState } from "react"
 import useViewportDimensions from "@/hooks/useViewportDimensions"
-import { closeFadeDuration } from "./WindowContainer.config"
+import { CLOSE_FADE_DURATION } from "./WindowContainer.config"
 
 
 const WindowContainer = ({ children, width, height, icon = eyeIcon, className = '', zIndex = 0, windowKey }: WindowContainerProps) => {
@@ -33,7 +33,7 @@ const WindowContainer = ({ children, width, height, icon = eyeIcon, className = 
 		setIsClosing(true);
 		setTimeout(() => {
 			DKT?.removeWindow(windowKey);
-		}, closeFadeDuration)
+		}, CLOSE_FADE_DURATION)
 
 	}
 
@@ -65,7 +65,7 @@ const WindowContainer = ({ children, width, height, icon = eyeIcon, className = 
 						'width': width,
 						'height': height,
 						'zIndex': zIndex,
-						'--fadeDuration': `${closeFadeDuration}ms`
+						'--fadeDuration': `${CLOSE_FADE_DURATION}ms`
 					} as WindowCSS}
 				onClick={() => DKT?.raiseWindow(windowKey)}
 				ref={windowRef}

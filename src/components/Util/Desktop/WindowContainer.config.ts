@@ -1,1 +1,1 @@
-export const closeFadeDuration = 250
+export const CLOSE_FADE_DURATION = 250
