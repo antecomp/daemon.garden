@@ -9,17 +9,17 @@ import useViewportDimensions from "@/hooks/useViewportDimensions"
 import { closeFadeDuration } from "./WindowContainer.config"
 
 
-const WindowContainer = ({children, width, height, icon = eyeIcon, className = '', zIndex = 0, windowKey} : WindowContainerProps) => {
+const WindowContainer = ({ children, width, height, icon = eyeIcon, className = '', zIndex = 0, windowKey }: WindowContainerProps) => {
 
 	const DKT = useContext(DesktopContext);
 	const vpd = useViewportDimensions();
 	const windowRef = useRef<HTMLInputElement>(null);
 
-	const [windowPos, setWindowPos] = useState<ControlPosition>({x: 10, y: 10});
+	const [windowPos, setWindowPos] = useState<ControlPosition>({ x: 10, y: 10 });
 	const [isClosing, setIsClosing] = useState(false); // to trigger the animation.
 
 	const centerWindow = () => {
-		if(windowRef?.current?.offsetHeight) {
+		if (windowRef?.current?.offsetHeight) {
 			setWindowPos({
 				x: (vpd.width / 2) - (windowRef.current.offsetWidth / 2),
 				y: (vpd.height / 2) - (windowRef.current.offsetHeight / 2)
@@ -42,7 +42,7 @@ const WindowContainer = ({children, width, height, icon = eyeIcon, className = '
 		centerWindow();
 	}, [])
 
-	if(!windowKey) {
+	if (!windowKey) {
 		console.error('Warning: Window is missing windowKey prop. undefined only permitted so TS wouldnt yell at me. Something is wrong :)')
 	}
 
@@ -53,18 +53,18 @@ const WindowContainer = ({children, width, height, icon = eyeIcon, className = '
 			//positionOffset={{x: '-50%', y: '-50%'}} // breaks the bounds shit.
 			axis="none" // ref: https://github.com/react-grid-layout/react-draggable/issues/129#issuecomment-365892516 (we want to manually handle pos)
 			position={windowPos}
-			onDrag={(e, d) => { setWindowPos({ x: d.x, y: d.y }) }} // Oh you want to externally change position? Fuck you now you have to add your own drag event handler!!! - cool library that doesn't piss me off.
+			onDrag={(_, d) => { setWindowPos({ x: d.x, y: d.y }) }} // Oh you want to externally change position? Fuck you now you have to add your own drag event handler!!! - cool library that doesn't piss me off.
 			scale={1}
 			bounds='#desktop'
 			onMouseDown={() => DKT?.raiseWindow(windowKey)}
 		>
-			<div 
-				className={`window ${className} ${isClosing ? 'closing' : ''}`} 
+			<div
+				className={`window ${className} ${isClosing ? 'closing' : ''}`}
 				style={
 					{
-						'width': width, 
-						'height': height, 
-						'zIndex': zIndex, 
+						'width': width,
+						'height': height,
+						'zIndex': zIndex,
 						'--fadeDuration': `${closeFadeDuration}ms`
 					} as WindowCSS}
 				onClick={() => DKT?.raiseWindow(windowKey)}
