@@ -32,7 +32,7 @@ const NSNode = ({
         y: parentCoords.y + (NODE_CONSTS.offsetMultiplier * dy)
     }
 
-    const linePoints: coordinatePair = { // TODO: make this more robust with the line drawing changing origin to better fit angle.
+    const linePoints: coordinatePair = {
         x1: findCircleExitPoint({...parentCoords}, NODE_CONSTS.radius, dx, dy)[0],
         y1: findCircleExitPoint({...parentCoords}, NODE_CONSTS.radius, dx, dy)[1],
         x2: coords.x,
