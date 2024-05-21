@@ -1,0 +1,29 @@
+.NST-statusbar {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--altfgc);
+    gap: 1px;
+    border-top: solid 1px var(--fgc);
+}
+
+.NST-statusbar .green {
+    color: lime;
+}
+
+.NST-statusbar .red {
+    color: red;
+}
+
+.NST-statusbar .yellow {
+    color: yellow;
+}
+
+.NST-statusbar p {
+    padding: 3px 3px;
+    background: var(--bgc);
+}
+
+.NST-statusbar span {
+    flex-grow: 1;
+    background-color: black;
+}

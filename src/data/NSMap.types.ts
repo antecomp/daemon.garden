@@ -3,7 +3,7 @@ export interface NodeData { /* interface for the NSMap in data, ensure node data
     // default dx,dy to 0 on undefined?
     dx?: number 
     dy?: number
-    action: string
+    action: "battle" | "autoconnect" | "dialogue"
     actionProps?: any // dont keep it as any lol. I just don't know the structure yet.
     postConnect?: Function
     children?: NodeData[]

@@ -7,6 +7,7 @@ import { coordinatePair } from "@/extra.types"
 import { NODE_CONSTS } from "./NSTracer.config"
 import classNames from "classnames"
 import { findCircleExitPoint } from "./helpers"
+import { NSTracerContext } from "./NSTracer"
 
 const NSNode = ({
     id,
@@ -19,9 +20,8 @@ const NSNode = ({
     postConnect,
 }: NSNodeProps) => {
 
-    
-
     const DKT = useContext(DesktopContext);
+    const NSTC = useContext(NSTracerContext)
     const { connectedNodes, addNode, removeNode } = useNSTStore()
     const isNodeExpanded = connectedNodes.includes(id)
     const expandedLeaf = isNodeExpanded && (children == null);
@@ -73,6 +73,7 @@ const NSNode = ({
                     stroke="white"
                     strokeWidth={1}
                     onClick={handleClick}
+                    onMouseMove={() => NSTC?.setStatusNode({id, dx, dy, action, actionProps, postConnect ,children})} // basically have to reconstruct the node object here with props
                     className={nodeClass}
                 />
                 {expandedLeaf && <text className="exlText" x={coords.x} y={coords.y + NODE_CONSTS.radius + 10} textAnchor="middle">NO ROUTE</text>}

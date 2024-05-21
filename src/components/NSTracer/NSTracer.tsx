@@ -7,8 +7,16 @@ import '@/styles/NSTracer/NSTracer.css'
 import { root } from "@/data/NSMap";
 import NSNode from "./NSNode";
 import NSTIcon from '@/assets/ui/window/icons/NST.png'
+import NSTStatusBar from "./NSTStatusBar";
+import { useState, createContext } from "react";
+import { NSTContext } from "./NSTracer.types";
+
+export const NSTracerContext = createContext<NSTContext | null>(null);
 
 const NSTracer= ({width = "650px", height, icon = NSTIcon, className = "NST-window", zIndex = 0, windowKey} : WindowProps) => {
+
+    const [statusNode, setStatusNode] = useState(root)
+
 
     const Controls = () => {
         const { resetTransform } = useControls();
@@ -21,6 +29,7 @@ const NSTracer= ({width = "650px", height, icon = NSTIcon, className = "NST-wind
     }
 
     return (
+    <NSTracerContext.Provider value={{setStatusNode}}>
        <WindowContainer width={width} height={height} className={className} icon={icon} zIndex={zIndex} windowKey={windowKey} initialPosition={{x: 20, y: 20}}>
             <div className="NST-body">
                 <TransformWrapper
@@ -37,8 +46,10 @@ const NSTracer= ({width = "650px", height, icon = NSTIcon, className = "NST-wind
                         </svg>
                     </TransformComponent>
                 </TransformWrapper>
+                <NSTStatusBar currentNode={statusNode}/>
             </div>
        </WindowContainer>
+    </NSTracerContext.Provider>
     )
 
 }
