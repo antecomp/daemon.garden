@@ -6,8 +6,9 @@ import { NST_SVG_DIMENSIONS } from "./NSTracer.config";
 import '@/styles/NSTracer/NSTracer.css'
 import { root } from "@/data/NSMap";
 import NSNode from "./NSNode";
+import NSTIcon from '@/assets/ui/window/icons/NST.png'
 
-const NSTracer= ({width = "650px", height, icon, className = "NST-window", zIndex = 0, windowKey} : WindowProps) => {
+const NSTracer= ({width = "650px", height, icon = NSTIcon, className = "NST-window", zIndex = 0, windowKey} : WindowProps) => {
 
     const Controls = () => {
         const { resetTransform } = useControls();
