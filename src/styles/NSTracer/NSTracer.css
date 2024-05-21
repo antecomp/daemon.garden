@@ -8,5 +8,46 @@
     position: absolute;
     top: 20px;
     right: 8px;
-    z-index: 10;
+    z-index: 10; /* lol */
+    font-family: 'pixl-wd';
+    background: none;
+    color: var(--fgc);
+    border: none;
+    font-size: 32px;
+    padding-top: 4px;
+    cursor: pointer;
+}
+
+.NST-node {
+    stroke: var(--altfgc);
+}
+
+.node-visited {
+    stroke: var(--fgc);
+}
+
+line.NST-node {
+    stroke-dasharray: 5;
+    stroke-dashoffset: 5; /* adds a gap out of the parent circle, looks better when you have a cluster of lines all going to a similar junction. */
+}
+
+line.node-visited {
+    stroke: var(--fgc);
+    stroke-dasharray: 0;
+}
+
+circle.NST-node:hover {
+    cursor: pointer;
+	filter: drop-shadow(0 0 3px var(--fgc));
+	stroke: var(--fgc);
+}
+
+circle.node-visited-leaf {
+	stroke: red;
+}
+
+.exlText {
+    fill: red;
+    font-family: 'teeny';
+    font-size: 6px;
 }

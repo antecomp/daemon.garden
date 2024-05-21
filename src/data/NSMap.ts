@@ -61,10 +61,13 @@ export const root : NodeData = {
 						id: "the slop module",
 						action: 'battle',
 						actionProps: { fileName: 'anthousai' },
+						dy: 2
 					},
 					{
 						id: "the mori zone",
 						action: 'dialogue',
+						dx: 1,
+						dy: -1
 					}
 				]
 			}]

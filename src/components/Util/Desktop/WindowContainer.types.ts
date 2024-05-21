@@ -7,6 +7,7 @@ export interface WindowProps  {
 	icon?: string; // TS seems to cast/alias image imports to just a string.
 	zIndex?: number;
 	windowKey?: string;
+	initialPosition?: {x: number, y: number} /* If undefined WindowContainer will automatically attempt to center the window. */
 }
 
 export interface WindowContainerProps extends WindowProps {

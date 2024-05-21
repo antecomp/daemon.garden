@@ -5,9 +5,10 @@ import rcorner from '@/assets/ui/window/win_single_corner_right.png'
 import '@/styles/Util/Desktop/SimpleWindow.css'
 
 
-const SimpleWindow = ({children, width, height, icon, className, zIndex = 0, windowKey}: WindowContainerProps) => {
+const SimpleWindow = ({children, width, height, icon, className, zIndex = 0, windowKey, initialPosition}: WindowContainerProps) => {
 	return (
-		<WindowContainer width={width} height={height} icon={icon} className={className} zIndex={zIndex} windowKey={windowKey}>
+		//<WindowContainer width={width} height={height} icon={icon} className={className} zIndex={zIndex} windowKey={windowKey} initialPosition={initialPosition}>
+		<WindowContainer {...{width, height, icon, className, zIndex, windowKey, initialPosition}}>
 			<div className="window-content">
 				{children}
 			</div>

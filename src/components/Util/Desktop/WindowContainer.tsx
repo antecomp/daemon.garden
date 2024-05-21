@@ -10,13 +10,13 @@ import { CLOSE_FADE_DURATION } from "./WindowContainer.config"
 
 // Note that other programs that use windows should have an extension of the WindowContainerProps type.
 // idk if I can enforce this any way tho
-const WindowContainer = ({ children, width, height, icon = eyeIcon, className = '', zIndex = 0, windowKey }: WindowContainerProps) => {
+const WindowContainer = ({ children, width, height, icon = eyeIcon, className = '', zIndex = 0, windowKey, initialPosition }: WindowContainerProps) => {
 
 	const DKT = useContext(DesktopContext);
 	const vpd = useViewportDimensions();
 	const windowRef = useRef<HTMLInputElement>(null);
 
-	const [windowPos, setWindowPos] = useState<ControlPosition>({ x: 10, y: 10 });
+	const [windowPos, setWindowPos] = useState<ControlPosition>({ x: (initialPosition?.x ?? 0),  y: (initialPosition?.y ?? 0)});
 	const [isClosing, setIsClosing] = useState(false); // to trigger the animation.
 
 	const centerWindow = () => {
@@ -40,7 +40,9 @@ const WindowContainer = ({ children, width, height, icon = eyeIcon, className = 
 
 	// lol
 	useEffect(() => {
-		centerWindow();
+		if (!initialPosition) {
+			centerWindow();
+		}
 	}, [])
 
 	if (!windowKey) {

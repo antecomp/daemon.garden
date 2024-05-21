@@ -14,13 +14,13 @@ const NSTracer= ({width = "650px", height, icon, className = "NST-window", zInde
 
         return (
                 // this is fucking terrible lol. For some reason we only need to do this if button is a component deep. Window-level buttons work??
-               <button className="NST-reset-zoom-button" onMouseDown={e => e.stopPropagation()} onClick={() => resetTransform()}>reset zoom</button>
+               <button className="NST-reset-zoom-button" onMouseDown={e => e.stopPropagation()} onClick={() => resetTransform()}>y</button>
            
         )
     }
 
     return (
-       <WindowContainer width={width} height={height} className={className} icon={icon} zIndex={zIndex} windowKey={windowKey}>
+       <WindowContainer width={width} height={height} className={className} icon={icon} zIndex={zIndex} windowKey={windowKey} initialPosition={{x: 20, y: 20}}>
             <div className="NST-body">
                 <TransformWrapper
                     initialScale={1}

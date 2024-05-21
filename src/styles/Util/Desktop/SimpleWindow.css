@@ -24,6 +24,7 @@
 	background-color: var(--bgc);
 	overflow: auto;
 	max-height: 40vh;
+	user-select:text;
 }
 
 .window-content img {
