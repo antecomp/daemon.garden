@@ -11,9 +11,7 @@ export function findCircleExitPoint(circleCenter: {x: number, y: number}, radius
 
 
 		let x = Math.sqrt(xSqr);
-		// decide which intersection point to grab based on slope direction
-		x *= (m < 0) ? -1 : 1;
-
+		x *= (Math.sign(dx)); // This decides what intersection we use. I have no idea why this works correctly.
 		let y = m * x;
 
 		return [x + circleCenter.x, y + circleCenter.y]

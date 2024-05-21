@@ -12,7 +12,7 @@ export const root : NodeData = {
 		{
 			id: "kestrel:phone",
 			dx: 2,
-			dy: 0,
+			dy: -1,
 			action: 'battle',
 			actionProps: { fileName: 'anthousai' },
 		},
@@ -25,7 +25,7 @@ export const root : NodeData = {
 			children: [
 				{
 					id: "novacene:home",
-					dy: 1,
+					dy: 0,
 					dx: 2.2,
 					action: 'battle',
 					actionProps: { fileName: 'anthousai' },
@@ -61,13 +61,13 @@ export const root : NodeData = {
 						id: "the slop module",
 						action: 'battle',
 						actionProps: { fileName: 'anthousai' },
-						dy: 2
+						dy: -1,
+						dx: -2
 					},
 					{
 						id: "the mori zone",
 						action: 'dialogue',
 						dx: 1,
-						dy: -1
 					}
 				]
 			}]
