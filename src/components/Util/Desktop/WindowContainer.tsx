@@ -3,20 +3,25 @@ import { WindowCSS, WindowContainerProps } from "./WindowContainer.types"
 import eyeIcon from '@/assets/ui/window/icons/eye.png'
 import closeIcon from '@/assets/ui/window/window_close.png'
 import '@/styles/Util/Desktop/WindowContainer.css'
-import { DesktopContext } from "./Desktop"
-import { useContext, useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import useViewportDimensions from "@/hooks/useViewportDimensions"
 import { CLOSE_FADE_DURATION } from "./WindowContainer.config"
+import useDesktopContext from "@/hooks/useDesktopContext"
 
-// Note that other programs that use windows should have an extension of the WindowContainerProps type.
-// idk if I can enforce this any way tho
+/**
+ * Draggable window container component for the desktop environment. This only provides the Draggable container and the "handle."
+ * NOTE: Other programs that use windows should extend the WindowContainerProps here. Desktop.tsx needs to drill info like z-Index down!!
+ * @component
+ * @param {WindowContainerProps} props - The properties for the window container.
+ * @returns {JSX.Element} The window container element.
+ */
 const WindowContainer = ({ children, width, height, icon = eyeIcon, className = '', zIndex = 0, windowKey, initialPosition }: WindowContainerProps) => {
 
-	const DKT = useContext(DesktopContext);
+	const { removeWindow, raiseWindow } = useDesktopContext();
 	const vpd = useViewportDimensions();
 	const windowRef = useRef<HTMLInputElement>(null);
 
-	const [windowPos, setWindowPos] = useState<ControlPosition>({ x: (initialPosition?.x ?? 0),  y: (initialPosition?.y ?? 0)});
+	const [windowPos, setWindowPos] = useState<ControlPosition>({ x: (initialPosition?.x ?? 0), y: (initialPosition?.y ?? 0) });
 	const [isClosing, setIsClosing] = useState(false); // to trigger the animation.
 
 	const centerWindow = () => {
@@ -28,17 +33,18 @@ const WindowContainer = ({ children, width, height, icon = eyeIcon, className = 
 		}
 	}
 
+	// For the X button on the window :)
 	const handleClose = (e: React.MouseEvent) => {
 		e.stopPropagation();
 
 		setIsClosing(true);
 		setTimeout(() => {
-			DKT?.removeWindow(windowKey);
+			removeWindow(windowKey);
 		}, CLOSE_FADE_DURATION)
 
 	}
 
-	// lol
+	// If no initial position is provided, the window will implicitely center itself on load.
 	useEffect(() => {
 		if (!initialPosition) {
 			centerWindow();
@@ -59,7 +65,7 @@ const WindowContainer = ({ children, width, height, icon = eyeIcon, className = 
 			onDrag={(_, d) => { setWindowPos({ x: d.x, y: d.y }) }} // Oh you want to externally change position? Fuck you now you have to add your own drag event handler!!! - cool library that doesn't piss me off.
 			scale={1}
 			bounds='#desktop'
-			onMouseDown={() => DKT?.raiseWindow(windowKey)}  // this can lead to some annoying propagation. Just remember to stopProp on mouseDown because the onClick never triggers :D
+			onMouseDown={() => raiseWindow(windowKey)}  // this can lead to some annoying propagation. Just remember to stopProp on mouseDown because the onClick never triggers :D
 			nodeRef={windowRef} // literally just so React strictmode will shut the fuck up: https://stackoverflow.com/questions/63603902/finddomnode-is-deprecated-in-strictmode-finddomnode-was-passed-an-instance-of-d
 		>
 			<div
@@ -71,7 +77,7 @@ const WindowContainer = ({ children, width, height, icon = eyeIcon, className = 
 						'zIndex': zIndex,
 						'--fadeDuration': `${CLOSE_FADE_DURATION}ms`
 					} as WindowCSS}
-				onClick={() => DKT?.raiseWindow(windowKey)}
+				onClick={() => raiseWindow(windowKey)}
 				ref={windowRef}
 			>
 				<div className="window-handle">

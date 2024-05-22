@@ -8,6 +8,14 @@ interface NSPromptProps {
 	callback: Function
 }
 
+/**
+ * Popup tooltip-looking confirmation prompt that appears when the player clicks on a node. 
+ * Summoned by triggerNewConfirmation() in NSTracer (called by Node via context). 
+ * This also loads a bunch of temporary event listeners to implicitely cancel ("by suicide") 
+ * if the user clicks anything other than elements within NSPrompt.
+ * @param param0 
+ * @returns 
+ */
 const NSPrompt = ({ display, callback }: NSPromptProps) => {
 	const NSTC = useContext(NSTracerContext)
 	const [spawnAt, _] = useState(getMousePosition())
@@ -23,16 +31,17 @@ const NSPrompt = ({ display, callback }: NSPromptProps) => {
 			callback("cancel by suicide")
 			NSTC?.setConfirmationText(null);
 		}
-	  };
+	};
 
 
 	useEffect(() => {
 
+		// Need this tiny timeout to prevent immediate suicide from a mouse event that was in-progress while this was mounting.
 		setTimeout(() => {
 			document.addEventListener('mousedown', handleClickOutside);
 			document.addEventListener('wheel', handleClickOutside);
 		}, 1)
-		
+
 
 
 		// Cleanup the event listeners on component unmount

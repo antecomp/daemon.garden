@@ -1,4 +1,6 @@
-export function findCircleExitPoint(circleCenter: {x: number, y: number}, radius: number, dx: number, dy:number) {
+import { Point } from "@/extra.types";
+
+export function findCircleExitPoint(circleCenter: Point, radius: number, dx: number, dy:number) {
 
 	// if going straight down.
 	if (dx == 0 ) {

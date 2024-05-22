@@ -4,7 +4,12 @@ import lcorner from '@/assets/ui/window/win_single_corner_left.png'
 import rcorner from '@/assets/ui/window/win_single_corner_right.png'
 import '@/styles/Util/Desktop/SimpleWindow.css'
 
-
+/**
+ * SimpleWindow component providing a basic window layout for rendering JSX children. Adds cut-corner border decoration.
+ * @component
+ * @param {WindowContainerProps} props - These props get directly passed to WindowContainer, and therefore are under the same conventions.
+ * @returns {JSX.Element}
+ */
 const SimpleWindow = ({children, width, height, icon, className, zIndex = 0, windowKey, initialPosition}: WindowContainerProps) => {
 	return (
 		//<WindowContainer width={width} height={height} icon={icon} className={className} zIndex={zIndex} windowKey={windowKey} initialPosition={initialPosition}>

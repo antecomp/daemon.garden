@@ -1,8 +1,3 @@
-// Implement add/remove functions and add them to the desktop context.
-
-// Before you get super deep into the code, also figure out how the "taskbar" or whatever will work. Or just in general what will invoke calls to add new windows
-// what will remove them, and how you will enforce uniqueness or whatever (for example it'd be nice if clicking on the taskbar either opens something, or 'focus's' it).
-
 import { cloneElement, useEffect, useState, createContext } from 'react';
 import '@/styles/Util/Desktop/Desktop.css'
 import { WindowKey, WindowData, DesktopContextType } from './Desktop.types';
@@ -10,45 +5,64 @@ import SimpleWindow from './SimpleWindow';
 import IntroText from '@/placeholders/IntroText';
 import NSTracer from '@/components/NSTracer/NSTracer';
 
-// TypeScript why.
+/**
+ * React context for signaling to the window manager (Desktop component).
+ */
 export const DesktopContext = createContext<DesktopContextType | null>(null);
 
+/**
+ * Desktop component. Renders and manages windows in the DE. Spans the entire screen.
+ * Windows should be added directly to this with DesktopContext.
+ * @component 
+ */
 const Desktop = () => {
 
 	// Should this be moved to a global zustand state?
 	const [windows, setWindows] = useState<Map<WindowKey, WindowData>>(new Map<WindowKey, WindowData>());
 	const [maxZIndex, setMaxZIndex] = useState(1);
-	
-	const addWindow = (key: WindowKey, data: WindowData) => {
+
+
+	/**
+	 * Adds a new window to the desktop.
+	 * @param {WindowKey} key - Unique key for the window. If key already exists, the existing window will be re-rendered with the new content.
+	 * @param {WindowData} data - Data for the window including content and dimensions.
+	 */
+	const addWindow: DesktopContextType['addWindow'] = (key: WindowKey, data: WindowData) => {
 
 		setWindows((prevWindows) => {
 			const newWindows = new Map(prevWindows);
-			// todo add check for key already existing.
+			// By the nature of this being a map, if the key already exists we overwrite the window (im fine with this behavior.)
 			newWindows.set(key, data);
 			return newWindows;
 		})
 	}
 
+	/**
+	* Removes a window from the desktop.
+	* @param {WindowKey} key - Unique key for the window.
+	*/
 	const removeWindow = (key: WindowKey) => {
 		setWindows((prevWindows) => {
 			const newWindows = new Map(prevWindows);
-			// todo: add check for key not existing.
-			newWindows.delete(key);
+			if (!newWindows.delete(key)) { console.error(`Cannot remove window that doesn't exist! Window: ${key} not found.`) };
 			return newWindows;
 		})
 	}
 
-	// Just keep increasing z-index's lol.
+	/**
+	 * Raises the z-index of a window, bringing it to the front. Will increase z-index ad-infinitum lol.
+	 * @param {WindowKey} key - Unique key for the window.
+	 */
 	const raiseWindow = (key: WindowKey) => {
 		const win = windows.get(key);
 
-		if(!win) {
+		if (!win) {
 			console.error('raiseWindow() failed. Window not found.')
 			return;
 		}
 
 		win.zIndex = maxZIndex + 1;
-		setMaxZIndex(prev => prev +1);
+		setMaxZIndex(prev => prev + 1);
 	}
 
 	useEffect(() => {
@@ -73,21 +87,21 @@ const Desktop = () => {
 		})
 
 		addWindow("NST", {
-			content: (<NSTracer/>)
+			content: (<NSTracer />)
 		})
 
 	}, [])
 
 
 	return (
-		<DesktopContext.Provider value={{addWindow, removeWindow, raiseWindow}}>
-		<div id="desktop">
-			{[...windows.entries()].map(([key, windowData]) => { // maybe move this stuff to a global context thingy, so we can access the other actually rendered windows from anywhere :)
-				const {content, ...rest} = windowData;
-				// first key is for the iterator stuff, second is the key within the map. I hate programming.
-				return cloneElement(content, {key, ...rest, windowKey: key}); // according to the react docs this is bad practice but their alternative doesnt work?? lmao???
-			})}
-		</div>
+		<DesktopContext.Provider value={{ addWindow, removeWindow, raiseWindow }}>
+			<div id="desktop">
+				{[...windows.entries()].map(([key, windowData]) => { // maybe move this stuff to a global context thingy (seperate from windowMap), so we can access the other actually rendered windows from anywhere :)
+					const { content, ...rest } = windowData;
+					// first key is for the iterator stuff, second is the key within the map. I hate programming.
+					return cloneElement(content, { key, ...rest, windowKey: key }); // according to the react docs this is bad practice but their alternative doesnt work?? lmao???
+				})}
+			</div>
 		</DesktopContext.Provider>
 	)
 }

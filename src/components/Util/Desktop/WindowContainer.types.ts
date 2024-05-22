@@ -1,13 +1,11 @@
 import { CSSProperties, ReactNode } from "react"
+import { WindowData } from "./Desktop.types";
+import { Point } from "@/extra.types";
 
-export interface WindowProps  {
-	width?: string;
-	height?: string;
-	className?: string;
-	icon?: string; // TS seems to cast/alias image imports to just a string.
-	zIndex?: number;
+export interface WindowProps extends Omit<WindowData, 'content'> {
 	windowKey?: string;
-	initialPosition?: {x: number, y: number} /* If undefined WindowContainer will automatically attempt to center the window. */
+	initialPosition?: Point
+	className?: string;
 }
 
 export interface WindowContainerProps extends WindowProps {
