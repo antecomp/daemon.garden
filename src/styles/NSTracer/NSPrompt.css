@@ -1,0 +1,8 @@
+.ns-prompt {
+	width: 250px;
+	border: solid var(--fgc) 1px;
+	padding: 3px;
+	position: fixed;
+	background-color: black;
+	z-index: 9999999999999999999999999999999;
+}

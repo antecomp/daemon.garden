@@ -8,14 +8,28 @@ import { root } from "@/data/NSMap";
 import NSNode from "./NSNode";
 import NSTIcon from '@/assets/ui/window/icons/NST.png'
 import NSTStatusBar from "./NSTStatusBar";
-import { useState, createContext } from "react";
-import { NSTContext } from "./NSTracer.types";
+import { useState, createContext, ReactNode } from "react";
+import { NSTContext, TriggerNewConfirmation } from "./NSTracer.types";
+import NSPrompt from "./NSPrompt";
 
 export const NSTracerContext = createContext<NSTContext | null>(null);
 
 const NSTracer= ({width = "650px", height, icon = NSTIcon, className = "NST-window", zIndex = 0, windowKey} : WindowProps) => {
 
-    const [statusNode, setStatusNode] = useState(root)
+    const [statusNode, setStatusNode] = useState(root);
+    const [confirmationText, setConfirmationText] = useState<ReactNode | null>(null);
+    const [confirmationCallback, setConfirmationCallback] = useState<Function>(() => {}) // for some reason putting anything in this function body makes it invoke on render???
+
+    const triggerNewConfirmation: TriggerNewConfirmation = (display, callback) => {
+        setConfirmationCallback(() => callback);
+        setConfirmationText(display);
+    };
+
+    function NSPrompticideFromTracer() { // NSTracer just completely fucking ignores the eventListeners I have for NSPrompt suicide so let's kill it ourselves :D
+        if (confirmationCallback && confirmationText !== null) confirmationCallback("cancel by NSPrompticide")
+        setConfirmationText(null)
+    }
+
 
 
     const Controls = () => {
@@ -23,13 +37,13 @@ const NSTracer= ({width = "650px", height, icon = NSTIcon, className = "NST-wind
 
         return (
                 // this is fucking terrible lol. For some reason we only need to do this if button is a component deep. Window-level buttons work??
-               <button className="NST-reset-zoom-button" onMouseDown={e => e.stopPropagation()} onClick={() => resetTransform()}>y</button>
+               <button className="NST-reset-zoom-button" onMouseDown={e => {e.stopPropagation(); NSPrompticideFromTracer()}} onClick={() => resetTransform()}>y</button>
            
         )
     }
 
     return (
-    <NSTracerContext.Provider value={{setStatusNode}}>
+    <NSTracerContext.Provider value={{setStatusNode, setConfirmationText, triggerNewConfirmation}}>
        <WindowContainer width={width} height={height} className={className} icon={icon} zIndex={zIndex} windowKey={windowKey} initialPosition={{x: 20, y: 20}}>
             <div className="NST-body">
                 <TransformWrapper
@@ -37,6 +51,7 @@ const NSTracer= ({width = "650px", height, icon = NSTIcon, className = "NST-wind
                     initialPositionX={0}
                     initialPositionY={0}
                     doubleClick={{disabled: true}}
+                    onZoomStart={NSPrompticideFromTracer} // murder :)
                 >
                      <Controls/>
                     {/* <button onClick={() => console.log("Nightmare")}>AAAAAAAAA</button> // for some god-forsaken reason this button doesnt need to stopProp on onMouseDown  */} 
@@ -49,6 +64,7 @@ const NSTracer= ({width = "650px", height, icon = NSTIcon, className = "NST-wind
                 <NSTStatusBar currentNode={statusNode}/>
             </div>
        </WindowContainer>
+       {confirmationText && <NSPrompt callback={confirmationCallback} display={confirmationText}/>}
     </NSTracerContext.Provider>
     )
 

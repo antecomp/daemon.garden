@@ -52,7 +52,8 @@ const NSNode = ({
             console.log("close")
             removeNode(id)
         } else {
-            addNode(id)
+            NSTC?.triggerNewConfirmation((<h1>{id}</h1>), (response: string) => {console.log(`${id} had ${response}`)})
+            //addNode(id)
         }
     }, [id, connectedNodes])
 
@@ -73,7 +74,7 @@ const NSNode = ({
                     stroke="white"
                     strokeWidth={1}
                     onClick={handleClick}
-                    onMouseMove={() => NSTC?.setStatusNode({id, dx, dy, action, actionProps, postConnect ,children})} // basically have to reconstruct the node object here with props
+                    onMouseEnter={() => NSTC?.setStatusNode({id, dx, dy, action, actionProps, postConnect ,children})} // basically have to reconstruct the node object here with props
                     className={nodeClass}
                 />
                 {expandedLeaf && <text className="exlText" x={coords.x} y={coords.y + NODE_CONSTS.radius + 10} textAnchor="middle">NO ROUTE</text>}
