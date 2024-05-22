@@ -17,7 +17,7 @@ export default function IntroText() {
 
       //const connectedNodes = useNSTStore((state) => state.connected)
       //const addNode = useNSTStore((state) => state.addNode)
-      const {connectedNodes, addNode, removeNode} = useNSTStore()
+      const {addNode, removeNode} = useNSTStore()
 
 
 	return (
