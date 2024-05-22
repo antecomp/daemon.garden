@@ -1,7 +1,5 @@
 import { useCallback, useContext } from "react"
 import { NSNodeProps } from "./NSNode.types"
-import { DesktopContext } from "../Util/Desktop/Desktop"
-import SimpleWindow from "../Util/Desktop/SimpleWindow"
 import useNSTStore from "@/store"
 import { coordinatePair } from "@/extra.types"
 import { NODE_CONSTS } from "./NSTracer.config"
@@ -20,7 +18,6 @@ const NSNode = ({
     postConnect,
 }: NSNodeProps) => {
 
-    const DKT = useContext(DesktopContext);
     const NSTC = useContext(NSTracerContext)
     const { connectedNodes, addNode, removeNode } = useNSTStore()
     const isNodeExpanded = connectedNodes.includes(id)
@@ -47,12 +44,22 @@ const NSNode = ({
     //////////////////////////////////////////////////////////////
 
     // Fancy Shit ///////////////////////////////////////////////
+
+    const confirmationCallback = (response: string): void => {
+        if(response == "connect") {
+            // If modal we get ANOTHER callback to determine if we actually connect (or maybe promise if I have a brain) 
+            addNode(id)
+        } else {
+            console.log(`${id} has ${response}`)
+        }
+    }
+
+
     const handleClick = useCallback(() => { // Maybe I should move this method elsewhere so a bunch of the callback stuff isnt mixed with the node render code?
         if(connectedNodes.includes(id)) {
-            console.log("close")
             removeNode(id)
         } else {
-            NSTC?.triggerNewConfirmation((<h1>{id}</h1>), (response: string) => {console.log(`${id} had ${response}`)})
+            NSTC?.triggerNewConfirmation((<p style={{fontSize: '24px'}}>connect to {id}?</p>), confirmationCallback)
             //addNode(id)
         }
     }, [id, connectedNodes])
