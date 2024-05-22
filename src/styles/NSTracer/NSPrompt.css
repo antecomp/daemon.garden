@@ -20,6 +20,7 @@
 	display: flex;
 	flex-direction: row-reverse;
 	gap: 3px;
+	margin-top: 4px;
 }
 
 .ns-prompt-footer a {
@@ -51,7 +52,7 @@
 	border: inset 1px var(--fgc);
 }
 
-.ns-prompt::after, .ns-prompt-footer a::after {
+.ns-prompt::after, .ns-prompt-footer a:first-of-type:after {
 	content: url('@/assets/ui/common/single_corner_right.png');
 	position: absolute;
 	right: -1px;
