@@ -46,9 +46,10 @@ const NSPrompt = ({ display, callback }: NSPromptProps) => {
 	return (
 		<div className="ns-prompt" style={{ top: spawnAt.y, left: spawnAt.x }} ref={tooltipRef}>
 			{display}
-			<hr />
-			<button onClick={() => handleClick("connect")}>connect</button>
-			<button onClick={() => handleClick("cancel")}>cancel</button>
+			<span className="ns-prompt-footer">
+				<a onClick={() => handleClick("connect")}>connect</a>
+				<a onClick={() => handleClick("cancel")}>cancel</a>
+			</span>
 		</div>
 	)
 }

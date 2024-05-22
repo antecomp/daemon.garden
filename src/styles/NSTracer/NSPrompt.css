@@ -1,8 +1,59 @@
 .ns-prompt {
-	width: 250px;
+	width: 200px;
 	border: solid var(--fgc) 1px;
 	padding: 3px;
 	position: fixed;
 	background-color: black;
 	z-index: 9999999999999999999999999999999; /* ;) */
+	outline: solid var(--outlinec) 3px;
+	transform: translateY(3px);
+}
+
+.ns-prompt::before {
+	content: url('@/assets/ui/extra/carot.png');
+	position: absolute;
+	top: -10px;
+	left: -1px;
+}
+
+.ns-prompt-footer {
+	display: flex;
+	flex-direction: row-reverse;
+	gap: 3px;
+}
+
+.ns-prompt-footer a {
+	border: solid 1px var(--fgc);
+	color: var(--fgc);
+	background: var(--bgc);
+	outline: none;
+	padding: 0px 4px;
+	font-family: "main";
+	position: relative;
+}
+
+.ns-prompt-footer a:hover::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 1px;
+	background-color: white;
+}
+
+.ns-prompt p {
+	/* font-size: 18px;*/
+	font-weight: normal;
+}
+
+.ns-prompt-footer a:active {
+	border: inset 1px var(--fgc);
+}
+
+.ns-prompt::after, .ns-prompt-footer a::after {
+	content: url('@/assets/ui/common/single_corner_right.png');
+	position: absolute;
+	right: -1px;
+	bottom: -6px;
 }

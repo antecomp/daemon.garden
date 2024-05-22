@@ -59,7 +59,7 @@ const NSNode = ({
         if(connectedNodes.includes(id)) {
             removeNode(id)
         } else {
-            NSTC?.triggerNewConfirmation((<p style={{fontSize: '24px'}}>connect to {id}?</p>), confirmationCallback)
+            NSTC?.triggerNewConfirmation((<p>connect to {id}?</p>), confirmationCallback)
             //addNode(id)
         }
     }, [id, connectedNodes])
