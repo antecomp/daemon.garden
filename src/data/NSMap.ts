@@ -17,7 +17,7 @@ export const root : NodeData = {
 			action: 'battle',
 			actionProps: { fileName: 'anthousai' },
 			postConnect: function () {
-				toast("postConnect trigger test. You have connected to kestrel:phone", {transition: Slide})
+				toast("postConnect trigger test. You connected to kestrel:phone", {transition: Slide})
 			}
 		},
 		{
