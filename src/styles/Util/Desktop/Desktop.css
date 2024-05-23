@@ -12,4 +12,6 @@
 
     user-select: none;
     -webkit-user-drag: none;
+
+	background: url('@/assets/images/bg.png');
 }
