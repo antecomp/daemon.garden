@@ -1,0 +1,101 @@
+:root {
+	--toastify-color-light: #fff;
+	--toastify-color-dark: #000000;
+	--toastify-color-info: #3498db;
+	--toastify-color-success: #07bc0c;
+	--toastify-color-warning: #f1c40f;
+	--toastify-color-error: #e74c3c;
+	--toastify-color-transparent: rgba(255, 255, 255, 0.7);
+  
+	--toastify-icon-color-info: var(--toastify-color-info);
+	--toastify-icon-color-success: var(--toastify-color-success);
+	--toastify-icon-color-warning: var(--toastify-color-warning);
+	--toastify-icon-color-error: var(--toastify-color-error);
+  
+	--toastify-toast-width: 315px;
+	--toastify-toast-background: #fff;
+	--toastify-toast-min-height: 64px;
+	--toastify-toast-max-height: 800px;
+	--toastify-font-family: "main";
+	--toastify-z-index: 9999;
+  
+	--toastify-text-color-light: #d11313;
+	--toastify-text-color-dark: #fff;
+  
+	/* Used only for colored theme */
+	--toastify-text-color-info: #fff;
+	--toastify-text-color-success: #fff;
+	--toastify-text-color-warning: #fff;
+	--toastify-text-color-error: #fff;
+  
+	--toastify-spinner-color: #616161;
+	--toastify-spinner-color-empty-area: #e0e0e0;
+  
+	/* Used when no type is provided */
+	/* toast("**hello**") */
+	--toastify-color-progress-light: linear-gradient(
+	  to right,
+	  #4cd964,
+	  #5ac8fa,
+	  #007aff,
+	  #34aadc,
+	  #5856d6,
+	  #ff2d55
+	);
+	/* Used when no type is provided */
+	--toastify-color-progress-dark: #ffffff;
+	--toastify-color-progress-info: var(--toastify-color-info);
+	--toastify-color-progress-success: var(--toastify-color-success);
+	--toastify-color-progress-warning: var(--toastify-color-warning);
+	--toastify-color-progress-error: var(--toastify-color-error);
+  
+	/* used to control the opacity of the progress trail */
+	--toastify-color-progress-bgo: .02;
+
+
+
+	/* border radius? */
+	--toastify-toast-bd-radius: 0px;
+  }
+
+.Toastify__progress-bar {
+	opacity: 1;
+}
+
+.Toastify__toast {
+	border: solid var(--fgc) 1px;
+	overflow: visible; /* for the cut corner :after to show */
+}
+
+.Toastify__progress-bar--wrp { 
+	height: 2px;
+	position: absolute;
+    top: 1px;
+    left: 1px;
+    width: 99.5%;
+}
+
+
+.toast-notification {
+	display: grid;
+	grid-template-columns: 96px auto;
+	gap: 5px;
+}
+
+.toast-notification img {
+	width: 100%;
+}
+
+.toast-notification div h3 {
+	letter-spacing: 0.25ch;
+	color: var(--empc);
+}
+
+.Toastify__toast::after {
+    content: url('@/assets/ui/common/single_corner_left.png');
+    position: absolute;
+    left: -1px;
+    bottom: -7px;
+    z-index: 2;
+    border-bottom: 1px var(--outlinec) solid;
+}

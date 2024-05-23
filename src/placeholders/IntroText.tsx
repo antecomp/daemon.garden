@@ -2,7 +2,8 @@ import titleImg from '@/assets/images/title.png'
 import Modal from '@/components/Util/Modal/Modal';
 import { useState } from 'react'
 import useNSTStore from '@/store';
-
+import { sendMessageToast } from '@/components/Util/Toasts/Toasts';
+import svalinn from '@/assets/sprites/characters/profile/USER.png'
 
 const testComp = () => {
       return (
@@ -32,6 +33,7 @@ export default function IntroText() {
             <hr />
             <button onClick={() => addNode('slop')}>test add NSTSave</button>
             <button onClick={() => removeNode('slop')}>test remove NSTSave</button>
+            <button onClick={() => sendMessageToast({title: "Svalinn", img: svalinn, msg: "Hello developer!"})}>Show notification</button>
             <hr />
             <br /><br />
             <div style={{ 'textAlign': 'center' }} ><img src={titleImg} /></div>

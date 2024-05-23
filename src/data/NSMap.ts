@@ -1,3 +1,4 @@
+import { Slide, toast } from "react-toastify"
 import { NodeData } from "./NSMap.types"
 
 export const root : NodeData = {
@@ -15,6 +16,9 @@ export const root : NodeData = {
 			dy: -1,
 			action: 'battle',
 			actionProps: { fileName: 'anthousai' },
+			postConnect: function () {
+				toast("postConnect trigger test. You have connected to kestrel:phone", {transition: Slide})
+			}
 		},
 		{
 			id: "kestrel:friends",

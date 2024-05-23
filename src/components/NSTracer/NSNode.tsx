@@ -55,6 +55,7 @@ const NSNode = ({
         if (response == "connect") {
             // If modal we get ANOTHER callback to determine if we actually connect (or maybe promise if I have a brain) 
             addNode(id)
+            if(postConnect) postConnect();
         } /* else { // I cant see this being anything other than connect. But who knows. YAGNI SHMNAGI I aint rewriting the code to be a boolean return on the callback :D
             console.log(`${id} had ${response}`)
         } */
