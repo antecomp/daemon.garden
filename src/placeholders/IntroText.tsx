@@ -4,6 +4,7 @@ import { useState } from 'react'
 import useNSTStore from '@/store';
 import { sendMessageToast } from '@/components/Util/Toasts/Toasts';
 import svalinn from '@/assets/sprites/characters/profile/USER.png'
+import TooltipWrapper from '@/components/Util/Tooltip/TooltipWrapper';
 
 const testComp = () => {
       return (
@@ -39,7 +40,10 @@ export default function IntroText() {
             <div style={{ 'textAlign': 'center' }} ><img src={titleImg} /></div>
             The year is 20XX, and reality has been sacrificed on the altar of “more.” The morasses of the world-as-we-know-it, as ugly as they are, were put on a seemingly endless backburner. With the global community no longer pretending to promise a future worth welcoming, men and women work tirelessly for rewards far more immediate- the infinite intrigues and pleasures of the Nullspace.
             <br />
-            In the year 2000, ASURACOM was founded. This engineering and computer technologies corporation would rediscover (with great consequence) technology that would ensure the world never left the course it was set upon. The VI-LINK, first officially prototyped in 2012, was the first device ever created with the capacity to interface with the human soul. And in 2013, the VI-LINK received a much needed security patch in the form of the Daemonveil, before being released to the world at large.
+            In the year 2000, <TooltipWrapper tooltipChildren={(
+                  <><h3>ASURACOM</h3> Technomancy company, maintainer of the VI-LINK system and Civilian Null-space</>)}>ASURACOM</TooltipWrapper> was founded. This engineering and computer technologies corporation would rediscover (with great consequence) technology that would ensure the world never left the course it was set upon. The VI-LINK, first officially prototyped in 2012, was the first device ever created with the capacity to interface with the human soul. And in 2013, the VI-LINK received a much needed security patch in the form of
+            the <TooltipWrapper tooltipChildren={(<><h3>DAEMONVEIL</h3>Local VI-LINK firewall system. Protects conscious render from daemonic influence and other unauthorized illusions.</>)}>Daemonveil</TooltipWrapper>,
+            before being released to the world at large.
             <br />
             From that point on, life was conducted differently. The “Nullspace”, a theoretically infinite plane of data storage, became a household name. Why would it not, after all, when it was so much more efficient and moldable than the real world? From the comfort of their own homes, hooked into these collaborative hallucinations, people handled all the business of day to day life.
             <br />

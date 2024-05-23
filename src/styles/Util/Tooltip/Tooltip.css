@@ -1,0 +1,67 @@
+.tooltip {
+	position: fixed;
+	top: 0;
+	left: 0;
+	pointer-events: none;
+	color: var(--fgc);
+	max-width: 190px;
+	hyphens: auto;
+	visibility: hidden; /* default, show triggered by code */
+	z-index: 9999999; /* lmao */
+}
+
+.tooltip-content {
+	padding: 5px;
+	border: solid var(--fgc) 1px;
+	border-bottom: 0;
+	background-color: var(--bgc);
+	outline: 4px solid var(--outlinec);
+}
+
+.tooltip footer {
+	display: flex;
+	flex-direction: row;
+}
+
+.tooltip footer span {
+	flex-grow: 1;
+	background-color: var(--bgc);
+	border-left: solid 1px var(--fgc);
+	border-bottom: solid 1px var(--fgc);
+	z-index: 1;
+	transform: translateY(-1px);
+	box-shadow: 0 4px 0 #000;
+}
+
+.tooltip footer img {
+	z-index: 2;
+}
+
+/* Delay of showing handled in CSS lol */
+.show-tooltip {
+	visibility: visible;
+	opacity: 0;
+	animation: delayed-visibility 0.5s forwards;
+	animation-delay: var(--tooltip-delay);
+}
+
+@keyframes delayed-visibility {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+.tooltip h3 {
+	letter-spacing: 0.25ch;
+	color: var(--empc);
+}
+
+/* for the wrapper */
+.has-tooltip {
+	text-decoration: underline;
+	text-decoration-style: dotted;
+	cursor: help;
+}
