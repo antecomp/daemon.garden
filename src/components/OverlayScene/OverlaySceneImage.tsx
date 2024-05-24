@@ -6,8 +6,8 @@ import '@/styles/OverlayScene/OverlaySceneImage.css'
 
 const OverlaySceneImage = ({newImage}: {newImage?: string}) => {
 	return (
-		<div className="overlayimage-container">
-			<img key={newImage} src={newImage} alt="" className="fade-image" /> {/* the use of key causes the CSS animation to trigger whenever newImage changes. */}
+		<div key={newImage} className="overlayimage-container fade-image">
+			<img src={newImage} alt="" /> {/* the use of key causes the CSS animation to trigger whenever newImage changes. */}
 		</div>
 	)
 }

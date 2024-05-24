@@ -27,3 +27,23 @@
         opacity: 1;
     }
 }
+
+
+/* .fade-image::before {
+    content: url('@/assets/ui/extra/fade_in.gif');
+    position: relative;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    animation: fadeAnim 900ms linear forwards;
+    visibility: visible;
+}
+
+@keyframes fadeAnim {
+    0% {
+        visibility: visible;
+    }
+    100% {
+        visibility: hidden;
+    }
+} */
