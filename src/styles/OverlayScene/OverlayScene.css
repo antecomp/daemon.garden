@@ -21,3 +21,13 @@
 	transition: opacity var(--fadeDuration) ease;
 	opacity: 0;
 }
+
+.scene-con p {
+    height: 40px;
+}
+
+.scene-con {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

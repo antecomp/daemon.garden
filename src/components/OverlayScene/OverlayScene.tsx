@@ -6,7 +6,7 @@ import { OverlayTextCSS, SceneData } from "./OverlayScene.types";
 import '@/styles/OverlayScene/OverlayScene.css'
 import OverlaySceneImage from "./OverlaySceneImage";
 
-async function loadScene(fileName: string) {
+async function loadScene(fileName: string): Promise<SceneData[]> {
 	try {
 		const response = await import(`@/data/scenes/${fileName}.ts`);
 		return response.default;
@@ -19,7 +19,7 @@ const OverlayScene = ({file}: {file: string}) => {
 	const modal = useModalWindow()
 
 	// For the entire scene object
-	const [scene, setScene] = useState(null);
+	const [scene, setScene] = useState<SceneData[] | null>(null);
 	const sceneIndex = useRef(0);
 
 	const [currentFrame, setCurrentFrame] = useState<SceneData>({text: ""});
@@ -31,6 +31,18 @@ const OverlayScene = ({file}: {file: string}) => {
 				let loadedScene = await loadScene(file);
 				setScene(loadedScene)
 				setCurrentFrame(loadedScene[0])
+
+
+				loadedScene.forEach(frame => {
+					if (frame.image) {
+						console.log("pain")
+						const preLoadedImage = new Image();
+						preLoadedImage.src = frame.image 
+					}
+				})
+
+
+
 			} catch (err) { // TODO: add actual handling of this lol.
 				console.error(err)
 				modal.close()
@@ -73,7 +85,7 @@ const OverlayScene = ({file}: {file: string}) => {
 			className="OverlayScene"
 			onClick={!fadeText ? handleAdvance : undefined} 
 		>
-			<div>
+			<div className="scene-con">
 			<OverlaySceneImage newImage={currentFrame.image}/>
 			<p
 				style={
