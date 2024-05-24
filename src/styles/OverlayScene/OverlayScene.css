@@ -1,0 +1,23 @@
+.OverlayScene {
+	font-size: 33px;
+	width: 100vw;
+	height: 100vh;
+	background-color: var(--bgc);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	user-select: none;
+}
+
+.OverlayScene p {
+	max-width: 50ch;
+	text-align: center;
+	transition: opacity var(--fadeDuration) ease; /* var defined by component render */
+	opacity: 1;
+}
+
+.OverlayScene p.overlay-fade-out {
+	transition: opacity var(--fadeDuration) ease;
+	opacity: 0;
+}

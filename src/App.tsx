@@ -11,11 +11,22 @@ import '@/styles/Util/Toastify/Toastify.css'
 
 // Toastify imports (for notification)
 import { ToastContainer } from 'react-toastify';
+import { useEffect } from 'react';
+import OverlayScene from './components/OverlayScene/OverlayScene';
 
 
 
 
 function App() {
+
+
+  // Automatically trigger game intro scene
+  // TODO: cookie/zustand state for if you've already seen this :^)
+  useEffect(() => {
+    Modal.open(OverlayScene, {closable: false, file: `intro`})
+  })
+
+
 
   return (
     <>
