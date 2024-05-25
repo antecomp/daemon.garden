@@ -2,7 +2,7 @@ import { cloneElement, useEffect, useState, createContext } from 'react';
 import '@/styles/Util/Desktop/Desktop.css'
 import { WindowKey, WindowData, DesktopContextType } from './Desktop.types';
 import SimpleWindow from './SimpleWindow';
-import IntroText from '@/placeholders/IntroText';
+import DemoDocument from '@/placeholders/DemoDocument';
 import NSTracer from '@/components/NSTracer/NSTracer';
 
 /**
@@ -68,7 +68,7 @@ const Desktop = () => {
 	useEffect(() => {
 		addWindow("introtext", {
 			content: (<SimpleWindow className='slop'>
-				<IntroText />
+				<DemoDocument />
 			</SimpleWindow>),
 			width: '75ch'
 		})

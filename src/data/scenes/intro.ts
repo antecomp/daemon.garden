@@ -3,7 +3,6 @@ import { sendMessageToast } from "@/components/Util/Toasts/Toasts"
 import { Slide, toast } from "react-toastify"
 import SVN from '@/assets/sprites/characters/profile/USER.png'
 import disketteIMG from './introAssets/diskette.png'
-import kissinger from './introAssets/kissinger.png'
 
 const connectionNotif = () => {
 	toast('SYSTEM: VI-LINK neural connection established.', {transition: Slide})
@@ -22,7 +21,6 @@ const exampleScene: SceneData[] = [
 	},
 	{
 		text: `"what's strange about it?"`,
-		image: kissinger,
 		color: "teal"
 	},
 	{

@@ -13,7 +13,7 @@ const testComp = () => {
 }
 
 
-export default function IntroText() {
+export default function DemoDocument() {
       const [count, setCount] = useState(0);
 
 
