@@ -1,0 +1,27 @@
+.taskbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    background-color: var(--bgc);
+}
+
+.taskbar-item {
+    padding: 4px;
+    background-color: var(--bgc);
+    border-top: solid 2px transparent;
+    cursor: pointer;
+}
+
+.taskbar-item.active {
+    border-top: solid 2px red;
+}
+
+.spacer {
+    flex-grow: 1;
+    background-color: var(--bgc);
+}
