@@ -15,6 +15,13 @@ async function loadScene(fileName: string): Promise<SceneData[]> {
 	}
 }
 
+
+/**
+ * OverlayScene is for the game "cutscene" events that take up the entire screen. This is not to be confused with dialogue. 
+ * Overlayscene has no option/user input handling, it simply goes through a set of text and images.
+ * The files that OverlayScene loads are typeset by the SceneData[] interface in OverlayScene.types.ts
+ * @param file name of the file to load, will load \@/data/scenes/<file>.ts
+ */
 const OverlayScene = ({file}: {file: string}) => {
 	const modal = useModalWindow()
 
