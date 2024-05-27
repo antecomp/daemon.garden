@@ -5,11 +5,9 @@
     width: 100vw;
     display: flex;
     flex-direction: row;
-    background-color: var(--bgc);
 }
 
 .taskbar-item {
-    background-color: var(--bgc);
     cursor: pointer;
     padding-top: 1px;
 }
@@ -60,5 +58,4 @@
 
 .spacer {
     flex-grow: 1;
-    background-color: var(--bgc);
 }
