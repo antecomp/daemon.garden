@@ -1,24 +1,55 @@
 .taskbar {
     position: fixed;
-    top: 0;
+    bottom: 0;
     left: 0;
     width: 100vw;
-
     display: flex;
     flex-direction: row;
-    gap: 5px;
     background-color: var(--bgc);
 }
 
 .taskbar-item {
-    padding: 4px;
     background-color: var(--bgc);
-    border-top: solid 2px transparent;
     cursor: pointer;
+    padding-top: 1px;
 }
 
-.taskbar-item.active {
-    border-top: solid 2px red;
+.taskbar-item {
+    margin-left: -10px;
+}
+
+.taskbar-item span {
+    border-top: solid white 1px;
+    border-bottom: solid white 1px;
+    padding-right: 2px;
+}
+
+.taskbar-item img {
+    transform: translateY(4px);
+}
+
+.taskbar-item:first-of-type {
+    margin-left: 3px;
+}
+
+.taskbar-item:first-of-type span {
+    border-left: solid white 1px;
+    padding-left: 4px;
+}
+
+.taskbar-item:first-of-type::before {
+    display: none;
+}
+
+.taskbar-item::before {
+    content: url('@/assets/ui/extra/divider.png');
+    transform: translateY(4px);
+    display: inline-block;
+}
+
+.taskbar-item.active  {
+    filter: sepia(52%) saturate(5330%) hue-rotate(80deg) brightness(97%) contrast(102%);
+    background: transparent;
 }
 
 .spacer {

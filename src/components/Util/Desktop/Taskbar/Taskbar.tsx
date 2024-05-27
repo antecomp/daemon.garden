@@ -1,11 +1,10 @@
 import useDesktopContext from "@/hooks/useDesktopContext";
 import { WindowKey } from "../Desktop.types";
 import '@/styles/Util/Desktop/Taskbar/Taskbar.css'
+import tbClose from '@/assets/ui/extra/tb_close.png'
 
 const Taskbar = ({windows, raisedWK} : {windows: WindowKey[], raisedWK: string}) => {
     const {addWindow, removeWindow, raiseWindow} = useDesktopContext();
-
-    console.log(raisedWK)
 
     return (
         <div className="taskbar">
@@ -15,12 +14,11 @@ const Taskbar = ({windows, raisedWK} : {windows: WindowKey[], raisedWK: string})
                     className={`taskbar-item ${windowKey == raisedWK ? 'active' : ''}`}
                     onClick={() => raiseWindow(windowKey)}
                 >
-                    {windowKey}
-                    <span
+                    <span>{windowKey}</span>
+                    <img
+                        src={tbClose}
                         onClick={(e) => {e.stopPropagation(); removeWindow(windowKey)}}
-                    >
-                        &nbsp; (X)
-                    </span>
+                    />
                 </span>
             )}
             <span className="spacer"></span>
