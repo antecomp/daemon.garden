@@ -22,6 +22,12 @@
     border-top: solid white 1px;
     border-bottom: solid white 1px;
     padding-right: 2px;
+    user-select: none;
+}
+
+.taskbar-item span img {
+    transform: translate(-2px, 1px);
+    -webkit-user-drag: none;
 }
 
 .taskbar-item img {

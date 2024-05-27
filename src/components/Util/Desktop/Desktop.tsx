@@ -6,6 +6,11 @@ import DemoDocument from '@/placeholders/DemoDocument';
 import NSTracer from '@/components/NSTracer/NSTracer';
 import Taskbar from './Taskbar/Taskbar';
 
+// TODO Well wanna make some seperate way of saving the common windows with their icons, will be part of the 'bookmarks' the taskbar launches.
+// Meaning this import is temp.
+import NSTIcon from '@/assets/ui/window/icons/NST.png'
+import EyeIcon from '@/assets/ui/window/icons/eye.png'
+
 /**
  * React context for signaling to the window manager (Desktop component).
  */
@@ -72,7 +77,8 @@ const Desktop = () => {
 			content: (<SimpleWindow className='slop'>
 				<DemoDocument />
 			</SimpleWindow>),
-			width: '75ch'
+			width: '75ch',
+			icon: EyeIcon
 		})
 
 		addWindow("otherwindow", {
@@ -89,7 +95,8 @@ const Desktop = () => {
 		})
 
 		addWindow("NST", {
-			content: (<NSTracer />)
+			content: (<NSTracer />),
+			icon: NSTIcon
 		})
 
 	}, [])
@@ -104,7 +111,7 @@ const Desktop = () => {
 					return cloneElement(content, { key, ...rest, windowKey: key }); // according to the react docs this is bad practice but their alternative doesnt work?? lmao???
 				})}
 			</div>
-			<Taskbar raisedWK={currentRaisedWindowKey} windows={Array.from(windows.keys())}/>
+			<Taskbar raisedWK={currentRaisedWindowKey} winMap={windows}/>
 		</DesktopContext.Provider>
 	)
 }
