@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404</title>
+
+    <style>
+
+        @font-face {
+            font-family: "NVEnochian";
+            src: url('./ng_assets/NVEnochian.otf');
+        }
+
+        @font-face {
+            font-family: "pik";
+            src: url('./ng_assets/Piksel-JAGa.ttf');
+        }
+
+        body {
+            overflow: hidden;
+            background-color: black;
+        }
+
+
+        #text {
+            background-color: black;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+            z-index: 1;
+            font-family: "NVEnochian";
+            overflow: hidden;
+            color: red;
+            font-size: 2em;
+            overflow-wrap: break-word;
+            text-align: center;
+            transform: rotate(3deg) scale(1.25);
+            user-select: none;
+        }
+
+        #error {
+            background-color: black;
+            border: double red 3px;
+            text-align: center;
+            padding: 2.5ch;
+            color: red;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(round(-50%, 1px), round(-50%, 1px));
+            z-index: 2;
+            font-family: "pik";
+            font-size: 2em;
+            outline: 10px solid black;
+        }
+
+        #error a {
+            text-decoration: none;
+            color: red;
+            font-weight: bold;
+        }
+
+        #error a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="text"></div>
+    <div id="error">
+        !! 404 !! <br>
+        CATASTROPHIC VI-LINK FAILURE <br> <br>
+        <a href="https://daemon.garden">MANUAL EJECTION REQUIRED</a>
+    </div>
+
+    <script>
+        function getREL() {
+            const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+            return letters.charAt(Math.floor(Math.random() * letters.length));
+        }
+
+        function genRELS(x) {
+            let rtn = '';
+            for (let i = 0; i < x; i++) {
+                rtn += getREL();
+            }
+
+            return rtn;
+        }
+
+        function updateBG() {
+            const BG = document.getElementById('text')
+            const enochian = genRELS(3000);
+            BG.innerText = enochian;
+        }
+
+        setInterval(updateBG, 100);
+
+        updateBG();
+    </script>
+</body>
+</html>
