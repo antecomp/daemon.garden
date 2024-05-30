@@ -1,0 +1,13 @@
+.test-trigger-window {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.914);
+}
+
+.test-trigger-content {
+    border: double 3px white;
+    text-align: center;
+    background-color: black;
+    padding: 4ch;
+}

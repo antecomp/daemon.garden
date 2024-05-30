@@ -6,11 +6,14 @@ import { NODE_CONSTS } from "./NSTracer.config"
 import classNames from "classnames"
 import { findCircleExitPoint } from "./helpers"
 import { NSTracerContext } from "./NSTracer"
+import Modal from "../Util/Modal/Modal"
+import TestTrigger from "../TestTrigger/TestTrigger"
 
 /** 
 * Individually rendered "Node" or connection location for the current NSTracer map. 
 * @component
-* @param (NSNodeProps) props - Node props are passed recursively to search through the entire map file and render nodes. If passing to the root node, just spreadOp the whole map file and set parentCoords as the starting coordinates for the root node
+* @param (NSNodeProps) props - Node props are passed recursively to search through the entire map file and render nodes. 
+* If passing to the root node, just spreadOp the whole map file and set parentCoords as the starting coordinates for the root node
 */
 
 const NSNode = ({
@@ -29,7 +32,7 @@ const NSNode = ({
     const isNodeExpanded = connectedNodes.includes(id)
     const expandedLeaf = isNodeExpanded && (children == null);
 
-    // Display Stuff //////////////////////////////////////////////
+    // Display Stuff ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     const coords = {
         x: parentCoords.x + (NODE_CONSTS.offsetMultiplier * dx),
         y: parentCoords.y + (NODE_CONSTS.offsetMultiplier * dy)
@@ -47,20 +50,39 @@ const NSNode = ({
         'node-visited': isNodeExpanded,
         'node-visited-leaf': expandedLeaf
     })
-    //////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    // Fancy Shit ///////////////////////////////////////////////
+    // Fancy Shit /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
+    /* 
+    * These callbacks are used to communicate between a node and a modal it may trigger, and pass a status back to determine if we connect to the node or not
+    * For example, the battle system will use this callback to send a "yes, please connect to this node" signal if the player wins the battle.
+    */
+    const handleNodeTriggerResponse = (shouldConnect: boolean): void => {
+        if(shouldConnect) {
+            addNode(id);
+            if (postConnect) postConnect();
+        } else {
+            console.log("Test/Debug Message: Node connection rejected, did you loose a battle or piss of a dæmon?")
+        }
+    }
+
+
+    /* confirmationCallback and handleClick deal with the little "connect to node?" tooltip, not the actual handling of the response from battle, dialogue etc. */
     const confirmationCallback = (response: string): void => {
         if (response == "connect") {
             // If modal we get ANOTHER callback to determine if we actually connect (or maybe promise if I have a brain) 
-            addNode(id)
-            if(postConnect) postConnect();
+            //addNode(id)
+            //if(postConnect) postConnect();
+
+            Modal.open(TestTrigger, {actionProps: {...actionProps, text: `THERES A SCARY DAEMON AT ${id.toUpperCase()} LOOK OUT!!!!!!`, connectText: "Pour apple juice on the entity!", rejectText: "Run away!", onConnectText: "The daemon melts. You connect to the node successfully.", onRejectText: "You run away from the node and do not establish a connection."}, sendNodeResponse: handleNodeTriggerResponse})
+
+
         } /* else { // I cant see this being anything other than connect. But who knows. YAGNI SHMNAGI I aint rewriting the code to be a boolean return on the callback :D
             console.log(`${id} had ${response}`)
         } */
     }
-
 
     const handleClick = useCallback(() => { // Maybe I should move this method elsewhere so a bunch of the callback stuff isnt mixed with the node render code?
         if (connectedNodes.includes(id)) {

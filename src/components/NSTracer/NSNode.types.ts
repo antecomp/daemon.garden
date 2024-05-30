@@ -5,3 +5,11 @@ import { Point } from "@/extra.types";
 export interface NSNodeProps extends NodeData { 
     parentCoords: Point
 } 
+
+
+// Props required by NSNode-called component to handle the response of a "trigger"/modal popup -> shouldConnect cycle.
+// 
+export interface NSNodeTriggerProps {
+    sendNodeResponse(shouldConnect: boolean): void;
+    //actionProps: any
+}

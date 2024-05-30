@@ -37,7 +37,7 @@ export default function DemoDocument() {
             <button onClick={() => sendMessageToast({title: "Svalinn", img: svalinn, msg: "Hello developer!"})}>Show notification</button>
             <hr />
             <br /><br />
-            <div style={{ 'textAlign': 'center' }} ><img src={titleImg} /></div>
+            <div style={{ 'textAlign': 'center' }} ><img src={titleImg} width={`426px`} style={{imageRendering: 'auto'}} /></div>
             The year is 20XX, and reality has been sacrificed on the altar of “more.” The morasses of the world-as-we-know-it, as ugly as they are, were put on a seemingly endless backburner. With the global community no longer pretending to promise a future worth welcoming, men and women work tirelessly for rewards far more immediate- the infinite intrigues and pleasures of the Nullspace.
             <br />
             In the year 2000, <TooltipWrapper tooltipChildren={(
