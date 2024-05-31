@@ -48,7 +48,7 @@ const NSTracer = ({ width = "650px", height, icon = NSTIcon, className = "NST-wi
 
     return (
         <NSTracerContext.Provider value={{ setStatusNode, setConfirmationText, triggerNewConfirmation }}>
-            <WindowContainer width={width} height={height} className={className} icon={icon} zIndex={zIndex} windowKey={windowKey} initialPosition={{ x: 20, y: 20 }}>
+            <WindowContainer width={width} height={height} className={className} icon={icon} zIndex={zIndex} windowKey={windowKey} initialPosition={{ x: 30, y: 30 }}>
                 <div className="NST-body">
                     <TransformWrapper
                         initialScale={1}
