@@ -49,6 +49,8 @@ const WindowContainer = ({ children, width, height, icon = eyeIcon, className = 
 		if (!initialPosition) {
 			centerWindow();
 		}
+		// Automatically raise a window when it is created.
+		raiseWindow(windowKey)
 	}, [])
 
 	if (!windowKey) {

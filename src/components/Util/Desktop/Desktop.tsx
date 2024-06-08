@@ -1,4 +1,4 @@
-import { cloneElement, useEffect, useState, createContext } from 'react';
+import { cloneElement, useEffect, useState, createContext, KeyboardEventHandler } from 'react';
 import '@/styles/Util/Desktop/Desktop.css'
 import { WindowKey, WindowData, DesktopContextType } from './Desktop.types';
 import SimpleWindow from './SimpleWindow';
@@ -10,6 +10,8 @@ import Taskbar from './Taskbar/Taskbar';
 // Meaning this import is temp.
 import NSTIcon from '@/assets/ui/window/icons/NST.png'
 import EyeIcon from '@/assets/ui/window/icons/eye.png'
+import { AssArray } from '@/extra.types';
+import { getNextMapKey } from './helpers';
 
 /**
  * React context for signaling to the window manager (Desktop component).
@@ -41,6 +43,7 @@ const Desktop = () => {
 			newWindows.set(key, data);
 			return newWindows;
 		})
+
 	}
 
 	/**
@@ -71,6 +74,45 @@ const Desktop = () => {
 		setMaxZIndex(prev => prev + 1);
 		setCurrentRaisedWindowKey(key);
 	}
+
+	// Keyboard shortcuts for using the desktop :^)
+	// It seems like this needs to be attached to the window rather than desktop,
+	// otherwise the preventDefault doesn't talk to the browser.
+	useEffect(() => {
+		// Keybinds in here makes sense if we just want it's functions linked to the dependancy array of the useEffect.
+		const keybinds: AssArray<(() => void)> = {
+			'Tab': () => {
+				const next = getNextMapKey(windows, currentRaisedWindowKey);
+				if(next) raiseWindow(next);
+			}
+		}
+
+		// Note to self: I can also do e.ctrlKey && .... to bind it to just control + keybind
+		const handler = (e: KeyboardEvent) => {
+			if(keybinds[e.key]) {
+				keybinds[e.key]();
+			}
+		}
+
+		// disables browser keybind.
+		const overrider = (e: KeyboardEvent) => {
+			if(keybinds[e.key]) {
+				e.preventDefault()
+			}
+		}
+
+		window.addEventListener("keyup", handler);
+		window.addEventListener("keydown", overrider)
+
+		return () => {
+			window.removeEventListener("keyup", handler);
+			window.removeEventListener("keydown", overrider)
+		}
+
+	}, [currentRaisedWindowKey, windows]) // Remember to add any dependancies of your keybind functions here :)
+
+
+
 
 	useEffect(() => {
 		addWindow("introtext", {

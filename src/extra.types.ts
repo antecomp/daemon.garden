@@ -9,3 +9,7 @@ export interface Point {
     x: number,
     y: number
 }
+
+export interface AssArray<T> { // Associative Array / Dictionary. I have the humour of a child.
+    [key: string]: T
+}
