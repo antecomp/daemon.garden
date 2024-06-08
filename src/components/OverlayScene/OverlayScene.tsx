@@ -1,20 +1,11 @@
 import useTypewriter from "@/hooks/useTypewriter";
 import { useEffect, useRef, useState } from "react";
 import { useModalWindow } from "react-modal-global";
-import { FADE_DURATION } from "./OverlayScene.config";
+import { FADE_DURATION, SCENE_FOLDER } from "./OverlayScene.config";
 import { OverlayTextCSS, SceneData } from "./OverlayScene.types";
 import '@/styles/OverlayScene/OverlayScene.css'
 import OverlaySceneImage from "./OverlaySceneImage";
-
-async function loadScene(fileName: string): Promise<SceneData[]> {
-	try {
-		const response = await import(`@/data/scenes/${fileName}.ts`);
-		return response.default;
-	} catch (error) {
-		throw new Error(`Failed to load scene file: ${error}`)
-	}
-}
-
+import { load } from "@/util/load";
 
 /**
  * OverlayScene is for the game "cutscene" events that take up the entire screen. This is not to be confused with dialogue. 
@@ -35,7 +26,7 @@ const OverlayScene = ({file}: {file: string}) => {
 	useEffect(() => {
 		(async () => {
 			try {
-				let loadedScene = await loadScene(file);
+				let loadedScene = await load<SceneData[]>(SCENE_FOLDER, file);
 				setScene(loadedScene)
 				setCurrentFrame(loadedScene[0])
 

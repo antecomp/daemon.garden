@@ -5,7 +5,8 @@ function actionTypeToStatus(type: NodeData['action']) {
    return {
     'autoconnect': 'green',
     'battle': 'red',
-    'dialogue': 'yellow'
+    'dialogue': 'yellow',
+    'testpopup': 'purple'
    }[type]
 }
 
