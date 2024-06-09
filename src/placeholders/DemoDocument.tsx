@@ -5,6 +5,9 @@ import useNSTStore from '@/store';
 import { sendMessageToast } from '@/components/Util/Toasts/Toasts';
 import svalinn from '@/assets/sprites/characters/profile/USER.png'
 import TooltipWrapper from '@/components/Util/Tooltip/TooltipWrapper';
+import useDesktopContext from '@/hooks/useDesktopContext';
+import SimpleWindow from '@/components/Util/Desktop/SimpleWindow';
+import FauxScript from '@/components/FauxScript/FauxScript';
 
 const testComp = () => {
       return (
@@ -21,6 +24,16 @@ export default function DemoDocument() {
       //const addNode = useNSTStore((state) => state.addNode)
       const {addNode, removeNode} = useNSTStore()
 
+      const {addWindow} = useDesktopContext()
+
+      const showTermTest = () => {
+            addWindow("TERMTEST", {
+                  content: (<SimpleWindow><FauxScript windowKey='TERMTEST' text={`expanding LocusPak.​​​​​.​​​​​. \n contextualizing thoughtstreams.​​​​​​​​.​​​​​. \n opening explorer.​​​​​.​​​​​.`} callback={() => console.log("done")} /></SimpleWindow>),
+			height: '100px',
+			width: '250px',
+			isPopup: true
+            })
+      }
 
 	return (
 		<>
@@ -28,9 +41,9 @@ export default function DemoDocument() {
             <h2>state test: count is {count}</h2>
             <button onClick={() => setCount(prev => prev +1)}>inc count</button>
             <button
-                  onClick={() => Modal.open(testComp)}
+                  onClick={showTermTest}
             >
-                  Open Test Modal</button>
+                  Open Console Popup</button>
             <hr />
             <button onClick={() => addNode('slop')}>test add NSTSave</button>
             <button onClick={() => removeNode('slop')}>test remove NSTSave</button>

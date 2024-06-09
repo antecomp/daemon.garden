@@ -7,6 +7,7 @@ export interface WindowData {
 	icon?: string;
 	zIndex?: number; // if undefined, we know its gonna be 0.
 	content: React.ReactElement; // Content doesn't have to be a window, in case we want other strange elements on the desktop!
+	isPopup?: boolean
 }
 
 export interface DesktopContextType {

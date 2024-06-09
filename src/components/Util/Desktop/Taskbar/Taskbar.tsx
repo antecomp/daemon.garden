@@ -5,12 +5,12 @@ import tbClose from '@/assets/ui/extra/tb_close.png'
 
 const Taskbar = ({winMap, raisedWK} : {winMap: Map<WindowKey, WindowData>, raisedWK: string}) => {
     const {addWindow, removeWindow, raiseWindow} = useDesktopContext();
-    const windows = Array.from(winMap.keys());
+    
 
     return (
         <div className="taskbar">
             {[...winMap.entries()].map(slop => // I dont know why I couldnt spread [key, value] here??
-                <span
+                {if (!slop[1].isPopup) return (<span
                     key={`taskbar-${slop[0]}`} 
                     className={`taskbar-item ${slop[0] == raisedWK ? 'active' : ''}`}
                     onClick={() => raiseWindow(slop[0])}
@@ -23,7 +23,7 @@ const Taskbar = ({winMap, raisedWK} : {winMap: Map<WindowKey, WindowData>, raise
                         src={tbClose}
                         onClick={(e) => {e.stopPropagation(); removeWindow(slop[0])}}
                     />
-                </span>
+                </span>)}
             )}
             <span className="spacer"></span>
         </div>

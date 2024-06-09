@@ -23,8 +23,9 @@
 	padding: 15px;
 	background-color: var(--bgc);
 	overflow: auto;
-	max-height: 40vh;
+	/* max-height: 40vh; */
 	user-select:text;
+	flex-grow: 1;
 }
 
 .window-content img {

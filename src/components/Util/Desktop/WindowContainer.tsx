@@ -15,7 +15,7 @@ import useDesktopContext from "@/hooks/useDesktopContext"
  * @param {WindowContainerProps} props - The properties for the window container.
  * @returns {JSX.Element} The window container element.
  */
-const WindowContainer = ({ children, width, height, icon = eyeIcon, className = '', zIndex = 0, windowKey, initialPosition }: WindowContainerProps) => {
+const WindowContainer = ({ children, width, height, icon = eyeIcon, className = '', zIndex = 0, windowKey, initialPosition, isPopup = false }: WindowContainerProps) => {
 
 	const { removeWindow, raiseWindow } = useDesktopContext();
 	const vpd = useViewportDimensions();
@@ -85,7 +85,7 @@ const WindowContainer = ({ children, width, height, icon = eyeIcon, className = 
 				<div className="window-handle">
 					<img src={icon} alt="" />
 					<span></span> {/* Window title here if we end up doing that. */}
-					<img className="close-icon" src={closeIcon} onClick={handleClose} alt="" />
+					{!isPopup && <img className="close-icon" src={closeIcon} onClick={handleClose} alt="" />}
 				</div>
 				{children}
 			</div>

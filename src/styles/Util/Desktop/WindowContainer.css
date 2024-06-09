@@ -1,5 +1,8 @@
 .window {
 	position: fixed;
+	display: flex;
+	flex-direction: column;
+	max-height: 600px;
 }
 
 .window-handle .close-icon {
@@ -28,6 +31,16 @@
 /* closing animation */
 .window {
 	opacity: 1;
+	animation: fadeIn forwards 0.25s;
+}
+
+@keyframes fadeIn {
+	0% {
+		filter: opacity(0);
+	}
+	100% {
+		filter: opacity(1);
+	}
 }
 
 .window.closing {

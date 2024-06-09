@@ -12,6 +12,7 @@ import NSTIcon from '@/assets/ui/window/icons/NST.png'
 import EyeIcon from '@/assets/ui/window/icons/eye.png'
 import { AssArray } from '@/extra.types';
 import { getNextMapKey } from './helpers';
+import FauxScript from '@/components/FauxScript/FauxScript';
 
 /**
  * React context for signaling to the window manager (Desktop component).
@@ -124,8 +125,8 @@ const Desktop = () => {
 		})
 
 		addWindow("otherwindow", {
-			content: (<SimpleWindow>
-				Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam commodi minus libero vitae, fuga ipsum suscipit animi rem odio, debitis vel culpa, nulla enim! Velit sed repellat natus error quo.
+			content: (<SimpleWindow height='150px'>
+				This window has a manually set height! <br/> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam commodi minus libero vitae, fuga ipsum suscipit animi rem odio, debitis vel culpa, nulla enim! Velit sed repellat natus error quo.
 			</SimpleWindow>),
 			width: '50ch'
 		})
