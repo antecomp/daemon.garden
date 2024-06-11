@@ -1,7 +1,6 @@
 import titleImg from '@/assets/images/title.png'
-import Modal from '@/components/Util/Modal/Modal';
 import { useState } from 'react'
-import useNSTStore from '@/store';
+import { useCombinedGDStore } from '@/store';
 import { sendMessageToast } from '@/components/Util/Toasts/Toasts';
 import svalinn from '@/assets/sprites/characters/profile/USER.png'
 import TooltipWrapper from '@/components/Util/Tooltip/TooltipWrapper';
@@ -9,20 +8,13 @@ import useDesktopContext from '@/hooks/useDesktopContext';
 import SimpleWindow from '@/components/Util/Desktop/SimpleWindow';
 import FauxScript from '@/components/FauxScript/FauxScript';
 
-const testComp = () => {
-      return (
-            <div>This is a test</div>
-      )
-}
-
-
 export default function DemoDocument() {
       const [count, setCount] = useState(0);
 
 
       //const connectedNodes = useNSTStore((state) => state.connected)
       //const addNode = useNSTStore((state) => state.addNode)
-      const {addNode, removeNode} = useNSTStore()
+      const {addNode, removeNode} = useCombinedGDStore()
 
       const {addWindow} = useDesktopContext()
 
@@ -45,8 +37,8 @@ export default function DemoDocument() {
             >
                   Open Console Popup</button>
             <hr />
-            <button onClick={() => addNode('slop')}>test add NSTSave</button>
-            <button onClick={() => removeNode('slop')}>test remove NSTSave</button>
+            <button onClick={() => addNode('divi:home')}>test add NSTSave</button>
+            <button onClick={() => removeNode('divi:home')}>test remove NSTSave</button>
             <button onClick={() => sendMessageToast({title: "Svalinn", img: svalinn, msg: "Hello developer!"})}>Show notification</button>
             <hr />
             <br /><br />

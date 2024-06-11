@@ -1,6 +1,6 @@
 import { useCallback, useContext } from "react"
 import { NSNodeProps } from "./NSNode.types"
-import useNSTStore from "@/store"
+import useNSTStore from "@/stores/NSTStore"
 import { coordinatePair } from "@/extra.types"
 import { NODE_CONSTS } from "./NSTracer.config"
 import classNames from "classnames"

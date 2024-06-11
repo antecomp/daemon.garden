@@ -1,24 +1,22 @@
-import {create} from "zustand"
-import { persist } from "zustand/middleware"
-import { NSMAP_DEFAULTS } from "./data/NSMap.defaults"
-import { NSTSave } from "./data/NSMap.types";
+import useFileStore from "./stores/fileStore";
+import useNSTStore from "./stores/NSTStore";
 
-// Todo, slice this up, with partialize for persisting whats needd.
-// Ref: https://docs.pmnd.rs/zustand/guides/slices-pattern
-// https://github.com/pmndrs/zustand/blob/main/docs/integrations/persisting-store-data.md#partialize
+//export type GDSlicesCombined = NSTSave & FilesState
 
+/**
+ * Reference my rant in store/README.md
+ * Combined store for accessing all the game state in one. You will probably
+ * never use this now lol
+ * I dont know what the point of this is now but it works fine :^)
+ */
+export const useCombinedGDStore = () => {
+    const fileState = useFileStore();
+    const NSTState = useNSTStore();
 
-const useNSTStore = create<NSTSave>()(
-    persist(
-        (set) => ({
-            ...NSMAP_DEFAULTS,
-            addNode: (id: string) => set((state) => ({connectedNodes: [...state.connectedNodes, id]})),
-            removeNode: (id: string) => set((state) => ({connectedNodes: state.connectedNodes.filter(nodeID => nodeID !== id)}))
-        }),
-        {
-            name: 'NSTracer-Storage' // localstorage key.
-        }
-    )
-)
+    return {
+        ...fileState,
+        ...NSTState
+    }
+}
 
 export default useNSTStore;
