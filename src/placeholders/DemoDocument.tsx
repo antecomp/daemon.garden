@@ -14,7 +14,7 @@ export default function DemoDocument() {
 
       //const connectedNodes = useNSTStore((state) => state.connected)
       //const addNode = useNSTStore((state) => state.addNode)
-      const {addNode, removeNode} = useCombinedGDStore()
+      const {addNode, removeNode, addFile, markFileAsRead} = useCombinedGDStore()
 
       const {addWindow} = useDesktopContext()
 
@@ -39,6 +39,14 @@ export default function DemoDocument() {
             <hr />
             <button onClick={() => addNode('divi:home')}>test add NSTSave</button>
             <button onClick={() => removeNode('divi:home')}>test remove NSTSave</button>
+            <button onClick={() => addFile('testFile', {
+                  fileID: 'testFile',
+                  fileName: 'Test File',
+                  content: 'hello',
+                  isRead: false,
+                  isHidden: false
+            })}>Test add file</button>
+            <button onClick={() => markFileAsRead('testFile')}>Mark file as read</button>
             <button onClick={() => sendMessageToast({title: "Svalinn", img: svalinn, msg: "Hello developer!"})}>Show notification</button>
             <hr />
             <br /><br />
