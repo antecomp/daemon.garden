@@ -22,7 +22,7 @@ function App() {
 
   // Automatically trigger game intro scene
   // TODO: cookie/zustand state for if you've already seen this :^)
-  /* useEffect(() => {
+/*   useEffect(() => {
     Modal.open(OverlayScene, {closable: false, file: `intro`})
   }) */
 

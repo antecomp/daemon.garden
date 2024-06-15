@@ -13,6 +13,7 @@ import EyeIcon from '@/assets/ui/window/icons/eye.png'
 import { AssArray } from '@/extra.types';
 import { getNextMapKey } from './helpers';
 import FauxScript from '@/components/FauxScript/FauxScript';
+import Mnemosyne from '@/components/Mnemosyne/Mnemosyne';
 
 /**
  * React context for signaling to the window manager (Desktop component).
@@ -140,6 +141,10 @@ const Desktop = () => {
 		addWindow("NST", {
 			content: (<NSTracer />),
 			icon: NSTIcon
+		})
+
+		addWindow("mnemosyne", {
+			content: (<Mnemosyne />)
 		})
 
 	}, [])

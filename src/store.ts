@@ -1,4 +1,4 @@
-import useFileStore from "./stores/fileStore";
+import useNoemataStore from "./stores/noemaStore";
 import useNSTStore from "./stores/NSTStore";
 
 //export type GDSlicesCombined = NSTSave & FilesState
@@ -10,7 +10,7 @@ import useNSTStore from "./stores/NSTStore";
  * I dont know what the point of this is now but it works fine :^)
  */
 export const useCombinedGDStore = () => {
-    const fileState = useFileStore();
+    const fileState = useNoemataStore();
     const NSTState = useNSTStore();
 
     return {
