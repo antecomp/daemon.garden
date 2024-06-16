@@ -1,18 +1,17 @@
-import { cloneElement, useEffect, useState, createContext, KeyboardEventHandler } from 'react';
+import { cloneElement, useEffect, useState, createContext } from 'react';
 import '@/styles/Util/Desktop/Desktop.css'
 import { WindowKey, WindowData, DesktopContextType } from './Desktop.types';
-import SimpleWindow from './SimpleWindow';
-import DemoDocument from '@/placeholders/DemoDocument';
+//import SimpleWindow from './SimpleWindow';
+//import DemoDocument from '@/placeholders/DemoDocument';
 import NSTracer from '@/components/NSTracer/NSTracer';
 import Taskbar from './Taskbar/Taskbar';
 
 // TODO Well wanna make some seperate way of saving the common windows with their icons, will be part of the 'bookmarks' the taskbar launches.
 // Meaning this import is temp.
 import NSTIcon from '@/assets/ui/window/icons/NST.png'
-import EyeIcon from '@/assets/ui/window/icons/eye.png'
+//import EyeIcon from '@/assets/ui/window/icons/eye.png'
 import { AssArray } from '@/extra.types';
 import { getNextMapKey } from './helpers';
-import FauxScript from '@/components/FauxScript/FauxScript';
 import Mnemosyne from '@/components/Mnemosyne/Mnemosyne';
 
 /**
@@ -77,6 +76,15 @@ const Desktop = () => {
 		setCurrentRaisedWindowKey(key);
 	}
 
+	/**
+	 * Returns data about a window, can be used to check if a windows exists, if it's a popup etc.
+	 * @param {WindowKey} key - Unique key for the window.
+	*/
+	const getWindowData = (key: WindowKey) => {
+		return windows.get(key) ?? null;
+	}
+
+
 	// Keyboard shortcuts for using the desktop :^)
 	// It seems like this needs to be attached to the window rather than desktop,
 	// otherwise the preventDefault doesn't talk to the browser.
@@ -117,25 +125,16 @@ const Desktop = () => {
 
 
 	useEffect(() => {
-		addWindow("introtext", {
+/* 		addWindow("introtext", {
 			content: (<SimpleWindow className='slop'>
 				<DemoDocument />
 			</SimpleWindow>),
 			width: '75ch',
 			icon: EyeIcon
-		})
+		}) */
 
-		addWindow("otherwindow", {
-			content: (<SimpleWindow height='150px'>
-				This window has a manually set height! <br/> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Numquam commodi minus libero vitae, fuga ipsum suscipit animi rem odio, debitis vel culpa, nulla enim! Velit sed repellat natus error quo.
-			</SimpleWindow>),
-			width: '50ch'
-		})
-
-		addWindow("third", {
-			content: (<SimpleWindow>
-				Sloppum soyim ipsum cummum.
-			</SimpleWindow>)
+		addWindow("mnemosyne", {
+			content: (<Mnemosyne />)
 		})
 
 		addWindow("NST", {
@@ -143,15 +142,11 @@ const Desktop = () => {
 			icon: NSTIcon
 		})
 
-		addWindow("mnemosyne", {
-			content: (<Mnemosyne />)
-		})
-
 	}, [])
 
 
 	return (
-		<DesktopContext.Provider value={{ addWindow, removeWindow, raiseWindow }}>
+		<DesktopContext.Provider value={{ addWindow, removeWindow, raiseWindow, getWindowData }}>
 			<div id="desktop">
 				{[...windows.entries()].map(([key, windowData]) => { // maybe move this stuff to a global context thingy (seperate from windowMap), so we can access the other actually rendered windows from anywhere :)
 					const { content, ...rest } = windowData;

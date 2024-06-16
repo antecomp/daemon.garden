@@ -1,0 +1,10 @@
+import { NoemaData } from "@/types/noemata.types";
+
+export default {
+	ID: "window ID for document",
+	content: (
+		<>
+			JSX HERE
+		</>
+	)
+} as NoemaData

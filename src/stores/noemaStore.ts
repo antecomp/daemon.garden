@@ -5,20 +5,25 @@ import { StorageValue, persist } from "zustand/middleware"
 export interface NoemataState {
 	noemata: Map<NoemaMeta['ID'], NoemaMeta>
 
-	addNoema: (fileID: string, file: NoemaMeta) => void
+	addNoema: (ID: string, file: NoemaMeta) => void
 
-	markNoemaAsSeen: (fileID: string) => void
+	markNoemaAsSeen: (ID: string) => void
 }
 
 const useNoemataStore = create<NoemataState>()(
 	persist(
 		(set) => ({
-			noemata: new Map<NoemaMeta['ID'], NoemaMeta>(),
-			addNoema: (fileID: string, file: NoemaMeta) => set((prev) => ({noemata: new Map(prev.noemata).set(fileID, file)})),
-			markNoemaAsSeen: (fileID: string) => set((prev) => {
-				if (!prev.noemata.get(fileID)) throw new Error("Cannot mark noema as seen as it doesn't exist (fileID not found in Map)")
+			noemata: new Map<NoemaMeta['ID'], NoemaMeta>().set("demodoc", {
+				ID: "demodoc",
+				location: "demoDocFile",
+				isRead: false,
+				virtualFolder: "local"
+			}),
+			addNoema: (ID: string, noema: NoemaMeta) => set((prev) => ({noemata: new Map(prev.noemata).set(ID, noema)})),
+			markNoemaAsSeen: (ID: string) => set((prev) => {
+				if (!prev.noemata.get(ID)) throw new Error("Cannot mark noema as seen as it doesn't exist (ID not found in Map)")
 				return (
-					{noemata: new Map(prev.noemata).set(fileID, {...prev.noemata.get(fileID)!, isRead: true} )}
+					{noemata: new Map(prev.noemata).set(ID, {...prev.noemata.get(ID)!, isRead: true} )}
 				)
 			})
 		}),

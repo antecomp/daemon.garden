@@ -3,7 +3,8 @@
  */
 export interface NoemaMeta {
 	ID: string
-	location: string // eventuall make point to dynamically loaded file
+	location: string // points to the actual file in /data/noemata/
+	virtualFolder: string // for the "folder" the noemata resides in mnemosyne.
 	isRead: boolean
 	//isHidden: boolean
 }

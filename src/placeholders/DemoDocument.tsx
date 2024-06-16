@@ -43,27 +43,29 @@ export default function DemoDocument() {
                   ID: 'test file',
                   location: 'thoughtStreams',
                   isRead: false,
+                  virtualFolder: 'local'
             })}>Test add file</button>
             <button onClick={() => markNoemaAsSeen('testFile')}>Mark file as read</button>
             <button onClick={() => addNoema('noema desc', {
                   ID: 'noema desc',
                   location: 'noemaDefinition',
-                  isRead: false
+                  isRead: false,
+                  virtualFolder: 'remote'
             })}>Add noemaDesc file</button>
             <button onClick={() => sendMessageToast({title: "Svalinn", img: svalinn, msg: "Hello developer!"})}>Show notification</button>
             <hr />
             <br /><br />
             <div style={{ 'textAlign': 'center' }} ><img src={titleImg} width={`426px`} style={{imageRendering: 'auto'}} /></div>
-            The year is 20XX, and reality has been sacrificed on the altar of “more.” The morasses of the world-as-we-know-it, as ugly as they are, were put on a seemingly endless backburner. With the global community no longer pretending to promise a future worth welcoming, men and women work tirelessly for rewards far more immediate- the infinite intrigues and pleasures of the Nullspace.
+            The year is 20XX, and reality has been sacrificed on the altar of "more." The morasses of the world-as-we-know-it, as ugly as they are, were put on a seemingly endless backburner. With the global community no longer pretending to promise a future worth welcoming, men and women work tirelessly for rewards far more immediate- the infinite intrigues and pleasures of the Nullspace.
             <br />
             In the year 2000, <TooltipWrapper tooltipChildren={(
                   <><h3>ASURACOM</h3> Technomancy company, maintainer of the VI-LINK system and Civilian Null-space</>)}>ASURACOM</TooltipWrapper> was founded. This engineering and computer technologies corporation would rediscover (with great consequence) technology that would ensure the world never left the course it was set upon. The VI-LINK, first officially prototyped in 2012, was the first device ever created with the capacity to interface with the human soul. And in 2013, the VI-LINK received a much needed security patch in the form of
             the <TooltipWrapper tooltipChildren={(<><h3>DAEMONVEIL</h3>Local VI-LINK firewall system. Protects conscious render from daemonic influence and other unauthorized illusions.</>)}>Daemonveil</TooltipWrapper>,
             before being released to the world at large.
             <br />
-            From that point on, life was conducted differently. The “Nullspace”, a theoretically infinite plane of data storage, became a household name. Why would it not, after all, when it was so much more efficient and moldable than the real world? From the comfort of their own homes, hooked into these collaborative hallucinations, people handled all the business of day to day life.
+            From that point on, life was conducted differently. The "Nullspace", a theoretically infinite plane of data storage, became a household name. Why would it not, after all, when it was so much more efficient and moldable than the real world? From the comfort of their own homes, hooked into these collaborative hallucinations, people handled all the business of day to day life.
             <br />
-            The boring details of real life began to seem more taboo as time shambled onwards. The domains and subdomains offered entire simulated cities, fantasy realms, entertainment venues, religious experiences, and more. For many, the “real world”, at best, became a troublesome necessity- participation was required to keep themselves tethered to the great beyond through the VI-LINK.
+            The boring details of real life began to seem more taboo as time shambled onwards. The domains and subdomains offered entire simulated cities, fantasy realms, entertainment venues, religious experiences, and more. For many, the "real world", at best, became a troublesome necessity- participation was required to keep themselves tethered to the great beyond through the VI-LINK.
             <br />
             Not all within the Nullspace is so idyllic, however. As an interstice it reflects both the evils of humanity and the alien nature of what lies in the distance. ASURACOM fought hard to secure the tip of the proverbial iceberg, but an entire world dwells beneath the surface. What could be found in these depths? Or… who?
             <br /><br />
