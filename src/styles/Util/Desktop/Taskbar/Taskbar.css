@@ -21,6 +21,7 @@
     border-bottom: solid white 1px;
     padding-right: 2px;
     user-select: none;
+    background: black;
 }
 
 .taskbar-item span img {

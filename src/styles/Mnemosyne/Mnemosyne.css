@@ -1,0 +1,99 @@
+.mnemosyne .window-content {
+	padding: 1px;
+	user-select: none;
+}
+
+.mnemosyne .window-content table {
+	height: 100%;
+	width: 100%;
+}
+
+.mnemosyne .window-content td {
+	vertical-align: top;
+}
+
+.folders-container {
+	width: 115px;
+	text-align: center;
+	border-right: solid 1px var(--fgc);
+	padding-right: 3px;
+}
+
+.folders-container u {
+	text-decoration: none;
+	border-bottom: 1px solid var(--fgc);
+	width: 100%;
+	display: block;
+}
+
+.folders {
+	display: flex;
+	padding-top: 6px;
+	flex-direction: column;
+	gap: 6px;
+	height: 95%;
+    overflow: auto;
+    padding-right: 2px;
+}
+
+.folders option {
+	border: 1px solid var(--fgc);
+	position: relative;
+	height: 18px;
+}
+
+.folders option:hover::after {
+	content: '';
+	display: block;
+	width: 100%;
+	height: 1px;
+	background-color: var(--fgc);
+	position: absolute;
+	top: 0;
+	left: 0;
+}
+
+.noemata-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	padding: 5px;
+	overflow: auto;
+    height: 98%;
+}
+
+.noemata-list figure {
+	width: fit-content;
+	text-align: center;
+}
+
+.noemata-list figure {
+	height: 60px;
+	width: 60px;
+	border: solid 1px transparent;
+	cursor: pointer;
+	padding: 2px;
+}
+
+.noemata-list figure:hover {
+	border: dashed 1px var(--fgc);
+}
+
+.noemata-list figure:active {
+	border: solid 1px var(--fgc);
+}
+
+.noemata-list figure figcaption {
+	width: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* .noemata-list figure {
+	filter: sepia(86%) saturate(1989%) hue-rotate(12deg) brightness(106%) contrast(104%);
+}
+
+.noemata-list figure.is-read {
+	filter: none;
+} */

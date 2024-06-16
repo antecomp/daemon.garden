@@ -27,4 +27,9 @@ export interface DesktopContextType {
      * @param {WindowKey} key - Unique key for the window.
      */
 	raiseWindow: Function
+	/**
+	 * Returns data about a window, can be used to check if a windows exists, if it's a popup etc.
+	 * @param {WindowKey} key - Unique key for the window.
+	 */
+	getWindowData(key: WindowKey): WindowData | null;
 }

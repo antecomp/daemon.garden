@@ -1,5 +1,6 @@
 import { Slide, toast } from "react-toastify"
 import { NodeData } from "./NSMap.types"
+import useNoemataStore from "@/stores/noemaStore"
 
 export const root : NodeData = {
 	id: "kestrel:home",
@@ -60,6 +61,14 @@ export const root : NodeData = {
 				dx: 0,
 				dy: 1,
 				action: 'autoconnect',
+				postConnect: () => {
+					useNoemataStore.getState().addNoema('wicked', {
+						ID: "wicked",
+						location: "wicked",
+						virtualFolder: "local",
+						isRead: false
+					})
+				},
 				children: [
 					{
 						id: "the slop module",
