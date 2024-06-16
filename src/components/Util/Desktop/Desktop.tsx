@@ -1,4 +1,4 @@
-import { cloneElement, useEffect, useState, createContext } from 'react';
+import { cloneElement, useEffect, useState, createContext, useRef } from 'react';
 import '@/styles/Util/Desktop/Desktop.css'
 import { WindowKey, WindowData, DesktopContextType } from './Desktop.types';
 //import SimpleWindow from './SimpleWindow';
@@ -28,7 +28,8 @@ const Desktop = () => {
 
 	// Should this be moved to a global zustand state?
 	const [windows, setWindows] = useState<Map<WindowKey, WindowData>>(new Map<WindowKey, WindowData>());
-	const [maxZIndex, setMaxZIndex] = useState(1);
+	//const [maxZIndex, setMaxZIndex] = useState(1);
+	const maxZIndex = useRef(1)
 	const [currentRaisedWindowKey, setCurrentRaisedWindowKey] = useState('');
 
 	/**
@@ -71,8 +72,7 @@ const Desktop = () => {
 			return;
 		}
 
-		win.zIndex = maxZIndex + 1;
-		setMaxZIndex(prev => prev + 1);
+		win.zIndex = ++maxZIndex.current;
 		setCurrentRaisedWindowKey(key);
 	}
 
