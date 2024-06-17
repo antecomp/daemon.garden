@@ -1,0 +1,198 @@
+{
+  "root": {
+    "next": "3eaeb2ff-e15f-4760-9db2-d026b1815311"
+  },
+  "3eaeb2ff-e15f-4760-9db2-d026b1815311": {
+    "name": "Solomon",
+    "character_uuid": null,
+    "portrait": "/home/omni/Misc/Nescius.png",
+    "text": {
+      "en": "Greeting User. Welcome to the automated daemon response system. Let's get some logic sorted out.",
+      "fr": ""
+    },
+    "parent": "root",
+    "next": "ff519f22-4f7f-44d7-a8a4-9013713ec181"
+  },
+  "ff519f22-4f7f-44d7-a8a4-9013713ec181": {
+    "name": "Leraje",
+    "character_uuid": "9fc487ab-b67d-4a85-b88c-2a1f46f5d5bc",
+    "portrait": "/home/omni/Misc/Leraje Transparent fdsbjkhfsdkjl.png",
+    "text": {
+      "en": "I am a daemon that you may end up conversing with. We should have a system that allows natural continues just by looking at next. Eventually however we'll have our text branch around.",
+      "fr": ""
+    },
+    "parent": "3eaeb2ff-e15f-4760-9db2-d026b1815311",
+    "choices": [
+      {
+        "text": {
+          "en": "Some choice",
+          "fr": ""
+        },
+        "next": "1c5cc383-589d-4f98-ab8e-b235e52af25d",
+        "parent": "ff519f22-4f7f-44d7-a8a4-9013713ec181"
+      },
+      {
+        "text": {
+          "en": "Some other choice",
+          "fr": ""
+        },
+        "next": "1ba50667-0cef-4bf2-8e36-b7e72376b6e1",
+        "parent": "ff519f22-4f7f-44d7-a8a4-9013713ec181"
+      }
+    ]
+  },
+  "1ba50667-0cef-4bf2-8e36-b7e72376b6e1": {
+    "name": "Solomon",
+    "character_uuid": "9fc487ab-b67d-4a85-b88c-2a1f46f5d5bc",
+    "portrait": "/home/omni/Misc/Nescius.png",
+    "text": {
+      "en": "The other choice leads you down a conversation tree with me, Solomon.",
+      "fr": ""
+    },
+    "parent": "747bffb6-50e0-4884-8ff2-26a007dcd782",
+    "next": "a02bd712-1a08-434b-a3db-6f4cc0f273a0"
+  },
+  "1c5cc383-589d-4f98-ab8e-b235e52af25d": {
+    "name": "Leraje",
+    "character_uuid": "9fc487ab-b67d-4a85-b88c-2a1f46f5d5bc",
+    "portrait": "/home/omni/Misc/Leraje Transparent fdsbjkhfsdkjl.png",
+    "text": {
+      "en": "The first choice brings you down a conversation tree with me, Leraje.",
+      "fr": ""
+    },
+    "parent": "e90a9d6d-392d-456b-acef-e2e74f9330f8",
+    "next": "173f56e7-72ed-453d-a19c-7f9787a4644f"
+  },
+  "a02bd712-1a08-434b-a3db-6f4cc0f273a0": {
+    "name": "Solomon",
+    "character_uuid": "9fc487ab-b67d-4a85-b88c-2a1f46f5d5bc",
+    "portrait": "/home/omni/Misc/Nescius.png",
+    "text": {
+      "en": "After we continue our conversation, i'd like to emit a game signal. These signals need to be parsed by the dialog manager to trigger events.",
+      "fr": ""
+    },
+    "parent": "1ba50667-0cef-4bf2-8e36-b7e72376b6e1",
+    "signals": {
+      "parent": "a02bd712-1a08-434b-a3db-6f4cc0f273a0",
+      "gameManager": {
+        "String": "exampleSignal"
+      }
+    },
+    "next": "0aa8135f-6fb6-44d4-a147-47f7f514c1ad"
+  },
+  "173f56e7-72ed-453d-a19c-7f9787a4644f": {
+    "name": "Leraje",
+    "character_uuid": "9fc487ab-b67d-4a85-b88c-2a1f46f5d5bc",
+    "portrait": "/home/omni/Misc/Leraje Transparent fdsbjkhfsdkjl.png",
+    "text": {
+      "en": "After this, the dialogue can branch based on predefined logical conditions that we'll also have to handle. This will be the most difficult step in the parsing/rendering of our dialogue trees. Most likely we'll need to seperately load/form a seperate states object manually to easily check these conditions.",
+      "fr": ""
+    },
+    "parent": "1c5cc383-589d-4f98-ab8e-b235e52af25d",
+    "conditions": [
+      {
+        "parent": "173f56e7-72ed-453d-a19c-7f9787a4644f",
+        "someCondition": {
+          "value": true,
+          "operator": "equal",
+          "type": "boolean"
+        },
+        "next": "c3bfd670-3e0d-4e8e-a4f2-ba9912d1361e"
+      },
+      {
+        "someCondition": {
+          "value": false,
+          "operator": "equal",
+          "type": "boolean"
+        },
+        "parent": "173f56e7-72ed-453d-a19c-7f9787a4644f",
+        "next": "f1ac7a6c-63bd-4a92-b202-4e4489b3cdc1"
+      }
+    ]
+  },
+  "0aa8135f-6fb6-44d4-a147-47f7f514c1ad": {
+    "name": "Solomon",
+    "character_uuid": "9fc487ab-b67d-4a85-b88c-2a1f46f5d5bc",
+    "portrait": "/home/omni/Misc/Nescius.png",
+    "text": {
+      "en": "I shouldve just emitted a signal, but that shouldn't always demarc the end of a conversation.",
+      "fr": ""
+    },
+    "parent": "a02bd712-1a08-434b-a3db-6f4cc0f273a0",
+    "next": "130cc6ae-6753-4e04-b4ca-f7dc60bfad3d"
+  },
+  "c3bfd670-3e0d-4e8e-a4f2-ba9912d1361e": {
+    "name": "Leraje",
+    "character_uuid": "9fc487ab-b67d-4a85-b88c-2a1f46f5d5bc",
+    "portrait": "/home/omni/Misc/Leraje Transparent fdsbjkhfsdkjl.png",
+    "text": {
+      "en": "someCondition was true. Let's emit some signal.",
+      "fr": ""
+    },
+    "parent": "8f482244-a0e0-41ec-b82f-e5ee98212c09",
+    "signals": {
+      "randomSignal": {
+        "String": "omni"
+      },
+      "parent": "c3bfd670-3e0d-4e8e-a4f2-ba9912d1361e"
+    }
+  },
+  "f1ac7a6c-63bd-4a92-b202-4e4489b3cdc1": {
+    "name": "Leraje",
+    "character_uuid": "9fc487ab-b67d-4a85-b88c-2a1f46f5d5bc",
+    "portrait": "/home/omni/Misc/Leraje Transparent fdsbjkhfsdkjl.png",
+    "text": {
+      "en": "someCondition was false.",
+      "fr": ""
+    },
+    "parent": "6e0e3825-5705-4947-acaf-f3e409ffea7a"
+  },
+  "130cc6ae-6753-4e04-b4ca-f7dc60bfad3d": {
+    "name": "Solomon",
+    "character_uuid": "9fc487ab-b67d-4a85-b88c-2a1f46f5d5bc",
+    "portrait": "/home/omni/Misc/Nescius.png",
+    "text": {
+      "en": "For good measure let's have one more choice branch.",
+      "fr": ""
+    },
+    "parent": "0aa8135f-6fb6-44d4-a147-47f7f514c1ad",
+    "choices": [
+      {
+        "text": {
+          "en": "Ok Fine.",
+          "fr": ""
+        },
+        "next": "07c71edf-e692-4cfb-8316-eee250c939e9",
+        "parent": "130cc6ae-6753-4e04-b4ca-f7dc60bfad3d"
+      },
+      {
+        "text": {
+          "en": "I dont want any more damn choices.",
+          "fr": ""
+        },
+        "next": "4fff79b6-5a93-4934-b1f2-28a02f2032a2",
+        "parent": "130cc6ae-6753-4e04-b4ca-f7dc60bfad3d"
+      }
+    ]
+  },
+  "07c71edf-e692-4cfb-8316-eee250c939e9": {
+    "name": "Solomon",
+    "character_uuid": "9fc487ab-b67d-4a85-b88c-2a1f46f5d5bc",
+    "portrait": "/home/omni/Misc/Nescius.png",
+    "text": {
+      "en": "Cool thanks. That completes the test of the automated daemon response system.",
+      "fr": ""
+    },
+    "parent": "b4d155f5-3553-47b5-8aa2-4b24e0112547"
+  },
+  "4fff79b6-5a93-4934-b1f2-28a02f2032a2": {
+    "name": "Solomon",
+    "character_uuid": "9fc487ab-b67d-4a85-b88c-2a1f46f5d5bc",
+    "portrait": "/home/omni/Misc/Nescius.png",
+    "text": {
+      "en": "Fuck you.",
+      "fr": ""
+    },
+    "parent": "f3247d7c-1e82-4312-80bf-9849b1f90e55"
+  }
+}
