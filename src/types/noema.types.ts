@@ -21,5 +21,5 @@ export interface NoemataState {
 
     addNoema: (folder: string, noemaID: string, md: NoemaMeta) => void
 
-    markNoemataAsSeen: (folder: string, noemaID: string) => void
+    markNoemaAsSeen: (folder: string, noemaID: string) => void
 }

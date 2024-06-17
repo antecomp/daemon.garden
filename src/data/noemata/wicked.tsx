@@ -1,6 +1,6 @@
 import shock from './assets/wicked/shock.jpg'
 
-import { NoemaData } from "@/types/noemata.types";
+import { NoemaData } from "@/types/noema.types";
 
 export default {
 	ID: "window ID for document",

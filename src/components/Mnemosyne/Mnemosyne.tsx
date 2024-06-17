@@ -1,4 +1,4 @@
-import { NoemaData, NoemaMeta } from "@/types/newNoema.types";
+import { NoemaData, NoemaMeta } from "@/types/noema.types";
 import { DesktopContextType } from "../Util/Desktop/Desktop.types";
 import { loadX } from "@/util/load";
 import { DEFAULT_FOLDER, NOEMA_FOLDER, NOEMA_WINID_PREFIX } from "./Mnemosyne.config";
@@ -45,7 +45,7 @@ export const openNoema = (noema: NoemaMeta, desktopContext: DesktopContextType):
 }
 
 const Mnemosyne = ({ width = "450px", height = "480px", icon = noemaIcon, className = "mnemosyne", zIndex = 0, windowKey = 'mnemosyne' }: WindowProps) => {
-    const {noemata, markNoemataAsSeen} = useNoemaStore();
+    const {noemata, markNoemaAsSeen} = useNoemaStore();
 
     const DKT = useDesktopContext();
 
@@ -90,7 +90,7 @@ const Mnemosyne = ({ width = "450px", height = "480px", icon = noemaIcon, classN
                                         <figure 
                                             className={classNames({'is-read': noema.isRead})}
                                             key={key}
-                                            onClick={() => {openNoema(noema, DKT); markNoemataAsSeen(selectedFolder, key)}}
+                                            onClick={() => {openNoema(noema, DKT); markNoemaAsSeen(selectedFolder, key)}}
                                         >
                                             <img src={noema.isRead ? fileDefaultIcon : fileUnreadIcon} />
                                             <figcaption>{noema.name}</figcaption>

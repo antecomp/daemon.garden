@@ -1,5 +1,5 @@
 import DemoDocument from "@/placeholders/DemoDocument";
-import { NoemaData } from "@/types/noemata.types";
+import { NoemaData } from "@/types/noema.types";
 
 export default {
 	ID: "demodoc",

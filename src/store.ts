@@ -1,4 +1,4 @@
-import useNoemataStore from "./stores/noemaStore.old";
+import useNoemataStore from "./stores/noemataStore";
 import useNSTStore from "./stores/NSTStore";
 
 //export type GDSlicesCombined = NSTSave & FilesState
