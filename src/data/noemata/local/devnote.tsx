@@ -2,7 +2,6 @@ import { NoemaData } from "@/types/noema.types";
 import title from '@/data/scenes/introAssets/kissinger.png'
 
 export default {
-	ID: "thoughtStream",
 	content: (
 		<>
 			<h1>slop</h1>

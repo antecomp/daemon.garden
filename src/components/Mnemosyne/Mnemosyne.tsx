@@ -14,10 +14,29 @@ import fileUnreadIcon from './assets/file_unread.png';
 import { WindowProps } from "../Util/Desktop/WindowContainer.types";
 import '@/styles/Mnemosyne/Mnemosyne.css'
 
+async function loadNoemaFile (inputPath: string) {
+    try {
+        const pathParts = inputPath.split('/');
+    
+        if (pathParts.length!== 2) {
+            throw new Error('Invalid file path format');
+        }
+    
+        const folder = pathParts[0];
+        const filename = pathParts[1];
+
+        const response = await import(`@/data/noemata/${folder}/${filename}.tsx`);
+        return response.default;
+    } catch (error) {
+        throw new Error(`Failed to load file: ${error}`)
+    }
+}
+
+
 export const openNoema = (noema: NoemaMeta, desktopContext: DesktopContextType): void => {
     (async () => {
         try {
-            loadX<NoemaData>(NOEMA_FOLDER, noema.location).then((data): void => {
+                loadNoemaFile(noema.location).then((data): void =>  {
 
                 if(desktopContext.getWindowData(NOEMA_WINID_PREFIX + noema.name)) {
                     desktopContext.raiseWindow(NOEMA_WINID_PREFIX + noema.name)

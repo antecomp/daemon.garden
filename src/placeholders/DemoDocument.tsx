@@ -41,11 +41,11 @@ export default function DemoDocument() {
             <button onClick={() => removeNode('divi:home')}>test remove NSTSave</button>
             <button onClick={() => addNoema('local', 'test file', {
                   name: 'test file',
-                  location: 'thoughtStreams'
+                  location: 'local/devnote'
             })}>Test add file</button>
             <button onClick={() => addNoema('remote', 'noema desc', {
                   name: 'noema desc',
-                  location: 'noemaDefinition'
+                  location: 'remote/noemaDefinition'
             })}>Add noemaDesc file</button>
             <button onClick={() => sendMessageToast({title: "Svalinn", img: svalinn, msg: "Hello developer!"})}>Show notification</button>
             <hr />

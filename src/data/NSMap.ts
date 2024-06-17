@@ -62,9 +62,9 @@ export const root : NodeData = {
 				dy: 1,
 				action: 'autoconnect',
 				postConnect: () => {
-					useNoemataStore.getState().addNoema('local', 'wicket', {
+					useNoemataStore.getState().addNoema('local', 'wicked', {
 						name: "wicked",
-						location: "wicked"
+						location: "local/wicked"
 					})
 				},
 				children: [
