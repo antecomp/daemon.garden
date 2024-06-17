@@ -14,6 +14,10 @@ import unreadBadge from './assets/unread_badge.png'
 import { WindowProps } from "../Util/Desktop/WindowContainer.types";
 import '@/styles/Mnemosyne/Mnemosyne.css'
 
+/**
+ * Custom loader function for noema filepaths, using this over the generic load/loadX code as our noema are organized into further subfolders.
+ * @param inputPath - provided by the NoemaMeta location property, expected to be of the form 'subfolder/filename'
+ */
 async function loadNoemaFile (inputPath: NoemaMeta['location']) {
     try {
         const pathParts = inputPath.split('/');
@@ -32,7 +36,12 @@ async function loadNoemaFile (inputPath: NoemaMeta['location']) {
     }
 }
 
-
+/**
+ * openNoema creates a new SimpleWindow containing the content of a specified noema (as loaded from its location property). 
+ * Mainly use by Mnemosyne, but other windows can open documents if needed.
+ * @param noema noema to open  
+ * @param desktopContext desktopContext reference, used to call addWindow/raiseWindow etc. Meaning that the caller of this method must have access to desktop context.
+ */
 export const openNoema = (noema: NoemaMeta, desktopContext: DesktopContextType): void => {
     (async () => {
         try {
@@ -63,6 +72,11 @@ export const openNoema = (noema: NoemaMeta, desktopContext: DesktopContextType):
     })()
 }
 
+/**
+ * Mnemosyne is the 'file manager' and noema 'explorer' window. It references the NoemaStore to show the currently 'downloaded'/available files in the store. 
+ * Clicking on files opens their content in a new window using the openNoema function.
+ * @param props - Typical windowprops for desktop handling.
+ */
 const Mnemosyne = ({ width = "450px", height = "480px", icon = noemaIcon, className = "mnemosyne", zIndex = 0, windowKey = 'mnemosyne' }: WindowProps) => {
     const {noemata, markNoemaAsSeen} = useNoemaStore();
 
