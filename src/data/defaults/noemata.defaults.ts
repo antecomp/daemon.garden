@@ -1,3 +1,4 @@
+import { NoemataState } from "@/types/newNoema.types";
 import { NoemaData, NoemaMeta } from "@/types/noemata.types";
 
 // Starting files in noemaStore.
@@ -16,3 +17,19 @@ const defaultNoema = new Map<NoemaData['ID'], NoemaMeta>()
 	})
 
 export default defaultNoema;
+
+
+export const DEFAULT_NOEMATA: NoemataState['noemata'] = {
+	"local": {
+		"demodoc": {
+			name: "demodoc",
+			location: "local-demodoc"
+		}
+	},
+	"kestrel": {
+		"ejectlog": {
+			name: "EJECT_LOG",
+			location: "kestrel-eject"
+		}
+	}
+}

@@ -1,6 +1,6 @@
 import { Slide, toast } from "react-toastify"
 import { NodeData } from "./NSMap.types"
-import useNoemataStore from "@/stores/noemaStore"
+import useNoemataStore from "@/stores/noemaStore.old"
 
 export const root : NodeData = {
 	id: "kestrel:home",
