@@ -25,7 +25,7 @@ export const openNoema = (loc: NoemaMeta['location'], addWindow: DesktopContextT
 				}
 
 				addWindow(NOEMA_WINID_PREFIX + data.ID, {
-					content: (<SimpleWindow width="400px" height="450px" initialPosition={getMousePosition()}>{data.content}</SimpleWindow>),
+					content: (<SimpleWindow width={data.dimensions?.width ?? "400px"} height={data.dimensions?.height ?? "450px"} initialPosition={getMousePosition()}>{data.content}</SimpleWindow>),
 					icon: nomeaIcon,
 				})
 
@@ -48,7 +48,6 @@ const Mnemosyne = ({ width = "450px", height = "480px", icon = nomeaIcon, classN
 	}, [noemata])
 
 	const doesFolderHaveUnread = useCallback((folder: string) => {
-		console.log("render trigger")
 		let rtn = false;
 		noemata.forEach(noema => {
 			if (noema.virtualFolder == folder && !noema.isRead) {rtn = true};

@@ -30,6 +30,7 @@
 	--fgc: white;
 	--bgc: black;
 	--empc: yellow;
+	--warnc: orangered;
 	--altfgc: #444;
 	--outlinec: black;
 }
@@ -74,4 +75,14 @@ h1, h2, h3 h4, h5, h6 {
 ::selection {
 	background: none;
 	color: var(--altfgc);
+}
+
+
+/* helper classes */
+.tc-yellow {
+	color: yellow;
+}
+
+.tc-orangered {
+	color: orangered;
 }

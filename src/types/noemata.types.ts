@@ -15,4 +15,8 @@ export interface NoemaMeta {
 export interface NoemaData {
 	ID: string // do I really need this? Just inherit ID from NoeMeta call
 	content: JSX.Element
+	dimensions?: {
+		width: `${number}px`
+		height: `${number}px`
+	}
 }

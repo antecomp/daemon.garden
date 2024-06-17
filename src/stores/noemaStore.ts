@@ -1,6 +1,8 @@
+import defaultNoema from "@/data/defaults/noemata.defaults"
 import { NoemaMeta } from "@/types/noemata.types"
 import { create } from "zustand"
 import { StorageValue, persist } from "zustand/middleware"
+
 
 export interface NoemataState {
 	noemata: Map<NoemaMeta['ID'], NoemaMeta>
@@ -13,12 +15,7 @@ export interface NoemataState {
 const useNoemataStore = create<NoemataState>()(
 	persist(
 		(set) => ({
-			noemata: new Map<NoemaMeta['ID'], NoemaMeta>().set("demodoc", {
-				ID: "demodoc",
-				location: "demoDocFile",
-				isRead: false,
-				virtualFolder: "local"
-			}),
+			noemata: defaultNoema,
 			addNoema: (ID: string, noema: NoemaMeta) => set((prev) => ({noemata: new Map(prev.noemata).set(ID, noema)})),
 			markNoemaAsSeen: (ID: string) => set((prev) => {
 				if (!prev.noemata.get(ID)) throw new Error("Cannot mark noema as seen as it doesn't exist (ID not found in Map)")
