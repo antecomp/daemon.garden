@@ -3,7 +3,7 @@ import { NoemaData } from "@/types/noema.types";
 export default {
 	ID: "kestrel/eject_log",
 	content: (
-		<span style={{whiteSpace: 'pre-line'}}>
+		<span style={{whiteSpace: 'pre-line', fontFamily: "monograph"}}>
 <br/>			{'<<<<<<'} [HEAD -n(AFTER: $EJECT_TIME - 3LR]] // (SHOWING LOG BEFORE EJECTION) {'<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'}
 <br/>			May 13 23:28:03 2101 VI-LINK kernel: TSS: Reparse thoughtstream range [0xf0000=0xf7000] from e820 map
 <br/>			May 13 23:28:03 2101 VI-LINK kernel: TSS: GET e820: map reserved, thoughtstream decay detected
@@ -82,7 +82,7 @@ export default {
 		</span>
 	),
 	dimensions: {
-		width: "740px",
+		width: "750px",
 		height: "470px"
 	}
 } as NoemaData

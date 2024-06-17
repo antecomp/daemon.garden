@@ -1,6 +1,9 @@
+import { noemaFolders } from "@/components/Mnemosyne/Mnemosyne.config";
+
+
 export interface NoemaMeta {
     name: string
-    location: string // points to the actual file in /data/noemata/
+    location: `${noemaFolders}/${string}` // points to the actual file in /data/noemata/
     isRead?: boolean;
 }
 

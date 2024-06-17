@@ -125,14 +125,7 @@ const Desktop = () => {
 
 
 	useEffect(() => {
-/* 		addWindow("introtext", {
-			content: (<SimpleWindow className='slop'>
-				<DemoDocument />
-			</SimpleWindow>),
-			width: '75ch',
-			icon: EyeIcon
-		}) */
-
+		
 		addWindow("mnemosyne", {
 			content: (<Mnemosyne />)
 		})

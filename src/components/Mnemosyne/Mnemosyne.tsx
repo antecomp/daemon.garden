@@ -1,7 +1,6 @@
-import { NoemaData, NoemaMeta } from "@/types/noema.types";
+import { NoemaMeta } from "@/types/noema.types";
 import { DesktopContextType } from "../Util/Desktop/Desktop.types";
-import { loadX } from "@/util/load";
-import { DEFAULT_FOLDER, NOEMA_FOLDER, NOEMA_WINID_PREFIX } from "./Mnemosyne.config";
+import { DEFAULT_FOLDER, NOEMA_WINID_PREFIX, noemaFolders } from "./Mnemosyne.config";
 import SimpleWindow from "../Util/Desktop/SimpleWindow";
 import { getMousePosition } from "@/util/getMousePosition";
 import noemaIcon from "@/assets/ui/window/icons/noema.png"
@@ -11,10 +10,11 @@ import { useCallback, useMemo, useState } from "react";
 import classNames from "classnames";
 import fileDefaultIcon from './assets/file_default.png';
 import fileUnreadIcon from './assets/file_unread.png';
+import unreadBadge from './assets/unread_badge.png'
 import { WindowProps } from "../Util/Desktop/WindowContainer.types";
 import '@/styles/Mnemosyne/Mnemosyne.css'
 
-async function loadNoemaFile (inputPath: string) {
+async function loadNoemaFile (inputPath: NoemaMeta['location']) {
     try {
         const pathParts = inputPath.split('/');
     
@@ -22,7 +22,7 @@ async function loadNoemaFile (inputPath: string) {
             throw new Error('Invalid file path format');
         }
     
-        const folder = pathParts[0];
+        const folder = pathParts[0] as noemaFolders;
         const filename = pathParts[1];
 
         const response = await import(`@/data/noemata/${folder}/${filename}.tsx`);
@@ -92,13 +92,12 @@ const Mnemosyne = ({ width = "450px", height = "480px", icon = noemaIcon, classN
                             <u>/NEOMATA/</u>
                             <div className="folders">
                                 {folders.map(folder => 
-                                    <option 
-                                        key={`folderlink-${folder}`} 
-                                        value={folder} 
+                                    <a 
+                                        key={`folderlink-${folder}`}  
                                         onClick={() => setSelectedFolder(folder)}
                                     >
-                                        {folder} {doesFolderHaveUnread(folder) && '(unread)'}
-                                    </option>
+                                        {doesFolderHaveUnread(folder) && <img src={unreadBadge} alt="slop"/>} {folder}
+                                    </a>
                                 )}
                             </div>
                         </td>

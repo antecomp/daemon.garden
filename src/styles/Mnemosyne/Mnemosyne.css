@@ -13,8 +13,7 @@
 }
 
 .folders-container {
-	width: 115px;
-	text-align: center;
+	width: 110px;
 	border-right: solid 1px var(--fgc);
 	padding-right: 3px;
 }
@@ -36,13 +35,16 @@
     padding-right: 2px;
 }
 
-.folders option {
+.folders a {
 	border: 1px solid var(--fgc);
 	position: relative;
 	height: 18px;
+	text-decoration: none;
+	color: var(--fgc);
+	padding-left: 4px;
 }
 
-.folders option:hover::after {
+.folders a:hover::after {
 	content: '';
 	display: block;
 	width: 100%;
