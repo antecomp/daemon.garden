@@ -26,6 +26,12 @@
 	src: url('../assets/fonts/pixelated-wingdings.ttf');
 }
 
+@font-face {
+	font-family: "monograph";
+	src: url('../assets//fonts/graph35.ttf');
+	size-adjust: 50%;
+}
+
 :root {
 	--fgc: white;
 	--bgc: black;

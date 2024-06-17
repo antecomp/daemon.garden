@@ -1,6 +1,4 @@
-import { supportedDirectories } from "@/util/load";
-
-export const NOEMA_FOLDER: supportedDirectories = "noemata";
+export type noemaFolders = "kestrel" | "local" | "remote"
 
 export const NOEMA_WINID_PREFIX: string = "/NOEMATA/"
 

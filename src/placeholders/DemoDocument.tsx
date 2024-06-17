@@ -14,7 +14,7 @@ export default function DemoDocument() {
 
       //const connectedNodes = useNSTStore((state) => state.connected)
       //const addNode = useNSTStore((state) => state.addNode)
-      const {addNode, removeNode, addNoema, markNoemaAsSeen} = useCombinedGDStore()
+      const {addNode, removeNode, addNoema} = useCombinedGDStore()
 
       const {addWindow} = useDesktopContext()
 
@@ -39,18 +39,13 @@ export default function DemoDocument() {
             <hr />
             <button onClick={() => addNode('divi:home')}>test add NSTSave</button>
             <button onClick={() => removeNode('divi:home')}>test remove NSTSave</button>
-            <button onClick={() => addNoema('test file', {
-                  ID: 'test file',
-                  location: 'thoughtStreams',
-                  isRead: false,
-                  virtualFolder: 'local'
+            <button onClick={() => addNoema('local', 'test file', {
+                  name: 'test file',
+                  location: 'local/devnote'
             })}>Test add file</button>
-            <button onClick={() => markNoemaAsSeen('testFile')}>Mark file as read</button>
-            <button onClick={() => addNoema('noema desc', {
-                  ID: 'noema desc',
-                  location: 'noemaDefinition',
-                  isRead: false,
-                  virtualFolder: 'remote'
+            <button onClick={() => addNoema('remote', 'noema desc', {
+                  name: 'noema desc',
+                  location: 'remote/noemaDefinition'
             })}>Add noemaDesc file</button>
             <button onClick={() => sendMessageToast({title: "Svalinn", img: svalinn, msg: "Hello developer!"})}>Show notification</button>
             <hr />
