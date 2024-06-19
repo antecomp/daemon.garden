@@ -1,0 +1,61 @@
+.hermes-container {
+	position: absolute;
+	top: 260px;
+	right: 0;
+	z-index: 2; /* show above modals */
+}
+
+.sender-container {
+	width: 240px;
+	height: 176px;
+	background: url('/src/components/Hermes/assets/base.png');
+	padding-top: 8px;
+	/* display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 86px repeat(3, 27px);
+	grid-column-gap: 0px;
+	grid-row-gap: 0px; */
+}
+
+.sender-container .text-preview {
+	height: 83px;
+	margin: 3px 5px 2px 5px;
+	padding: 1px;
+	padding-left: 3px;
+	line-height: 120%;
+}
+
+.sender-container .text-preview img {
+	position: absolute;
+	left: 5px;
+}
+
+.sender-container .text-preview .name {
+	margin-left: 2px;
+	margin-right: 27px;
+}
+
+.hermes-resp-container {
+	display: flex;
+	padding-left: 10px;
+	height: 27px;
+	align-items: center;
+	opacity: 0.5;
+	cursor: pointer;
+	margin-bottom: 1px;
+}
+
+.hermes-resp-container:hover {
+	opacity: 1;
+}
+
+.hermes-resp-container span {
+	background: white;
+	background-position: 5px 7px;
+	flex-grow: 1;
+	height: 1px;
+}
+
+.hermes-resp-container img {
+	height: min-content;
+}

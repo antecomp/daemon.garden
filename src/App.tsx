@@ -13,6 +13,7 @@ import '@/styles/Util/Toastify/Toastify.css'
 import { ToastContainer } from 'react-toastify';
 import { useEffect } from 'react';
 import OverlayScene from './components/OverlayScene/OverlayScene';
+import Hermes from './components/Hermes/Hermes';
 
 
 
@@ -45,6 +46,7 @@ function App() {
         theme="dark"
         closeButton={false}
       />
+      <Hermes/>
     </>
   )
 }
