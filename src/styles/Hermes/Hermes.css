@@ -1,7 +1,7 @@
 .hermes-container {
 	position: absolute;
-	top: 260px;
 	right: 0;
+	top: 10px;
 	z-index: 2; /* show above modals */
 }
 
@@ -23,6 +23,7 @@
 	padding: 1px;
 	padding-left: 3px;
 	line-height: 120%;
+	cursor: default;
 }
 
 .sender-container .text-preview img {
@@ -58,4 +59,84 @@
 
 .hermes-resp-container img {
 	height: min-content;
+}
+
+
+
+
+
+
+/* =========================================================== */
+
+.messages-container {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end; /* align to right side */
+	/* justify-content: flex-end; align to bottom (when no overflow)   - BREAKS OVERFLOW SCROLL BECAUSE FUCK YOU (ISSUE RESOLVED BUT NOT FIXED 🖕 ) */ 
+	padding-bottom: 5px;
+	padding-right: 6px;
+	gap: 5px;
+	height: 400px;
+	overflow: auto;
+	overflow-x: hidden;
+	/* overflow: hidden; */
+	scrollbar-width: none;
+	cursor: default;
+}
+
+/* .hermes-container::before {
+	content: url('/src/components/Hermes/assets/fadething.png');
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 2;
+} */
+
+/* ref: https://github.com/philipwalton/flexbugs/issues/53 */
+.messages-container > :first-child {
+	/* margin-top: auto; */
+	height: 410px;
+  	flex-grow: 1;
+  	flex-shrink: 0;
+}
+
+.message-content {
+	width: 223px;
+	height: 82px;
+	background: url('/src/components/Hermes/assets/message_body_bg.png');
+}
+
+.message-content p {
+	padding: 2px 5px;
+}
+
+.message-dogtag {
+	display: flex;
+}
+
+.message-dogtag img {
+	display: block;
+}
+
+.message-dogtag span {
+	background-color: var(--fgc);
+	color: var(--outlinec);
+	line-height: 80%;
+}
+
+.message-body {
+	position: relative;
+}
+
+.message-body:last-child {
+	animation: message-send 0.5s forwards;
+}
+
+@keyframes message-send {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
