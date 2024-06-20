@@ -26,6 +26,11 @@
 	cursor: default;
 }
 
+.sender-container.inactive {
+	filter: brightness(0.5);
+	pointer-events: none;
+}
+
 .sender-container .text-preview img {
 	position: absolute;
 	left: 5px;

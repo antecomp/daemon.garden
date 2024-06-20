@@ -1,8 +1,9 @@
 import { useEffect, useRef } from 'react'
 import dogtagFirst from './assets/dogtag_first.png'
 import dogtagLast from './assets/dogtag_last.png'
+import { HermesMessageProps } from './hermes.types';
 
-const Message = ({name, content}: {name: string, content: string}) => {
+const Message = ({name, content}: Omit<HermesMessageProps, 'UUID'>) => {
 
 	const elementBodyRef = useRef<HTMLDivElement | null>(null);
 

@@ -14,6 +14,7 @@ import { ToastContainer } from 'react-toastify';
 import { useEffect } from 'react';
 import OverlayScene from './components/OverlayScene/OverlayScene';
 import Hermes from './components/Hermes/Hermes';
+import useHermesStore from './stores/hermesStore';
 
 
 
@@ -28,6 +29,13 @@ function App() {
   }) */
 
 
+  const {initiateMessages} = useHermesStore();
+
+   useEffect(() => {
+    setTimeout(() => {
+      initiateMessages("hell")
+    }, 1500)
+  }, [])
 
   return (
     <>
