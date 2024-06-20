@@ -2,9 +2,10 @@ import '@/styles/Hermes/Hermes.css'
 import topb from './assets/topb.png'
 import midb from './assets/midb.png'
 import botb from './assets/botb.png'
+import ntwrk from './assets/ntwrk.gif'
 import nameplateBorder from './assets/nameplate_border.png'
 import useTypewriter from '@/hooks/useTypewriter'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Message from './Message'
 import useHermesStore from '@/stores/hermesStore'
 import { HermesMessageProps, HermesOption } from './hermes.types'
@@ -16,10 +17,12 @@ const Hermes = () => {
 
 	const [previewText, setPreviewText] = useState('')
 	const [options, setOptions] = useState<HermesOption[]>([]);
-
 	const [messages, setMessages] = useState<HermesMessageProps[]>([])
-
 	const [currentDialogueObject, setCurrentDialogueObject] = useState<DialogueItem>();
+	const {displayText} = useTypewriter(previewText, 25, () => {})
+	const [canDisconnect, setCanDisconnect] = useState(false);
+	// Decorative. Receptiant VLID in footer.
+	const RVLID = useRef(`${Math.floor(Math.random() * 0xFFFF).toString(16).padStart(4, '0')}:${Math.floor(Math.random() * 0xFFFF).toString(16).padStart(4, '0')}`)
 
 	const addMessage = (name: string, content: string, UUID: UUID) => { // should this be memoized?
 		setMessages(prev => [...prev, {...{name, content, UUID}}])
@@ -40,13 +43,17 @@ const Hermes = () => {
 		addMessage(responseMessage.name, responseMessage.text.en, option.nextUUID);}, 1000)
 	}
 
-	const {displayText} = useTypewriter(previewText, 25, () => {})
-
+	const handleDisconnectClick = () => {
+		if(canDisconnect) {
+			close();
+		}
+	}
 
 	// Reset when dialogue tree updates
 	useEffect(() => {
 		setMessages([])
 		setOptions([])
+		setCanDisconnect(false);
 		if (!currentDialogTree) return;
 		const firstMessage = currentDialogTree[currentDialogTree.root.next as UUID]
 		setCurrentDialogueObject(firstMessage);
@@ -59,7 +66,6 @@ const Hermes = () => {
 	useEffect(() => {
 		if (!currentDialogTree) return;
 		let messageTick = setInterval(() => {
-			console.log('tick')
 
 			if(!currentDialogueObject) { // I dont think we should ever see this, here just in case.
 				clearInterval(messageTick);
@@ -78,7 +84,6 @@ const Hermes = () => {
 				addMessage(nextDialogueObj.name, nextDialogueObj.text.en, currentDialogueObject.next)
 				setCurrentDialogueObject(nextDialogueObj);
 			} else if(currentDialogueObject.choices) {
-				console.log("choices time")
 				if (currentDialogueObject.choices.length !== 3) throw new Error("Incorrect # of choices for chat");
 				setOptions([
 					{
@@ -104,6 +109,7 @@ const Hermes = () => {
 				console.log("Hit end of dialogue tree")
 				clearInterval(messageTick);
 				//close();
+				setCanDisconnect(true);
 			} 
 
 
@@ -158,6 +164,11 @@ const Hermes = () => {
 					<p>{options[2]?.summaryText ?? ''}</p>
 					<span></span><img src={botb} alt="" />
 				</div>
+			</div>
+			<div className="hermes-footer">
+				<img src={ntwrk} alt="" />
+				<span>S-VLID:9ae0:ffc1 R-VLID:{RVLID.current}</span>
+				<span className={`hermes-disconnect ${canDisconnect? 'can-disconnect' : ''}`} onClick={handleDisconnectClick}>DISCONNECT</span>
 			</div>
 		</div>
 	)

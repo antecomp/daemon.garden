@@ -12,7 +12,7 @@ import '@/styles/Util/Toastify/Toastify.css'
 // Toastify imports (for notification)
 import { ToastContainer } from 'react-toastify';
 import { useEffect } from 'react';
-import OverlayScene from './components/OverlayScene/OverlayScene';
+//import OverlayScene from './components/OverlayScene/OverlayScene';
 import Hermes from './components/Hermes/Hermes';
 import useHermesStore from './stores/hermesStore';
 
@@ -33,7 +33,7 @@ function App() {
 
    useEffect(() => {
     setTimeout(() => {
-      initiateMessages("hell")
+      initiateMessages("demo")
     }, 1500)
   }, [])
 

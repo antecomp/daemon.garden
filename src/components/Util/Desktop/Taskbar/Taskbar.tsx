@@ -4,7 +4,7 @@ import '@/styles/Util/Desktop/Taskbar/Taskbar.css'
 import tbClose from '@/assets/ui/extra/tb_close.png'
 
 const Taskbar = ({winMap, raisedWK} : {winMap: Map<WindowKey, WindowData>, raisedWK: string}) => {
-    const {addWindow, removeWindow, raiseWindow} = useDesktopContext();
+    const {removeWindow, raiseWindow} = useDesktopContext();
     
 
     return (

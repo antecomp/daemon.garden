@@ -27,7 +27,7 @@
 }
 
 .sender-container.inactive {
-	filter: brightness(0.5);
+/* 	filter: brightness(0.5); */
 	pointer-events: none;
 }
 
@@ -66,8 +66,46 @@
 	height: min-content;
 }
 
+.hermes-footer {
+	background: url('/src/components/Hermes/assets/footerbase.png');
+	width: 240px;
+	height: 21px;
+	display: flex;
+  	align-items: center;
+	cursor: default;
+}
 
+/* .sender-container.inactive + .hermes-footer {
+	filter: brightness(0.5);
+} */
 
+.hermes-footer span {
+	font-family: 'teeny';
+	line-height: 50%;
+	font-size: 5px;
+}
+
+.hermes-footer img {
+	float: left;
+  	margin-right: 3px;
+}
+
+.sender-container.inactive + .hermes-footer .hermes-disconnect {
+	cursor: default;
+}
+
+.hermes-disconnect {
+	margin-left: auto;
+	padding: 8px;
+ 	padding-right: 2px;
+	color: var(--altfgc);
+	cursor:default;
+}
+
+.hermes-disconnect.can-disconnect {
+	cursor: pointer !important;
+	color: var(--fgc);
+}
 
 
 
