@@ -29,11 +29,11 @@ function App() {
   }) */
 
 
-  const {initiateMessages} = useHermesStore();
+  const {initiateHermes} = useHermesStore();
 
    useEffect(() => {
     setTimeout(() => {
-      initiateMessages("demo")
+      initiateHermes("hell")
     }, 1500)
   }, [])
 

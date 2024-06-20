@@ -12,10 +12,19 @@ async function loadMessageTree(filename: string) {
 	}
 }
 
+/**
+ * This store is used to interface with the Hermes components, reference it's JSDoc for it's use.
+ * 
+ * In general, the only thing that should be called external to Hermes is initiateHermes. 
+ */
 const useHermesStore = create<HermesStore>((set) => ({
 	currentDialogTree: null,
 	isActive: false,
-	async initiateMessages(filename: string) {
+	/**
+	 * Start a new Hermes instance with the passed dialogue file.
+	 * @param filename filename within messagetrees
+	 */
+	async initiateHermes(filename: string) {
 
 		const loaded = await loadMessageTree(filename);
 
@@ -24,7 +33,7 @@ const useHermesStore = create<HermesStore>((set) => ({
 			isActive: true
 		}))
 	},
-	close() {
+	closeHermes() {
 		console.log("exit trigger")
 		set((_) => ({
 			currentDialogTree: null, // idk if we wanna change this later so we can "resume" chats.

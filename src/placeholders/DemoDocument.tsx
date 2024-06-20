@@ -7,10 +7,12 @@ import TooltipWrapper from '@/components/Util/Tooltip/TooltipWrapper';
 import useDesktopContext from '@/hooks/useDesktopContext';
 import SimpleWindow from '@/components/Util/Desktop/SimpleWindow';
 import FauxScript from '@/components/FauxScript/FauxScript';
+import useHermesStore from '@/stores/hermesStore';
 
 export default function DemoDocument() {
       const [count, setCount] = useState(0);
 
+      const {initiateHermes} = useHermesStore();
 
       //const connectedNodes = useNSTStore((state) => state.connected)
       //const addNode = useNSTStore((state) => state.addNode)
@@ -31,6 +33,7 @@ export default function DemoDocument() {
 		<>
             <h1 style={{ 'fontWeight': 'normal' }}>RECOVERED DOCUMENT</h1>
             <h2>state test: count is {count}</h2>
+            <button onClick={() => initiateHermes('demo')}>Run demo Hermes sequence.</button>
             <button onClick={() => setCount(prev => prev +1)}>inc count</button>
             <button
                   onClick={showTermTest}
