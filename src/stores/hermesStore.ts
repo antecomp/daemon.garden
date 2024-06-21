@@ -28,14 +28,14 @@ const useHermesStore = create<HermesStore>((set) => ({
 
 		const loaded = await loadMessageTree(filename);
 
-		set((_prev) => ({
+		set(() => ({
 			currentDialogTree: loaded,
 			isActive: true
 		}))
 	},
 	closeHermes() {
 		console.log("exit trigger")
-		set((_) => ({
+		set(() => ({
 			currentDialogTree: null, // idk if we wanna change this later so we can "resume" chats.
 			isActive: false
 		}))

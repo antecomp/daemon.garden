@@ -55,7 +55,7 @@ const Desktop = () => {
 	const removeWindow = (key: WindowKey) => {
 		setWindows((prevWindows) => {
 			const newWindows = new Map(prevWindows);
-			if (!newWindows.delete(key)) { console.error(`Cannot remove window that doesn't exist! Window: ${key} not found.`) };
+			if (!newWindows.delete(key)) { console.error(`Cannot remove window that doesn't exist! Window: ${key} not found.`) }
 			return newWindows;
 		})
 	}

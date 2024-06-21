@@ -85,7 +85,7 @@ const Hermes = () => {
 	useEffect(() => {
 		if (!currentDialogTree) return; // Mainly just a gaurd clause for TS to be happy, I doubt we'll hit this unless there's some bad init call / race condition.
 
-		let messageTick = setTimeout(() => {
+		const messageTick = setTimeout(() => {
 			if(!currentDialogueObject) return; // Another gaurd clause mainly for TS to be happy, the logic below of actually updating the dialogueObject should handle this check.
 
 			// TODO: Handle Signal Emittance.

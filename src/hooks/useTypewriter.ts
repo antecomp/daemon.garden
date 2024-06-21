@@ -9,7 +9,7 @@ import { useCallback, useEffect, useRef, useState } from "react"
  * @returns skipTypingAnim - void method for pre-emptively filling all the text in, skipping the animation
  * @returns isFinished - updating boolean state for tracking if the text has finished typing out // Preferably only used for conditional renders, rely on callback for timed logic.
  */
-const useTypewriter = (text: string, delay = 50, onComplete = (): any => {}) => { // Giving onComplete this default to prevent weird behavior I had in the JS implementation.
+const useTypewriter = (text: string, delay = 50, onComplete = (): void => {}) => { // Giving onComplete this default to prevent weird behavior I had in the JS implementation.
 	const [displayText, setDisplayText] = useState('');
 	const [isFinished, setFinished] = useState(false);
 	const [prevText, setPrevText] = useState(text)
