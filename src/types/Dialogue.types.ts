@@ -1,12 +1,15 @@
-type UUID = `${string}-${string}-${string}-${string}`
+export type UUID = `${string}-${string}-${string}-${string}`
 type condition = `C_${string}`
 
 export interface DialogueFile {
     root: {
-        next: string
+        next: UUID
     }
-    [UUID: UUID]: {
-        parent: "root" | UUID
+    [UUID: UUID]: DialogueItem
+}
+
+export interface DialogueItem {
+    parent: "root" | UUID
         name: string
         character_uuid: string
         text: {
@@ -36,8 +39,6 @@ export interface DialogueFile {
             next: UUID
         }[]
         next?: UUID
-        //Either we have signals OR a next.
+        //Either we have choices OR a next.
         //Trying to enforce this would be too much of a pain in the ass.
-
-    }
 }

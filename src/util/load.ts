@@ -1,6 +1,6 @@
 // Should match whatever folders you have in /data/. 
 // This enforcement is to catch typos and prevent the higher-depth mistakes mentioned below.
-export type supportedDirectories = "scenes" | "noemata"
+export type supportedDirectories = "scenes" | "noemata" | "messagetrees"
 
 /**
  * load is a simple helper function to grab data from a file with the path src/data/XXX/Y.ts

@@ -12,7 +12,9 @@ import '@/styles/Util/Toastify/Toastify.css'
 // Toastify imports (for notification)
 import { ToastContainer } from 'react-toastify';
 import { useEffect } from 'react';
-import OverlayScene from './components/OverlayScene/OverlayScene';
+//import OverlayScene from './components/OverlayScene/OverlayScene';
+import Hermes from './components/Hermes/Hermes';
+import useHermesStore from './stores/hermesStore';
 
 
 
@@ -27,6 +29,13 @@ function App() {
   }) */
 
 
+  const {initiateHermes} = useHermesStore();
+
+   useEffect(() => {
+    setTimeout(() => {
+      initiateHermes("hell")
+    }, 1500)
+  }, [])
 
   return (
     <>
@@ -45,6 +54,7 @@ function App() {
         theme="dark"
         closeButton={false}
       />
+      <Hermes/>
     </>
   )
 }
