@@ -2,6 +2,7 @@ export type UUID = `${string}-${string}-${string}-${string}`
 type condition = `C_${string}`
 
 export interface DialogueFile {
+    filename: string
     root: {
         next: UUID
     }

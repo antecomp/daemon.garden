@@ -29,7 +29,7 @@ function App() {
   }) */
 
 
-  const {initiateHermes} = useHermesStore();
+  const {initiateHermes, isActive: isHermesActive, currentDialogTree: currentHermesTree} = useHermesStore();
 
    useEffect(() => {
     setTimeout(() => {
@@ -54,7 +54,8 @@ function App() {
         theme="dark"
         closeButton={false}
       />
-      <Hermes/>
+      {/* Giving Hermes a key based on the current filename ensures itll completely remount when that changes. */}
+      {isHermesActive && currentHermesTree && <Hermes key={currentHermesTree?.filename}/>}
     </>
   )
 }

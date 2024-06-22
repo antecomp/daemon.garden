@@ -1,10 +1,11 @@
 import { HermesStore } from "@/components/Hermes/hermes.types";
-import { DialogueFile } from "@/types/Dialogue.types";
+import { DialogueFile } from "@/types/RawDialogue.types";
 import { create } from "zustand";
 
 async function loadMessageTree(filename: string) {
 	try {
 		const response = await import(`@/data/messagetrees/${filename}.json`)
+		response.default.filename = filename;
 		return response.default as DialogueFile;
 	} catch (error) {
 		console.error(error);

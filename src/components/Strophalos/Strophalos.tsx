@@ -32,7 +32,7 @@ const Strophalos = ({
 							</div>
 						</td>
 						<td>
-							<ContactCard name='Svalinn' VLID={'fae77:700ab'} homeAddr={'kv:00000'} currentAddr={'unknown'} />
+							<ContactCard status='DNC' name='Svalinn' VLID={'fae77:700ab'} homeAddr={'kv:00000'} currentAddr={'unknown'} />
 						</td>
 					</tr>
 				</tbody>

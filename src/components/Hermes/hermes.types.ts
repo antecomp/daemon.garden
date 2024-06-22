@@ -1,4 +1,4 @@
-import { DialogueFile, UUID } from "@/types/Dialogue.types";
+import { DialogueFile, UUID } from "@/types/RawDialogue.types";
 
 export interface HermesStore {
 	currentDialogTree: DialogueFile | null

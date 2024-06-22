@@ -1,8 +1,9 @@
 import USR from '@/assets/sprites/characters/profile/USER.png'
 import badge from './assets/badge.png'
-import { ContactCardProps } from './Strophalos.types';
+import { ContactCardProps } from "@/types/strophalos.types";
+import { calcStatusFilter } from './helpers';
 
-const ContactCard = ({name, profile = USR, VLID, homeAddr, currentAddr}: ContactCardProps) => {
+const ContactCard = ({name, profile = USR, VLID, homeAddr, currentAddr, status}: ContactCardProps) => {
 	return (
 		<div className="contact-card-container">
 			<div className="cc-top">
@@ -10,8 +11,11 @@ const ContactCard = ({name, profile = USR, VLID, homeAddr, currentAddr}: Contact
 					<img src={profile} alt="" />
 				</figure>
 				<div className="contact-info">
-					{/* Badge will hue-rotate based on status */}
-					<h1>{name} <img src={badge} alt="" /> <span className="status-def">AWAKE</span></h1>
+					<h1>
+						{name} 
+						{/* Badge will hue-rotate based on status */}
+						<img src={badge} style={{filter: calcStatusFilter(status)}} alt="" /> 
+						<span className="status-def">{status.toUpperCase()}</span></h1>
 					<hr />
 					<h2>VLID: {VLID}</h2>
 					<ul>
