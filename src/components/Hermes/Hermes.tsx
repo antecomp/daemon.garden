@@ -9,7 +9,7 @@ import { useEffect, useRef, useState } from 'react'
 import Message from './Message'
 import useHermesStore from '@/stores/hermesStore'
 import { HermesMessageProps, HermesOption } from './hermes.types'
-import { DialogueItem, UUID } from '@/types/Dialogue.types'
+import { DialogueItem } from '@/types/Dialogue.types'
 import { HERMES_MESSAGE_DELAY } from './Hermes.config'
 
 /**
@@ -30,10 +30,11 @@ const Hermes = () => {
 	const {displayText} = useTypewriter(previewText, 25, () => {})
 	const [canDisconnect, setCanDisconnect] = useState(false);
 	// Decorative. Receptiant VLID in footer. Eventually this will probably be linked to the actual NPC for story consistancy.
-	const RVLID = useRef(`${Math.floor(Math.random() * 0xFFFF).toString(16).padStart(4, '0')}:${Math.floor(Math.random() * 0xFFFF).toString(16).padStart(4, '0')}`)
+	const RVLID = useRef(`${Math.floor(Math.random() * 0xFFFFF).toString(16).padStart(5, '0')}:${Math.floor(Math.random() * 0xFFFFF).toString(16).padStart(5, '0')}`)
 
-	const addMessage = (name: string, content: string, UUID: UUID) => { // should this be memoized?
-		setMessages(prev => [...prev, {...{name, content, UUID}}])
+	const addMessage = (name: string, content: string, renderKeyBase: string) => { // should this be memoized?
+		const renderKey = renderKeyBase + `-` + messages.length
+		setMessages(prev => [...prev, {...{name, content, renderKey}}])
 	}
 
  	const handleOptionClick = (option: HermesOption) => {
@@ -153,7 +154,7 @@ const Hermes = () => {
 		<div className="hermes-container">
 			<div className="messages-container">
 				<div className="message-spacer-nightmare"></div>
-				{messages.map(message => <Message key={message.UUID} {...message}/>)}
+				{messages.map(message => <Message key={message.renderKey} {...message}/>)}
 			</div>
 			<div className={`sender-container ${options.length > 0 ? '' : 'inactive'}`}>
 				<div className="text-preview">
@@ -186,7 +187,7 @@ const Hermes = () => {
 			</div>
 			<div className="hermes-footer">
 				<img src={ntwrk} alt="" />
-				<span>S-VLID:9ae0:ffc1 R-VLID:{RVLID.current}</span>
+				<span>S-VLID:91ae0:ffc13 R-VLID:{RVLID.current}</span>
 				<span className={`hermes-disconnect ${canDisconnect? 'can-disconnect' : ''}`} onClick={handleDisconnectClick}>DISCONNECT</span>
 			</div>
 		</div>

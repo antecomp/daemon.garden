@@ -3,7 +3,7 @@ import dogtagFirst from './assets/dogtag_first.png'
 import dogtagLast from './assets/dogtag_last.png'
 import { HermesMessageProps } from './hermes.types';
 
-const Message = ({name, content}: Omit<HermesMessageProps, 'UUID'>) => {
+const Message = ({name, content}: Omit<HermesMessageProps, 'renderKey'>) => {
 
 	const elementBodyRef = useRef<HTMLDivElement | null>(null);
 

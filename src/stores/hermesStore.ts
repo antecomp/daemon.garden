@@ -17,7 +17,7 @@ async function loadMessageTree(filename: string) {
  * 
  * In general, the only thing that should be called external to Hermes is initiateHermes. 
  */
-const useHermesStore = create<HermesStore>((set) => ({
+const useHermesStore = create<HermesStore>((set, get) => ({
 	currentDialogTree: null,
 	isActive: false,
 	/**
@@ -26,6 +26,20 @@ const useHermesStore = create<HermesStore>((set) => ({
 	 */
 	async initiateHermes(filename: string) {
 
+		const {isActive} = get();
+
+		if(isActive) {
+			throw new Error("Cannot initiate new hermes as a sequence is already occuring. If you desperately need to override, use dangerouslyIntiateHermes.")
+		}
+
+		const loaded = await loadMessageTree(filename);
+
+		set(() => ({
+			currentDialogTree: loaded,
+			isActive: true
+		}))
+	},
+	async dangerouslyInitiateHermes(filename: string) {
 		const loaded = await loadMessageTree(filename);
 
 		set(() => ({
