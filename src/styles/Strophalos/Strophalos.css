@@ -1,0 +1,204 @@
+.strophalos-window .window-content {
+	padding: 1px;
+	overflow: hidden;
+}
+
+.strophalos-window .window-content table {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+.strophalos-window .window-content td,  .strophalos-window .window-content tr {
+	vertical-align: top;
+	height: 100%;
+}
+
+.strophalos-window .window-content tbody {
+	height: 100%;
+}
+
+.contact-card-container {
+	display: grid;
+	grid-template-rows: min-content auto;
+	grid-template-columns: auto;
+	width: 100%;
+	height: 100%;
+	border-left: solid 1px white;
+}
+
+.contact-card-container .cc-top {
+	border-bottom: 1px solid var(--fgc);
+	padding: 10px;
+	display: grid;
+	grid-template-columns: 130px auto;
+	gap: 12px;
+}
+.cc-top h1 {
+	font-size: 32px;
+	line-height: 65%;
+	/* This makes the badge image line up nicely */
+	display: flex;
+	align-items: baseline;
+	gap: 2px;
+}
+
+.cc-top h1 img:hover + .status-def {
+	display: block;
+}
+
+.cc-top h1 .status-def {
+	display: none;
+	font-family: 'teeny';
+	position: relative;
+	top: -15px;
+	left: -2px;
+	font-size: 5px;
+	line-height: 0%;
+}
+
+.cc-top h1 .status-def::before {
+	content: url('/src/components/Strophalos/assets/nightmare.png');
+	position: relative;
+	top: 4px;
+	left: -1px;
+}
+
+.cc-top hr {
+	border: solid white 1px;
+	margin-bottom: 1px;
+}
+
+.cc-top h2 {
+	font-size: 16px;
+	color: rgb(156, 156, 156);
+}
+
+.cc-top ul {
+	border-left: solid 1px white;
+}
+
+.cc-top li {
+	list-style-position: inside;
+	line-height: 120%;
+	text-decoration: dotted underline white;
+	cursor: pointer;
+}
+
+.cc-top li:hover {
+	text-decoration: solid underline white;
+}
+
+.cc-top li::marker {
+	content: url('/src/components/Strophalos/assets/action_bullet.png');
+	transform: translateY(5px);
+	position: relative;
+}
+
+.contact-card-container .cc-top figure {
+	width: 130px;
+}
+
+.cc-top figure {
+	border: solid white 1px;
+	position: relative;
+}
+
+.cc-top figure img {
+	max-width: 100%;
+}
+
+.cc-top figure::after {
+	content: url('/src/assets/ui/common/single_corner_right.png');
+	position: absolute;
+	bottom: -6px;
+	right: -1px;
+}
+
+.cc-bot {
+	padding: 8px;
+}
+
+.cc-details {
+	display: flex;
+	flex-direction: column;
+}
+
+.cc-details div {
+	display: flex;
+	gap: 5px;
+}
+
+.cc-details div span {
+	height: 1px;
+	flex-grow: 1;
+	border-bottom: dotted 1px white;
+	justify-self: center;
+	align-self: center;
+}
+
+.cc-notes {
+	border: solid 1px white;
+	padding: 5px;
+	margin-top: 15px;
+	position: relative;
+	height: 60px;
+}
+
+.cc-notes::after {
+	content: url('/src/assets/ui/common/single_corner_right.png');
+	position: absolute;
+	bottom: -6px;
+	right: -1px;
+}
+
+.cc-notes::before {
+	content: 'notes';
+	position: absolute;
+	top: -12px;
+	background: black;
+	padding: 2px;
+}
+
+
+.contact-list {
+	width: 100px;
+	height: 100%;
+}
+
+.contact-list > div {
+	height: 100%;
+	overflow: auto;
+}
+
+
+.contact-list .contact-item {
+	border: solid white 1px;
+	padding-left: 3px;
+	margin-right: 3px;
+	position: relative;
+	cursor: pointer;
+	user-select: none;
+	margin-bottom: 5px;
+	height: 17px; /* chrome and FF render different text heights naturally. I hate */
+}
+
+.contact-list .contact-item::after {
+	content: url('/src/components/Strophalos/assets/contactitem-edge.png');
+	position: absolute;
+	right: -1px;
+	top: -1px;
+}
+
+.contact-list .contact-item:hover::before {
+	content: '';
+	width: 100%;
+	height: 1px;
+	top: 0;
+	left: 0;
+	display: block;
+	position: absolute;
+	background-color: white;
+	z-index: 3;
+}
+

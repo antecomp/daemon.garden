@@ -13,6 +13,7 @@ import NSTIcon from '@/assets/ui/window/icons/NST.png'
 import { AssArray } from '@/extra.types';
 import { getNextMapKey } from './helpers';
 import Mnemosyne from '@/components/Mnemosyne/Mnemosyne';
+import Strophalos from '@/components/Strophalos/Strophalos';
 
 /**
  * React context for signaling to the window manager (Desktop component).
@@ -55,7 +56,7 @@ const Desktop = () => {
 	const removeWindow = (key: WindowKey) => {
 		setWindows((prevWindows) => {
 			const newWindows = new Map(prevWindows);
-			if (!newWindows.delete(key)) { console.error(`Cannot remove window that doesn't exist! Window: ${key} not found.`) };
+			if (!newWindows.delete(key)) { console.error(`Cannot remove window that doesn't exist! Window: ${key} not found.`) }
 			return newWindows;
 		})
 	}
@@ -133,6 +134,10 @@ const Desktop = () => {
 		addWindow("NST", {
 			content: (<NSTracer />),
 			icon: NSTIcon
+		})
+
+		addWindow("strophalos", {
+			content: (<Strophalos/>)
 		})
 
 	}, [])

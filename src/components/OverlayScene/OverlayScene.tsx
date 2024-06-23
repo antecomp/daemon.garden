@@ -26,7 +26,7 @@ const OverlayScene = ({file}: {file: string}) => {
 	useEffect(() => {
 		(async () => {
 			try {
-				let loadedScene = await load<SceneData[]>(SCENE_FOLDER, file);
+				const loadedScene = await load<SceneData[]>(SCENE_FOLDER, file);
 				setScene(loadedScene)
 				setCurrentFrame(loadedScene[0])
 
@@ -56,7 +56,7 @@ const OverlayScene = ({file}: {file: string}) => {
 		if(isFinished) {
 
 			// Trigger postEvent before advancing the text. Easier to do it this way since we listen for advance.
-			if (currentFrame.postEvent) {currentFrame.postEvent()};
+			if (currentFrame.postEvent) {currentFrame.postEvent()}
 
 			// If no next scene
 			if(!scene || !(scene[sceneIndex.current +1])) {
