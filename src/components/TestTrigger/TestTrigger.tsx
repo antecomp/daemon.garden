@@ -2,16 +2,11 @@ import { useModalWindow } from "react-modal-global"
 import { NSNodeTriggerProps } from "../NSTracer/NSNode.types"
 import '@/styles/TestTrigger/TestTrigger.css'
 import { toast } from "react-toastify"
+import { testActionProps } from "@/data/NSMap.types"
 
 
 interface TestTriggerProps extends NSNodeTriggerProps {
-    actionProps: {
-        text: string,
-        connectText: string,
-        rejectText: string,
-        onConnectText: string,
-        onRejectText: string
-    }
+    actionProps: testActionProps
 }
 
 

@@ -1,13 +1,15 @@
 import { NodeData } from "@/data/NSMap.types"
 import '@/styles/NSTracer/NSTStatusBar.css'
 
-function actionTypeToStatus(type: NodeData['action']) {
+function actionTypeToStatus(AP: NodeData['actionProps']) {
+
+   if (!AP) return 'limegreen' // autoconnect
+
    return {
-    'autoconnect': 'green',
     'battle': 'red',
     'dialogue': 'yellow',
     'testpopup': 'purple'
-   }[type]
+   }[AP.actionType]
 }
 
 
@@ -15,7 +17,7 @@ function actionTypeToStatus(type: NodeData['action']) {
 const NSTStatusBar = ({currentNode} : {currentNode: NodeData}) => {
     return (
         <div className="NST-statusbar">
-            <p className={actionTypeToStatus(currentNode.action)}>
+            <p style={{color: actionTypeToStatus(currentNode.actionProps)}}>
              [|]
             </p>
             <p>
