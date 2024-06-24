@@ -8,6 +8,7 @@ import useDesktopContext from '@/hooks/useDesktopContext';
 import SimpleWindow from '@/components/Util/Desktop/SimpleWindow';
 import FauxScript from '@/components/FauxScript/FauxScript';
 import useHermesStore from '@/stores/hermesStore';
+import SigilBuilder from '@/components/Battle/SigilBuilder';
 
 export default function DemoDocument() {
       const [count, setCount] = useState(0);
@@ -31,6 +32,9 @@ export default function DemoDocument() {
 
 	return (
 		<>
+
+            <SigilBuilder />
+
             <h1 style={{ 'fontWeight': 'normal' }}>RECOVERED DOCUMENT</h1>
             <h2>state test: count is {count}</h2>
             <button onClick={() => dangerouslyInitiateHermes('demo')}>Run demo Hermes sequence.</button>

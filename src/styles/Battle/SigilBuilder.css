@@ -1,0 +1,85 @@
+/* make it look like shit on purpose lol */
+.runeBuilder {
+	shape-rendering: crispEdges;
+}
+
+.rune, .rune text {
+	cursor: pointer;
+}
+
+.clickedRune {
+	cursor: default;
+	stroke-width: 2;
+}
+
+.finished .rune, .finished  .clickedRune, .finished text{
+	opacity: 0;
+	transition: opacity 0.5s ease-in;
+}
+
+.finished .rune {
+	cursor: default;
+}
+
+.rune + text, .clickedRune + text {
+	pointer-events: none;
+	/* font-size: 2rem; */
+	font-family: "pixl-wd";
+}
+
+.rune:hover {
+	/*stroke-dasharray: 100; */
+	stroke-dashoffset: 20;
+	stroke-width: 2;
+	animation: spin 1s linear infinite, open 0.5s ease-in forwards;
+	transform-box: fill-box; /* firefox hates every other one lol */
+    transform-origin: center;
+}
+
+
+
+.runeBuilder line {
+	stroke-dasharray: 1000;
+	stroke-dashoffset: 1000;
+	animation: drawLine 0.5s ease-in forwards;
+	pointer-events: none;
+}
+
+
+.resetButton {
+	position: relative;
+	top: -25%;
+}
+
+.SigilBgCircle {
+	/* cursor: pointer; */
+}
+
+
+/* animation keyframes */
+
+@keyframes drawLine {
+	to {
+		stroke-dashoffset: 0;
+	}
+	
+}
+
+@keyframes spin {
+	0% {
+		rotate: 0deg;
+	}
+
+	100% {
+		rotate: -360deg;
+	}
+}
+
+@keyframes open {
+	0% {
+		stroke-dasharray: 180;
+	}
+	100% {
+		stroke-dasharray: 100;
+	}
+}
