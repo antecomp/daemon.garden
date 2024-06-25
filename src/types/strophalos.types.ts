@@ -22,4 +22,5 @@ export interface StrophalosStore extends ContactMap {
 	setContact(vlid: VLID, details: Omit<ContactCardProps, 'vlid'>): void // used both to add and wholly modify.
 	deleteContact(vlid: VLID): void
 	setContactNote(vlid: VLID, note: string): void
+	setContactStatus(vlid: VLID, status: status): void
 }

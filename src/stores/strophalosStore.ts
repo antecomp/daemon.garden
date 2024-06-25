@@ -29,7 +29,7 @@ const useStophalosStore = create<StrophalosStore>()(
 			},
 			setContactNote(vlid, note) {
 				set((prev) => {
-					if (!prev.contacts[vlid]) throw new Error("Contact doesn't exist, cannot edit note.")
+					if (!prev.contacts[vlid]) throw new Error(`Contact ${vlid} doesn't exist, cannot edit note.`)
 
 					return {
 						contacts: {
@@ -41,7 +41,23 @@ const useStophalosStore = create<StrophalosStore>()(
 						}
 					}
 				})
+			},
+			setContactStatus(vlid, status) {
+				set((prev) => {
+					if (!prev.contacts[vlid]) throw new Error(`Contact ${vlid} doesn't exist, cannot change status`);
+
+					return {
+						contacts: {
+							...prev.contacts,
+							[vlid]: {
+								...prev.contacts[vlid],
+								"status": status
+							}
+						}
+					}
+				})
 			}
+
 		}),
 		{
 			name: 'stophalos-storage'
