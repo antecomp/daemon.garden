@@ -36,7 +36,7 @@ const Tooltip = ({children, className, offset = {x: 10, y: 10}, delay} : Tooltip
 
 
 	return createPortal(
-		<div className={cls('tooltip', className)} ref={element} style={{"--delay": `${delay}`} as TooltipCSS}>
+		<div className={cls('tooltip', className)} ref={element} style={{"--tooltip-delay": `${delay}`} as TooltipCSS}>
 			<div className='tooltip-content'>
 				{children}
 			</div>

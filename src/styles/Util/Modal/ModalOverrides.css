@@ -1,4 +1,4 @@
 .modal__container {
-    background: #000000f2;
+    background: #000000fd;
 	cursor: default; /* why is this not linked to closable?? */
 }

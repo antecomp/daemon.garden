@@ -1,0 +1,94 @@
+.battle-container {
+	--leftwidth: 414px;
+}
+
+.battle-container {
+	display: grid;
+	grid-template-columns: auto auto;
+	grid-gap: 5px;
+	width: max-content;
+	position: absolute;
+	left: 50%;
+	top: 40%;
+	transform: translate(-50%, -50%);
+}
+
+.battle-left {
+	display: grid;
+	grid-template-columns: auto;
+	width: var(--leftwidth);
+	border-bottom: none;
+}
+
+.battle-viewbox {
+	border: double 3px var(--fgc);
+	border-bottom: none;
+	background: var(--bgc); /* will get changed when we have custom bgs */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.battle-left .battle-viewbox {
+	height: 521px;
+}
+
+.battle-bottom {
+	border: double 3px var(--fgc);
+	height: 64px;
+	outline: solid var(--outlinec) 1px;
+	color: var(--fgc);
+	display: grid;
+	grid-template-columns: 1fr auto 1fr;
+	background: var(--bgc);
+}
+
+.battle-bottom .br, .battle-bottom .bl {
+	font-family: "teeny";
+	font-size: 5px;
+	padding: 5px;
+}
+
+.battle-bottom .br {
+	text-align: right;
+	padding-right: 0;
+}
+
+.battle-bottom .bl {
+	text-align: left;
+	padding-left: 3px;
+	cursor: default;
+}
+
+.battle-bottom .sigil-con {
+	height: 64px;
+}
+
+.battle-bottom .sigil-con svg {
+	position: relative;
+	bottom: 56px;
+}
+
+.battle-bottom .bl::before {
+	content: '';
+	height: 1px;
+	width: calc(var(--leftwidth) - 8px);
+	background-color: var(--fgc);
+	position: absolute;
+	left: 4px;
+	translate: 0 -4px;
+}
+
+.battle-bottom::before {
+	content: url('/src/assets//ui/common/double_corner_left.png');
+	position: absolute;
+	bottom: -4px;
+	left: 0;
+}
+
+.battle-bottom::after {
+	content: url('/src/assets/ui/common/double_corner_right.png');
+	position: absolute;
+	bottom: -4px;
+	left: calc(var(--leftwidth) - 9px);
+}
