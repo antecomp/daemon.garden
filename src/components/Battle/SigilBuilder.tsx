@@ -116,11 +116,19 @@ const SigilBuilder = ({playerRuneData = DEFAULT_RUNEDATA.player}: {playerRuneDat
 			{tooltipTarget && <Tooltip offset={{ x: 10, y: 10 }} delay={"0.75s"}> {tooltipTarget} </Tooltip>}
 
 			<svg width={svgDim} height={svgDim} className={`runeBuilder ${isMaxRunesSelected ? 'finished' : ''}`}>
-				<circle cx={cx} cy={cy} r={RUNEBUILDER_RADIUS * 1.35} stroke="none" fill="black" onClick={handleReset} className='SigilBgCircle' /> {/* bg circle to mask shit to black */}
+			<defs>
+			<defs>
+      <linearGradient id="grad" gradientTransform="rotate(90)">
+        <stop offset="21%" stop-color="transparent"/>
+        <stop offset="21%" stop-color="black"/>
+      </linearGradient>
+    </defs>
+			</defs>
+				<circle cx={cx} cy={cy} r={RUNEBUILDER_RADIUS * 1.35} stroke="none" onClick={handleReset} className='SigilBgCircle' fill="url(#grad)"/> {/* bg circle to mask shit to black */}
 				<circle cx={cx} cy={cy} r={RUNEBUILDER_RADIUS} stroke="white" fill="none" />
 				{runeCircles};
 				{lines?.map((line, index) => (
-					<line key={index} x1={line.x1} y1={line.y1} x2={line.x2} y2={line.y2} stroke="white" strokeWidth={2} />
+					<line key={index} x1={line.x1} y1={line.y1} x2={line.x2} y2={line.y2} stroke="white" strokeWidth={2}/>
 				))}
 			</svg>
 		</>
