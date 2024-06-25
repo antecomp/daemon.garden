@@ -1,5 +1,6 @@
 import { ContactMap } from "@/types/strophalos.types";
 import USR from '@/assets/sprites/characters/profile/USER.png'
+import friendX from '@/assets/sprites/characters/profile/friendXpfp.png'
 
 export const DEFAULT_CONTACT_MAP: ContactMap = {
 		"fae77:700ab": {
@@ -10,12 +11,13 @@ export const DEFAULT_CONTACT_MAP: ContactMap = {
 		currentAddr: "unknown",
 		status: "awake",
 	},
-	"slopa:00000": {
+	"00000:00001": {
 		name: "Omni",
-		vlid: "slopa:00000",
-		homeAddr: "Sloplands:72",
+		profile: friendX,
+		vlid: "00000:00001",
+		homeAddr: "hjemme:72ff",
 		currentAddr: "somewhere cool",
 		status: "awake",
-		note: "OMNI IS HERE"
+		note: "OMNI IS AWAKE"
 	}
 }

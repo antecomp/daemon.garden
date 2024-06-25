@@ -15,7 +15,7 @@ const useStophalosStore = create<StrophalosStore>()(
 						...prev.contacts,
 						[vlid]: {
 							...prev.contacts[vlid],
-							details,
+							...details,
 							'vlid': vlid
 						}
 					}
@@ -23,7 +23,8 @@ const useStophalosStore = create<StrophalosStore>()(
 			},
 			deleteContact(vlid) {
 				set((prev) => {
-					const {[vlid]: _, ...filteredContacts}: ContactMap = prev.contacts // Object deconstruc voodoo: https://stackoverflow.com/questions/38750705/filter-object-properties-by-key-in-es6
+					// Object deconstruc voodoo: https://stackoverflow.com/questions/38750705/filter-object-properties-by-key-in-es6
+					const {[vlid]: _, ...filteredContacts}: ContactMap = prev.contacts
 					return {contacts: filteredContacts};
 				})
 			},
