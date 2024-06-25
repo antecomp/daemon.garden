@@ -1,0 +1,73 @@
+.battle-side-status {
+	font-family: 'erth';
+	font-size: 8px;
+	color: var(--fgc);
+	text-align: left;
+	border-left: 1px solid var(--fgc);
+	border-bottom: 1px solid var(--fgc);
+	padding-left: 7px;
+	padding-top: 3px;
+	margin-top: 2px;
+	width: 70%;
+	position: relative;
+}
+
+.battle-side-status .sid {
+	padding: 2px 0;
+}
+
+.battle-side-status div {
+	padding: 0;
+	margin-bottom: 3px;
+}
+
+.battle-side-status .stb,
+.battle-side-status .sid {
+	position: relative;
+}
+
+.battle-side-status .stb::before, .battle-side-status .sid::before {
+	content: "";
+	height: 1px;
+	background-color: var(--fgc);
+	width: 5px;
+	position: absolute;
+	left: -7px;
+	top: 25%;
+}
+
+.battle-side-status .sid::before {
+	top: 40%;
+}
+
+.battle-side-status hr {
+	border-style: solid;
+	border-bottom: none;
+	margin-bottom: 8px;
+	margin-top: 3px;
+	margin-left: -5px;
+}
+
+.battle-side-status::after {
+	content: url('/src/assets/ui/common/single_corner_left.png');
+	position: absolute;
+	left: -1px;
+	bottom: -3px;
+	z-index: 2;
+	border-bottom: 1px var(--outlinec) solid;
+}
+
+.meter {
+	display: inline-flex;
+}
+
+.bar {
+	width: 2px;
+	height: 8px;
+	background-color: var(--altfgc);
+	margin: 0 1px;
+}
+
+.filled {
+	background-color: var(--fgc);
+}

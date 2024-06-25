@@ -56,15 +56,12 @@ const SigilBuilder = ({playerRuneData = DEFAULT_RUNEDATA.player}: {playerRuneDat
 
 		const clickedRune = {id, x, y}
 
-		console.log('clicked', clickedRune);
 		setClickedRunes(prev => [...prev, clickedRune]);
 
 	}
 
-	// See if you can not useFootgun here, why isnt lines render stuff just dependant on clickedRunes?
-	// Even if you useMemo itll prob make more sense?
+	//I tried to do this without useeffect and ended up making things significantly more hellish, just keep it who gives a fuck.
 	useEffect(() => {
-		console.log(clickedRunes)
 		if(clickedRunes.length > 1) {
 			const lastClickedRune = clickedRunes[clickedRunes.length - 2]
 			const currentClickedRune = clickedRunes[clickedRunes.length -1]

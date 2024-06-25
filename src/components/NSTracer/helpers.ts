@@ -2,6 +2,7 @@ import { validActionPropTypes } from "@/data/NSMap.types";
 import { Point } from "@/extra.types";
 import Modal from "@/components/Util/Modal/Modal";
 import TestTrigger from "../TestTrigger/TestTrigger";
+import Battle from "../Battle/Battle";
 
 export function findCircleExitPoint(
 	circleCenter: Point,
@@ -62,9 +63,14 @@ export function initiateNodeAction(
 			});
 			break;
 		case "battle":
-			console.log("battle trigger");
+			/* console.log("battle trigger");
 			nodeResponseCB(true);
 			/* todo */
+			Modal.open(Battle, {
+				filename: 'anthousai',
+				closable: false,
+				victoryCB: nodeResponseCB
+			})
 			break;
 		case "dialogue":
 			console.log("dialoge");

@@ -1,5 +1,5 @@
 import titleImg from '@/assets/images/title.png'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useCombinedGDStore } from '@/store';
 import { sendMessageToast } from '@/components/Util/Toasts/Toasts';
 import svalinn from '@/assets/sprites/characters/profile/USER.png'
@@ -9,9 +9,20 @@ import SimpleWindow from '@/components/Util/Desktop/SimpleWindow';
 import FauxScript from '@/components/FauxScript/FauxScript';
 import useHermesStore from '@/stores/hermesStore';
 import SigilBuilder from '@/components/Battle/SigilBuilder';
+import useTypewriter from '@/hooks/useTypewriter';
 
 export default function DemoDocument() {
       const [count, setCount] = useState(0);
+
+      const [slopText, setSlopText] = useState<string | null>(null);
+
+      useEffect(() => {
+            setTimeout(() => {
+                  setSlopText('insloppah')
+            }, 5000)
+      }, [])
+
+      const {displayText} = useTypewriter(slopText);
 
       const {dangerouslyInitiateHermes} = useHermesStore();
 
@@ -32,6 +43,10 @@ export default function DemoDocument() {
 
 	return (
 		<>
+
+            slop: {displayText}
+
+            <br />
 
             <SigilBuilder />
 
