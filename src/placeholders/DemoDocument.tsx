@@ -1,5 +1,5 @@
 import titleImg from '@/assets/images/title.png'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useCombinedGDStore } from '@/store';
 import { sendMessageToast } from '@/components/Util/Toasts/Toasts';
 import svalinn from '@/assets/sprites/characters/profile/USER.png'
@@ -8,23 +8,14 @@ import useDesktopContext from '@/hooks/useDesktopContext';
 import SimpleWindow from '@/components/Util/Desktop/SimpleWindow';
 import FauxScript from '@/components/FauxScript/FauxScript';
 import useHermesStore from '@/stores/hermesStore';
-import SigilBuilder from '@/components/Battle/SigilBuilder';
-import useTypewriter from '@/hooks/useTypewriter';
+import useStophalosStore from '@/stores/strophalosStore';
 
 export default function DemoDocument() {
       const [count, setCount] = useState(0);
 
-      const [slopText, setSlopText] = useState<string | null>(null);
-
-      useEffect(() => {
-            setTimeout(() => {
-                  setSlopText('insloppah')
-            }, 5000)
-      }, [])
-
-      const {displayText} = useTypewriter(slopText);
-
       const {dangerouslyInitiateHermes} = useHermesStore();
+
+      const {setContact, deleteContact, setContactNote} = useStophalosStore();
 
       //const connectedNodes = useNSTStore((state) => state.connected)
       //const addNode = useNSTStore((state) => state.addNode)
@@ -44,11 +35,34 @@ export default function DemoDocument() {
 	return (
 		<>
 
-            slop: {displayText}
+            <button onClick={() => {
+                  setContact("test:contact", {
+                        name: 'Test Contact',
+                        homeAddr: 'test addr',
+                        currentAddr: 'test addr 2',
+                        status: 'DNC'
+                  })
+            }}>
+                  Add test contact
+            </button>
+
+            <button
+                  onClick={() => {
+                        deleteContact("test:contact")
+                  }}
+            >
+                  Delete test contact
+            </button>
+
+            <button onClick={() => {
+                  setContactNote("test:contact", "Hello world")
+            }}>
+                  Test change contact note
+            </button>
+
 
             <br />
 
-            <SigilBuilder />
 
             <h1 style={{ 'fontWeight': 'normal' }}>RECOVERED DOCUMENT</h1>
             <h2>state test: count is {count}</h2>

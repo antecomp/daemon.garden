@@ -3,7 +3,7 @@ import badge from './assets/badge.png'
 import { ContactCardProps } from "@/types/strophalos.types";
 import { calcStatusFilter } from './helpers';
 
-const ContactCard = ({name, profile = USR, VLID, homeAddr, currentAddr, status}: ContactCardProps) => {
+const ContactCard = ({name, profile = USR, vlid, homeAddr, currentAddr, status, note = ""}: ContactCardProps) => {
 	return (
 		<div className="contact-card-container">
 			<div className="cc-top">
@@ -17,7 +17,7 @@ const ContactCard = ({name, profile = USR, VLID, homeAddr, currentAddr, status}:
 						<img src={badge} style={{filter: calcStatusFilter(status)}} alt="" /> 
 						<span className="status-def">{status.toUpperCase()}</span></h1>
 					<hr />
-					<h2>VLID: {VLID}</h2>
+					<h2>VLID: {vlid}</h2>
 					<ul>
 						<li>send message</li>
 						<li>view message history</li>
@@ -34,7 +34,7 @@ const ContactCard = ({name, profile = USR, VLID, homeAddr, currentAddr, status}:
 					</div>
 				</div>
 				<div className="cc-notes">
-					hi buddy
+					{note}
 				</div>
 			</div>
 

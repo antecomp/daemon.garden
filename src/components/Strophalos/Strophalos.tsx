@@ -4,6 +4,10 @@ import strophalosIcon from '@/assets/ui/window/icons/strophalos.png'
 import SimpleWindow from '../Util/Desktop/SimpleWindow'
 import ContactCard from './ContactCard'
 import ContactItem from './ContactItem'
+import useStophalosStore from '@/stores/strophalosStore'
+import { useState } from 'react'
+import { VLID } from '@/extra.types'
+
 
 const Strophalos = ({
 	width = "532px",
@@ -14,8 +18,9 @@ const Strophalos = ({
 	windowKey = "strophalos"
 }: WindowProps) => {
 
-	// State for currently selected contact, sets the props for ContactCard
-	// List of contacts grab from zustand store I reckon...
+	const {contacts} = useStophalosStore();
+
+	const [shownContactVLID, setShownContactVLID] = useState<VLID | null>(null)
 
 	return (
 		<SimpleWindow {...{width, height, icon, className, zIndex, windowKey}}> 
@@ -24,15 +29,17 @@ const Strophalos = ({
 					<tr>
 						<td className="contact-list">
 							<div>
-								<ContactItem name="Svalinn" onClick={() => {console.log("test")}} />
-								<ContactItem name="Omnidisplay" onClick={() => {console.log("test")}} />
-								<ContactItem name="Moribund" onClick={() => {console.log("test")}} />
-								<ContactItem name="Moribund" onClick={() => {console.log("test")}} />
-								<ContactItem name="Moribund" onClick={() => {console.log("test")}} />
+								{
+									// The day that TS can infer type from Object.entries is the day I ascend.
+									Object.entries(contacts).map(([V,info]) => {
+										const vlid = V as VLID
+										return(<ContactItem key={vlid} name={info.name} onClick={() => setShownContactVLID(vlid)}/>)
+									})
+								}
 							</div>
 						</td>
 						<td>
-							<ContactCard status='DNC' name='Svalinn' VLID={'fae77:700ab'} homeAddr={'kv:00000'} currentAddr={'unknown'} />
+							{shownContactVLID && contacts[shownContactVLID] && (<ContactCard {...contacts[shownContactVLID]}/>)}
 						</td>
 					</tr>
 				</tbody>
