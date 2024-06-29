@@ -15,6 +15,9 @@ import { useEffect } from 'react';
 //import OverlayScene from './components/OverlayScene/OverlayScene';
 import Hermes from './components/Hermes/Hermes';
 import useHermesStore from './stores/hermesStore';
+import useDynamicHermesStore from './stores/dynamicHermesStore';
+import HermesDynamic from './components/Hermes/HermesDynamic';
+import generateSvalinnTree from './data/hermes_dynamic/svalinn';
 
 
 
@@ -29,12 +32,20 @@ function App() {
   }) */
 
 
-  const {initiateHermes, isActive: isHermesActive, currentDialogTree: currentHermesTree} = useHermesStore();
+/*   const {initiateHermes, isActive: isHermesActive, currentDialogTree: currentHermesTree} = useHermesStore();
 
    useEffect(() => {
     setTimeout(() => {
       initiateHermes("hell")
     }, 1500)
+  }, []) */
+
+  const {initiateHermes, isActive: isHermesActive, currentCollection} = useDynamicHermesStore();
+
+  useEffect(() => {
+    setTimeout(() => {
+      initiateHermes(generateSvalinnTree);
+    })
   }, [])
 
   return (
@@ -55,7 +66,10 @@ function App() {
         closeButton={false}
       />
       {/* Giving Hermes a key based on the current filename ensures itll completely remount when that changes. */}
-      {isHermesActive && currentHermesTree && <Hermes key={currentHermesTree?.filename}/>}
+      {/* {isHermesActive && currentHermesTree && <Hermes key={currentHermesTree?.filename}/>} */}
+
+      {isHermesActive && currentCollection && <HermesDynamic key={"this will change"}/>}
+
     </>
   )
 }
