@@ -3,6 +3,10 @@ import { ContactMap, StrophalosStore } from "@/types/strophalos.types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
+/**
+ * TODO!! Add property messageFunction?: () => HermesCollection   (undefined means no messages for the NPC, implicitely make offline/DNC). MessageFunction generates the tree and launches Hermes w/ it
+ */
+
 const useStophalosStore = create<StrophalosStore>()(
 	persist(
 		(set) => ({
