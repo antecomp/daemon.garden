@@ -111,8 +111,6 @@ const HermesDynamic = () => {
 
 	const handleOptionClick = (option: HermesOption | undefined) => {
 
-		// TODO "dontShowMessage coording code"
-
 		if (!option) return;
 
 		setPreviewText('');

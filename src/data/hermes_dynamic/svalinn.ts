@@ -1,4 +1,10 @@
+/**
+ * This is a sample/test dynamic file with some terribly manually inserted nodes.
+ */
+
+import useNSTStore from "@/store";
 import { HermesCollection, HermesNode, HermesOption } from "@/types/hermes.types";
+import { pickRandom } from "@/util/pickRandom";
 
 // Look I understand this system is unideal and kinda annoying in code but I was ripping my hair out
 // trying to find a nicer way to do this. Just deal with it.
@@ -61,13 +67,23 @@ const generateSvalinnTree = () => {
 	})
 
 	svalinnTree.setNode("svalinn_hint_2", {
-		renderSelf: () => "The game is not remotely done yet, I can't give you any hints..." // This will eventually be based on some flag for Svalinn.
+		renderSelf: () => "The game is not remotely done yet, I can't give you any hints...", // This will eventually be based on some flag for Svalinn.
+		getGoto: () => "svalinn_hint_3"
+	})
+
+	svalinnTree.setNode("svalinn_hint_3", {
+		renderSelf: () => "But this hint system will be based on your game progress, like I'm aware that your connected nodes looks like this...",
+		getGoto: () => "svalinn_hint_4"
+	})
+
+	svalinnTree.setNode("svalinn_hint_4", {
+		renderSelf: () => useNSTStore.getState().connectedNodes.join(' ') // Make sure to call getState AT this point, not at the root. Otherwise the info will be outdated!!
 	})
 
 	svalinnTree.setNode("svalinn_question_root", {
 		renderSelf() {
-			console.log(this.parent) // Node you cant use arrow syntax for this function because it changes what "this" refers to (I hate JS)
-			return "Whatsup?"
+			//console.log(this.parent) // Node you cant use arrow syntax for this function because it changes what "this" refers to (I hate JS)
+			return pickRandom<string>(["Whatsup", "K, go for it.", "Hmm?"])
 		},
 		// Will be based on flags, basically list every question available in the questions flag, but also make sure that it exists within the collection.
 		getGoto() {
@@ -83,6 +99,28 @@ const generateSvalinnTree = () => {
 				dontShowMessage: true
 			}]
 		}
+	})
+
+	svalinnTree.setNode("sq_loopback_catch", {
+		renderSelf: () => "Any other questions?",
+		getGoto() {
+			return [
+				{
+					summaryText: "Yes",
+					fullText: "Yes",
+					goto: "svalinn_question_root"
+				},
+				{
+					summaryText: "No",
+					fullText: "Nah",
+					goto: "svalinn_question_end"
+				}
+			]
+		}
+	})
+
+	svalinnTree.setNode("svalinn_question_end", {
+		renderSelf: () => "Alright, I'll leave you to it then."
 	})
 
 
@@ -104,11 +142,13 @@ const generateSvalinnTree = () => {
 	})
 
 	svalinnTree.setNode("sa_what_this", {
-		renderSelf: () => "Hermes is a program for interacting with NPCs in a more natural, out-of-cutscene way. You can use it to ask me questions!"
+		renderSelf: () => "Hermes is a program for interacting with NPCs in a more natural, out-of-cutscene way. You can use it to ask me questions!",
+		getGoto: () => "sq_loopback_catch"
 	})
 
 	svalinnTree.setNode("sa_game", {
-		renderSelf: () => "Daemon.garden is a passion project game by omnidisplay and moribund :D"
+		renderSelf: () => "Daemon.garden is a passion project game by omnidisplay and moribund :D",
+		getGoto: () => "sq_loopback_catch"
 	})
 
 
@@ -130,16 +170,9 @@ const generateSvalinnTree = () => {
 	})
 
 	svalinnTree.setNode("sa_why_this", {
-		renderSelf: () => "Hermes was made to make interacting with the NPCs feel more player-oriented and natural. You're interacting with us, not just playing out a story!"
+		renderSelf: () => "Hermes was made to make interacting with the NPCs feel more player-oriented and natural. You're interacting with us, not just playing out a story!",
+		getGoto: () => "sq_loopback_catch"
 	})
-
-
-
-
-
-
-
-
 
 	svalinnTree.setNode("svalinn_test_base", {
 		renderSelf: () => "I don't feel like it right now."

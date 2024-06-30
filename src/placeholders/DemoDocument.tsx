@@ -9,6 +9,7 @@ import SimpleWindow from '@/components/Util/Desktop/SimpleWindow';
 import FauxScript from '@/components/FauxScript/FauxScript';
 import useHermesStore from '@/stores/hermesStore';
 import useStophalosStore from '@/stores/strophalosStore';
+import { addQuestionForSvalinn, removeQuestionForSvalinn } from '@/data/hermes_dynamic/ST_Svalinn';
 
 export default function DemoDocument() {
       const [count, setCount] = useState(0);
@@ -59,6 +60,19 @@ export default function DemoDocument() {
             }}>
                   Test change contact note
             </button>
+
+            <button onClick={() => {
+                  addQuestionForSvalinn("how", {
+                        questionKey: "HOWDEMO",
+                        summaryText: 'NPCFlagStore',
+                        fullText: 'How does the NPCFlagStore work for tracking questions?',
+                        answer: "It works using lots of voodoo and general hell coding."
+                  })
+            }}>Test add question for Svalinn</button>
+
+            <button onClick={() => {
+                  removeQuestionForSvalinn("how", "HOWDEMOX")
+            }}>Test remove question for Svalinn</button>
 
 
             <br />
