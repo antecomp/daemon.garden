@@ -11,6 +11,7 @@ import botb from './assets/botb.png'
 import ntwrk from './assets/ntwrk.gif'
 import nameplateBorder from './assets/nameplate_border.png'
 import '@/styles/Hermes/Hermes.css'
+import classNames from "classnames";
 
 const generateOpeningMessage = (coll: HermesCollection) => {
 	const renderKey = "root-message"
@@ -55,9 +56,19 @@ const HermesDynamic = () => {
 
 	const [currentNode, setCurrentNode] = useState(collection!.getRoot());
 
-	const [optionsOffset, setOptionsOffset] = useState(0)
+	const [optionsPage, setOptionsPage] = useState(0)	
+
+	const optionsOffset = optionsPage * 3;
 
 	const [options, setOptions] = useState<HermesOption[]>([])
+
+	const numPages = (() => {
+		let rtn = Math.floor(options.length /3)
+		const leftovers = (options.length % 3) > 0
+		rtn = rtn + (leftovers ? 1 : 0)
+		return rtn
+	})()
+
 
 	const {displayText} = useTypewriter(previewText, 25, () => {})
 
@@ -115,6 +126,7 @@ const HermesDynamic = () => {
 
 		setPreviewText('');
 		setOptions([]);
+		setOptionsPage(0);
 
 		if(option.dontShowMessage) {
 			if(!collection?.getNode(option.goto)) {
@@ -141,6 +153,18 @@ const HermesDynamic = () => {
 			const responseNode = collection.getNode(option.goto)
 			addMessage({...generateMessageFromNode(responseNode), renderKeyBase: option.goto})
 		}, HERMES_MESSAGE_DELAY)
+	}
+
+	const generatePages = () => {
+		const rtn: JSX.Element[] = []
+
+		for(let i = 0; i < numPages; i++) {
+			rtn.push(
+				<a className={"hermes-page-opt " + ((optionsPage == i)? 'hpo-active' : '')} onClick={() => setOptionsPage(i)}></a>
+			)
+		}
+
+		return rtn;
 	}
 
 
@@ -184,6 +208,11 @@ const HermesDynamic = () => {
 				<span>S-VLID:91ae0:ffc13 R-VLID:{RVLID.current}</span>
 				<span className={`hermes-disconnect ${canDisconnect ? 'can-disconnect' : ''}`} onClick={handleDisconnectClick}>DISCONNECT</span>
 			</div>
+			{	(options.length > 3) &&
+				<div className={classNames({"hermes-pages": true, "hp-first": (optionsPage == 0), "hp-last": (optionsPage == numPages - 1)})}>
+					{generatePages()}
+				</div>
+			}
 		</div>
 	)
 

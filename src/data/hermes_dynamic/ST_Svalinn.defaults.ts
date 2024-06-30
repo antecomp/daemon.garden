@@ -100,8 +100,67 @@ const SVALINN_DEFAULT_WHO: NPCQuestion[] = [
 	}
 ]
 
+
+const SVALINN_DEFAULT_WHY: NPCQuestion[] = [
+	{
+		questionKey: 'whySaveKingdom',
+		summaryText: 'Why save the kingdom?',
+		fullText: 'Can you explain why the kingdom must be saved?',
+		answer: 'The kingdom must be saved to prevent the dark sorcerer Zoltar from plunging the world into eternal darkness.'
+	},
+	{
+		questionKey: 'whyHeroChosen',
+		summaryText: 'Why was the hero chosen?',
+		fullText: 'Why was the main hero chosen for this quest?',
+		answer: 'The hero was chosen because of their unique lineage and inherent bravery, making them the only one capable of facing Zoltar.'
+	},
+	{
+		questionKey: 'whyEnemiesAttack',
+		summaryText: 'Why do enemies attack?',
+		fullText: 'Why are the enemies attacking the hero and the kingdom?',
+		answer: 'The enemies attack under the command of Zoltar, who seeks to weaken the kingdom\'s defenses and spread fear.'
+	},
+	{
+		questionKey: 'whyItemsImportant',
+		summaryText: 'Item importance?',
+		fullText: 'Why are the items found during the journey important?',
+		answer: 'The items are important because they grant the hero special abilities and powers needed to overcome challenges.'
+	},
+	{
+		questionKey: 'whyMentorHelps',
+		summaryText: 'Why does the mentor help',
+		fullText: 'What motivates the mentor to assist the hero?',
+		answer: 'The mentor helps the hero out of a sense of duty and a desire to see the kingdom restored to peace.'
+	},
+	{
+		questionKey: 'whyNeedAllies',
+		summaryText: 'Why does the hero need allies?',
+		fullText: 'Why is it important for the hero to have allies?',
+		answer: 'Allies are crucial for providing support, different skills, and moral strength to the hero during their quest.'
+	},
+	{
+		questionKey: 'whyAncientArtifacts',
+		summaryText: 'Why seek ancient artifacts?',
+		fullText: 'Why must the hero seek out ancient artifacts?',
+		answer: 'Ancient artifacts hold powerful magic that can help defeat Zoltar and restore peace to the kingdom.'
+	},
+	{
+		questionKey: 'whyTrustProphecy',
+		summaryText: 'Why trust the prophecy?',
+		fullText: 'Why does the hero believe in the prophecy?',
+		answer: 'The prophecy has been passed down for generations and has accurately predicted past events, making it a guiding beacon for the hero.'
+	},
+	{
+		questionKey: 'whyExploreDungeons',
+		summaryText: 'Why explore dungeons?',
+		fullText: 'Why must the hero venture into dangerous dungeons?',
+		answer: 'Exploring dungeons is essential to find hidden treasures, gain experience, and uncover secrets that are vital for the quest.'
+	}
+]
+
 export const SVALINN_DEFAULT_QUESTIONS: SvalinnFlags['questions'] = {
 	how: SVALINN_DEFAULT_HOW,
 	what: SVALINN_DEFAULT_WHAT,
-	who: SVALINN_DEFAULT_WHO
+	who: SVALINN_DEFAULT_WHO,
+	why: SVALINN_DEFAULT_WHY
 }

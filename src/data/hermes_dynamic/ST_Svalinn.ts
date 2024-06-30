@@ -36,6 +36,7 @@ const getCurrentQuestions = () => {
 	return useNPCFlagStore.getState().flags.svalinn.questions;
 }
 
+const questionCategories: (keyof SvalinnFlags['questions'])[] = ["how", "who", "what", "why"];
 
 const genSTForSvalinn = () => {
 
@@ -90,7 +91,6 @@ const genSTForSvalinn = () => {
 		}
 	}
 
-
 	const coll = new HermesCollection("Svalinn", svalinnRoot);
 
 	coll.setNode("svalinn_prompt", svalinnPrompt)
@@ -112,41 +112,27 @@ const genSTForSvalinn = () => {
 			// Remember we need to filter by questions that exist in the map too...
 			const currentQuestions = getCurrentQuestions()
 			const routes: HermesOption[] = []
-			if(arrayIntersection(currentQuestions.how, questionsAtInit.how).length > 0) {
-				routes.push({
-					summaryText: "How",
-					fullText: "How...",
-					goto: "sq_how",
-					dontShowMessage: true
-				})
-			}
-			if(arrayIntersection(currentQuestions.what, questionsAtInit.what).length > 0) {
-				routes.push({
-					summaryText: "What",
-					fullText: "What...",
-					goto: "sq_what",
-					dontShowMessage: true
-				})
-			}
-			if(arrayIntersection(currentQuestions.who, questionsAtInit.who).length > 0) {
-				routes.push({
-					summaryText: "Who",
-					fullText: "Who...",
-					goto: "sq_who",
-					dontShowMessage: true
-				})
-			}
+
+			questionCategories.forEach(category => {
+				if(arrayIntersection(currentQuestions[category], questionsAtInit[category]).length > 0) {
+					routes.push({
+						summaryText: category.replace(/^./, str => str.toUpperCase()),
+						fullText: `${category.replace(/^./, str => str.toUpperCase())}...`,
+						goto: `sq_${category}`,
+						dontShowMessage: true
+					})
+				}
+			})
+
+
 			if (routes.length == 0) return "svalinn_no_question_fallback" // You should never see this as the prompt root checks before jumping here...
 			return routes; 
 		}
 	})
 
-	// TODO: make this conditionally render different if no more questions left.
-
 	const anyQuestionsLeft = (): boolean => {
 		let anyQuestionsLeft = false;
 
-		const questionCategories: (keyof SvalinnFlags['questions'])[] = ["how", "who", "what"];
 		const currentQuestions = getCurrentQuestions();
 
 		questionCategories.forEach(category => {
@@ -191,56 +177,23 @@ const genSTForSvalinn = () => {
 		renderSelf: () => "Actually sorry bro I don't think I have anything more to tell you rn."
 	})
 
-
-	// Likely move this to a standard internal helper function, im literally copy pasting here for these 3...
-	coll.setNode("sq_how", {
-		renderSelf: () => null,
-		getGoto() {
-			const {how: currentHow} = getCurrentQuestions()
-			const availableHow = arrayIntersection(currentHow, questionsAtInit.how)
-			return availableHow.map(q => {
-				return {
-					summaryText: q.summaryText,
-					fullText: q.fullText,
-					goto: `how_${q.questionKey}`
-				}
-			});
-		}
-	})
-
-	coll.setNode("sq_who", {
-		renderSelf: () => null,
-		getGoto() {
-			const {who: currentWho} = getCurrentQuestions()
-			const availableWho = arrayIntersection(currentWho, questionsAtInit.who)
-			return availableWho.map(q => {
-				return {
-					summaryText: q.summaryText,
-					fullText: q.fullText,
-					goto: `who_${q.questionKey}`
-				}
-			});
-		}
-	})
-
-	coll.setNode("sq_what", {
-		renderSelf: () => null,
-		getGoto() {
-			const {what: currentWhat} = getCurrentQuestions()
-			const availableWhat = arrayIntersection(currentWhat, questionsAtInit.what)
-			return availableWhat.map(q => { 
-				return {
-					summaryText: q.summaryText,
-					fullText: q.fullText,
-					goto: `what_${q.questionKey}`
-				}
-			});
-		}
-	})
-
 	// Generate all the nodes for our questions
-	const questionCategories: (keyof SvalinnFlags['questions'])[] = ["how", "who", "what"];
 	questionCategories.forEach(category => {
+		coll.setNode(`sq_${category}`, {
+			renderSelf: () => null,
+			getGoto() {
+				const {[category]: current} = getCurrentQuestions()
+				const available = arrayIntersection(current, questionsAtInit[category])
+				return available.map(q => {
+					return {
+						summaryText: q.summaryText,
+						fullText: q.fullText,
+						goto: `${category}_${q.questionKey}`
+					}
+				})
+			}
+		})
+
 		questionsAtInit[category].forEach(q => {
 			coll.setNode(`${category}_${q.questionKey}`, {
 				renderSelf: () => q.answer,
