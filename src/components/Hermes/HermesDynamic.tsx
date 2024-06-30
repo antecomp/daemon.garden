@@ -29,8 +29,8 @@ const generateOpeningMessage = (coll: HermesCollection) => {
 	return rtn;
 }
 
-const generateMessageFromNode = (node: HermesNode, fallbackName: string) => {
-	let name: string = fallbackName
+const generateMessageFromNode = (node: HermesNode) => {
+	let name: string = node.parent?.name ?? "ANONYMOUS (ERROR)"
 	let content: string = ""
 	let nodeRender = node.renderSelf()!
 	if(typeof nodeRender == 'string') {
@@ -55,7 +55,7 @@ const HermesDynamic = () => {
 
 	const [currentNode, setCurrentNode] = useState(collection!.getRoot());
 
-	const [optionsPage, setOptionsPage] = useState(1)
+	const [optionsOffset, setOptionsOffset] = useState(0)
 
 	const [options, setOptions] = useState<HermesOption[]>([])
 
@@ -80,25 +80,29 @@ const HermesDynamic = () => {
 	useEffect(() => {
 		if(!collection) return; // Mainly gaurd for TS to be happy. Should never happen.
 
-		const messageTick = setTimeout(() => {
-			
-			if(!currentNode.getGoto) { // No next, we've hit a leaf.
-				setCanDisconnect(true);
-				return () => {clearTimeout(messageTick)};
-			}
+		if(!currentNode.getGoto) { // No next, we've hit a leaf.
+			setCanDisconnect(true);
+			return;
+		}
 
-			const next = currentNode.getGoto();
+		const displayNextMessage = () => {
+			const next = currentNode.getGoto!();
 
 			if(typeof next == 'string') { // Just a direct next key link.
 				const nextNode = collection.getNode(next);
-				addMessage({...generateMessageFromNode(nextNode, collection.name), renderKeyBase: next})
+				addMessage({...generateMessageFromNode(nextNode), renderKeyBase: next})
 				setCurrentNode(nextNode);
 			} else { // Otherwise we have choices.
 				setOptions(next)
 			}
+		}
 
+		if(currentNode.renderSelf() == null) { // Remember, null is used when coording.
+			displayNextMessage() // Immediately advance it with no timeout when coording.
+			return;
+		}
 
-		}, HERMES_MESSAGE_DELAY)
+		const messageTick = setTimeout(displayNextMessage, HERMES_MESSAGE_DELAY)
 
 		return () => {clearTimeout(messageTick)};
 
@@ -111,9 +115,22 @@ const HermesDynamic = () => {
 
 		if (!option) return;
 
-		addMessage({name: 'Eske', content: option.fullText, renderKeyBase: `optiontriggerfor-${option.goto}`})
 		setPreviewText('');
 		setOptions([]);
+
+		if(option.dontShowMessage) {
+			if(!collection?.getNode(option.goto)) {
+				console.error('Could not locate the node that this option points to. Is it pointing to anything at all?')
+				setCanDisconnect(true);
+				return;
+			}
+
+			setCurrentNode(collection.getNode(option.goto))
+			// Dont display response.
+			return;
+		}
+
+		addMessage({name: 'Eske', content: option.fullText, renderKeyBase: `optiontriggerfor-${option.goto}`})
 
 		// Need to handle showing the immediate response message, since our timer is based on next and won't show this "current"
 		setTimeout(() => {
@@ -124,7 +141,7 @@ const HermesDynamic = () => {
 			}
 			setCurrentNode(collection.getNode(option.goto))
 			const responseNode = collection.getNode(option.goto)
-			addMessage({...generateMessageFromNode(responseNode, collection.name), renderKeyBase: option.goto})
+			addMessage({...generateMessageFromNode(responseNode), renderKeyBase: option.goto})
 		}, HERMES_MESSAGE_DELAY)
 	}
 
@@ -140,27 +157,27 @@ const HermesDynamic = () => {
 					<img src={nameplateBorder} alt="" /> <span className='name'>Eske</span> {displayText}
 				</div>
 				<div
-					className='topb hermes-resp-container'
-					onMouseEnter={() => setPreviewText(options[0 * optionsPage].fullText)}
-					onClick={() => handleOptionClick(options[0 * optionsPage])}
+					className={'hermes-resp-container ' + ((options[optionsOffset] ? '' : 'inactive'))}
+					onMouseEnter={() => setPreviewText(options[0 + optionsOffset]?.fullText ?? '')}
+					onClick={() => handleOptionClick(options[0 + optionsOffset])}
 				>
-					<p>{options[0 * optionsPage]?.summaryText ?? ''}</p>
+					<p>{options[0 + optionsOffset]?.summaryText ?? ''}</p>
 					<span></span><img src={topb} alt="" />
 				</div>
 				<div
-					className='hermes-resp-container'
-					onMouseEnter={() => setPreviewText(options[1 * optionsPage].fullText)}
-					onClick={() => {handleOptionClick(options[1 * optionsPage])}}
+					className={'hermes-resp-container ' + ((options[1 + optionsOffset] ? '' : 'inactive'))}
+					onMouseEnter={() => setPreviewText(options[1 + optionsOffset]?.fullText ?? '')}
+					onClick={() => {handleOptionClick(options[1 + optionsOffset])}}
 				>
-					<p>{options[1 * optionsPage]?.summaryText ?? ''}</p>
+					<p>{options[1 + optionsOffset]?.summaryText ?? ''}</p>
 					<span></span><img src={midb} alt="" />
 				</div>
 				<div
-					className='hermes-resp-container'
-					onMouseEnter={() => setPreviewText(options[2 * optionsPage].fullText)}
-					onClick={() => handleOptionClick(options[2 * optionsPage])}
+					className={'hermes-resp-container ' + ((options[2 + optionsOffset] ? '' : 'inactive'))}
+					onMouseEnter={() => setPreviewText(options[2 + optionsOffset]?.fullText ?? '')}
+					onClick={() => handleOptionClick(options[2 + optionsOffset])}
 				>
-					<p>{options[2 * optionsPage]?.summaryText ?? ''}</p>
+					<p>{options[2 + optionsOffset]?.summaryText ?? ''}</p>
 					<span></span><img src={botb} alt="" />
 				</div>
 			</div>

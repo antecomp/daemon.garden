@@ -39,7 +39,6 @@ export class HermesCollection {
 	setNode(nodeKey: HermesNodeKey, newNode: HermesNode) {
 		this.nodes[nodeKey] = newNode
 		this.nodes[nodeKey].parent = this // ProwlerSFX.mp3
-		console.log(this)
 	}
 
 	getNode(nodeKey: HermesNodeKey) {

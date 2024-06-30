@@ -40,7 +40,7 @@ function App() {
     }, 1500)
   }, []) */
 
-  const {initiateHermes, isActive: isHermesActive, currentCollection} = useDynamicHermesStore();
+  const {initiateHermes, isActive: isHermesActive, currentCollection, closeHermes} = useDynamicHermesStore();
 
   useEffect(() => {
     setTimeout(() => {

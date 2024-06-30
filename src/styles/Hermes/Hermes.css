@@ -31,6 +31,11 @@
 	pointer-events: none;
 }
 
+.hermes-resp-container.inactive {
+	pointer-events: none;
+	opacity: 0.25;
+}
+
 .sender-container .text-preview img {
 	position: absolute;
 	left: 5px;

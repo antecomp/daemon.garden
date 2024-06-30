@@ -1,5 +1,7 @@
 import { HermesCollection, HermesNode, HermesOption } from "@/types/hermes.types";
 
+// Look I understand this system is unideal and kinda annoying in code but I was ripping my hair out
+// trying to find a nicer way to do this. Just deal with it.
 const generateSvalinnTree = () => {
 
 	const svalinnRoot: HermesNode = {
@@ -31,8 +33,13 @@ const generateSvalinnTree = () => {
 				},
 				{
 					summaryText: "Nevermind",
-					fullText: "Nevermind, just saying hi.",
+					fullText: "Nevermind, just saying Hi",
 					goto: "svalinn_bye"
+				},
+				{
+					summaryText: "Testing",
+					fullText: "Let's test some misc shit bro",
+					goto: "svalinn_test_base"
 				}
 			]
 
@@ -60,14 +67,82 @@ const generateSvalinnTree = () => {
 	svalinnTree.setNode("svalinn_question_root", {
 		renderSelf() {
 			console.log(this.parent) // Node you cant use arrow syntax for this function because it changes what "this" refers to (I hate JS)
-			return "Sorry I can't answer anything yet."
+			return "Whatsup?"
 		},
-		/* getGoto() {
-			// Will be based on flags, basically list every question available in the questions flag, but also make sure that it exists within the collection.
-			// !!!! Maybe Hermes should be the one checking for if the question node exists and just skip rendering the ones it cant find lol !!!!
-			console.log(this.parent)
+		// Will be based on flags, basically list every question available in the questions flag, but also make sure that it exists within the collection.
+		getGoto() {
+			return [{
+				summaryText: "What",
+				fullText: "What...",
+				goto: "sq_what",
+				dontShowMessage: true
+			}, {
+				summaryText: "Why",
+				fullText: "Why...",
+				goto: "sq_why",
+				dontShowMessage: true
+			}]
+		}
+	})
 
-		} */
+
+	svalinnTree.setNode("sq_what", {
+		renderSelf: () => null,
+		getGoto() { // This will map over all the "What questions"
+			return [
+				{
+					summaryText: "this",
+					fullText: "What is this program?",
+					goto: "sa_what_this"
+				}, {
+					summaryText: "game",
+					fullText: "What is this game?",
+					goto: "sa_game"
+				}
+			]
+		}
+	})
+
+	svalinnTree.setNode("sa_what_this", {
+		renderSelf: () => "Hermes is a program for interacting with NPCs in a more natural, out-of-cutscene way. You can use it to ask me questions!"
+	})
+
+	svalinnTree.setNode("sa_game", {
+		renderSelf: () => "Daemon.garden is a passion project game by omnidisplay and moribund :D"
+	})
+
+
+	svalinnTree.setNode("sq_why", {
+		renderSelf: () => null,
+		getGoto() {
+			return [
+				{
+					summaryText: "this",
+					fullText: "Why does this program exist?",
+					goto: "sa_why_this"
+				}, {
+					summaryText: "BROKEN",
+					fullText: "This option has no path and should cause Hermes to do a disconnect available bail.",
+					goto: "BROKEN_LINK"
+				}
+			]
+		}
+	})
+
+	svalinnTree.setNode("sa_why_this", {
+		renderSelf: () => "Hermes was made to make interacting with the NPCs feel more player-oriented and natural. You're interacting with us, not just playing out a story!"
+	})
+
+
+
+
+
+
+
+
+
+	svalinnTree.setNode("svalinn_test_base", {
+		renderSelf: () => "I don't feel like it right now."
 	})
 
 	return svalinnTree;
