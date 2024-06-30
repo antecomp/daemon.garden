@@ -13,11 +13,10 @@ import '@/styles/Util/Toastify/Toastify.css'
 import { ToastContainer } from 'react-toastify';
 import { useEffect } from 'react';
 //import OverlayScene from './components/OverlayScene/OverlayScene';
-import Hermes from './components/Hermes/Hermes';
-import useHermesStore from './stores/hermesStore';
 import useDynamicHermesStore from './stores/dynamicHermesStore';
 import HermesDynamic from './components/Hermes/HermesDynamic';
 import generateSvalinnTree from './data/hermes_dynamic/svalinn';
+import genSTForSvalinn from './data/hermes_dynamic/ST_Svalinn';
 
 
 
@@ -40,11 +39,11 @@ function App() {
     }, 1500)
   }, []) */
 
-  const {initiateHermes, isActive: isHermesActive, currentCollection, closeHermes} = useDynamicHermesStore();
+  const {initiateHermes, isActive: isHermesActive, currentCollection} = useDynamicHermesStore();
 
   useEffect(() => {
     setTimeout(() => {
-      initiateHermes(generateSvalinnTree);
+      initiateHermes(genSTForSvalinn);
     })
   }, [])
 

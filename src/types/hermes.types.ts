@@ -9,7 +9,7 @@ export interface HermesOption {
 
 export interface HermesNode {
 	renderSelf(): null | HermesMessage // null used for coording.
-	getGoto?: () => HermesOption[] | HermesNodeKey // if undefined we've hit the end. HermesOption[] for options, or just the key for an automatic flow.
+	getGoto?: () => HermesOption[] | HermesNodeKey | null // if undefined (or return null) we've hit the end. HermesOption[] for options, or just the key for an automatic flow.
 	parent?: HermesCollection // In case any of the rendering conditionals are based on what nodes currently exist in the dialogue.
 }
 

@@ -80,7 +80,7 @@ const HermesDynamic = () => {
 	useEffect(() => {
 		if(!collection) return; // Mainly gaurd for TS to be happy. Should never happen.
 
-		if(!currentNode.getGoto) { // No next, we've hit a leaf.
+		if(!currentNode.getGoto || currentNode.getGoto() == null) { // No next, we've hit a leaf.
 			setCanDisconnect(true);
 			return;
 		}
@@ -93,7 +93,7 @@ const HermesDynamic = () => {
 				addMessage({...generateMessageFromNode(nextNode), renderKeyBase: next})
 				setCurrentNode(nextNode);
 			} else { // Otherwise we have choices.
-				setOptions(next)
+				setOptions(next!) // TS cant infer that the check above will prevent next from being null.
 			}
 		}
 

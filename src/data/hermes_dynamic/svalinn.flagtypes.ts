@@ -7,5 +7,6 @@ export interface SvalinnFlags {
 		what: NPCQuestion[]
 		who: NPCQuestion[]
 		how: NPCQuestion[]
+		// Add why??
 	}
 }

@@ -1,3 +1,4 @@
+import { SVALINN_DEFAULT_QUESTIONS } from "@/data/hermes_dynamic/ST_Svalinn.defaults";
 import { NPCFlagStore } from "@/types/NPCFlags.types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
@@ -8,11 +9,7 @@ const useNPCFlagStore = create<NPCFlagStore>()(
 			flags: { // Move to defaults later...
 				'svalinn': {
 					currentHint: "Sorry, none to give until the games done.",
-					questions: {
-						what: [],
-						who: [],
-						how: [],
-					}
+					questions: SVALINN_DEFAULT_QUESTIONS
 				},
 				'omnidisplay': {
 					mood: "sloppy"
