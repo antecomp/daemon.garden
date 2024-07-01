@@ -11,7 +11,7 @@ import '@/styles/Util/Toastify/Toastify.css'
 
 // Toastify imports (for notification)
 import { ToastContainer } from 'react-toastify';
-import { useEffect } from 'react';
+//import { useEffect } from 'react';
 import HermesDynamic from './components/Hermes/HermesDynamic';
 import useDynamicHermesStore from './stores/dynamicHermesStore';
 

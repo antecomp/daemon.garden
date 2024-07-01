@@ -1,4 +1,4 @@
-import { status } from "./Strophalos.types"
+import { status } from "@/types/strophalos.types"
 
 export function calcStatusFilter(status: status) {
 	switch(status){

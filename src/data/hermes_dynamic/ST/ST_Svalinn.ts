@@ -1,5 +1,5 @@
 import { NPCQuestion } from "@/types/NPCFlags.types";
-import { SvalinnFlags } from "../svalinn.flagtypes";
+import { SvalinnFlags } from "@/types/npcFlagtypes/svalinn.flagtypes";
 import useNPCFlagStore from "@/stores/NPCFlagStore";
 import { HermesCollection, HermesNode, HermesOption } from "@/types/hermes.types";
 import { pickRandom } from "@/util/pickRandom";

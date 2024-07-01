@@ -1,5 +1,5 @@
 import { NPCQuestion } from "@/types/NPCFlags.types";
-import { SvalinnFlags } from "./svalinn.flagtypes";
+import { SvalinnFlags } from "../../../types/npcFlagtypes/svalinn.flagtypes";
 
 const SVALINN_DEFAULT_HOW: NPCQuestion[] = [
 		{

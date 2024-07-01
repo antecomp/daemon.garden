@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import dogtagFirst from './assets/dogtag_first.png'
 import dogtagLast from './assets/dogtag_last.png'
-import { HermesMessageProps } from './hermes.types';
+import { HermesMessageProps } from "@/types/hermes.types";
 
 const Message = ({name, content}: Omit<HermesMessageProps, 'renderKey'>) => {
 

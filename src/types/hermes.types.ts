@@ -59,3 +59,10 @@ export interface DynamicHermesStore {
 	initiateHermes(collectionGenerator: () => HermesCollection): void
 	closeHermes(): void
 }
+export interface HermesMessageProps {
+	name: string
+	content: string
+	// This is the React key for our mapping through messages, this needs to be updated with some increment in the 
+	// case of looping back to the same message UUID (dont just use UUID).
+	renderKey: string
+}

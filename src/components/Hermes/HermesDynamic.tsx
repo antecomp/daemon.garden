@@ -1,6 +1,6 @@
 import useDynamicHermesStore from "@/stores/dynamicHermesStore"
 import { useEffect, useRef, useState } from "react";
-import { HermesMessageProps } from "./hermes.types";
+import { HermesMessageProps } from "@/types/hermes.types";
 import useTypewriter from "@/hooks/useTypewriter";
 import { HermesCollection, HermesNode, HermesOption } from "@/types/hermes.types";
 import { HERMES_MESSAGE_DELAY } from "./Hermes.config";

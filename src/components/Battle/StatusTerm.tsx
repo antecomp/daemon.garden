@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import '@/styles/Battle/StatusTerm.css'
 import battltermIcon from './assets/battleterm_icon.png'
 

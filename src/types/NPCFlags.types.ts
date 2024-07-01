@@ -1,5 +1,5 @@
-import { OmnidisplayFlags } from "@/data/hermes_dynamic/omnidisplay.flagtypes"
-import { SvalinnFlags } from "@/data/hermes_dynamic/svalinn.flagtypes"
+import { OmnidisplayFlags } from "@/types/npcFlagtypes/omnidisplay.flagtypes"
+import { SvalinnFlags } from "@/types/npcFlagtypes/svalinn.flagtypes"
 
 export interface NPCQuestion {
 	questionKey: string
