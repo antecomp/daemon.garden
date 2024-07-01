@@ -119,8 +119,8 @@ const SigilBuilder = ({playerRuneData = DEFAULT_RUNEDATA.player}: {playerRuneDat
 			<defs>
 			<defs>
       <linearGradient id="grad" gradientTransform="rotate(90)">
-        <stop offset="21%" stop-color="transparent"/>
-        <stop offset="21%" stop-color="black"/>
+        <stop offset="21%" stopColor="transparent"/>
+        <stop offset="21%" stopColor="black"/>
       </linearGradient>
     </defs>
 			</defs>

@@ -7,15 +7,13 @@ import TooltipWrapper from '@/components/Util/Tooltip/TooltipWrapper';
 import useDesktopContext from '@/hooks/useDesktopContext';
 import SimpleWindow from '@/components/Util/Desktop/SimpleWindow';
 import FauxScript from '@/components/FauxScript/FauxScript';
-import useHermesStore from '@/stores/hermesStore';
 import useStophalosStore from '@/stores/strophalosStore';
+import { addQuestionForSvalinn, removeQuestionForSvalinn } from '@/data/hermes_dynamic/ST/ST_Svalinn';
 
 export default function DemoDocument() {
       const [count, setCount] = useState(0);
 
-      const {dangerouslyInitiateHermes} = useHermesStore();
-
-      const {setContact, deleteContact, setContactNote} = useStophalosStore();
+      const {addContact, deleteContact, setContactNote} = useStophalosStore();
 
       //const connectedNodes = useNSTStore((state) => state.connected)
       //const addNode = useNSTStore((state) => state.addNode)
@@ -36,8 +34,9 @@ export default function DemoDocument() {
 		<>
 
             <button onClick={() => {
-                  setContact("test:contact", {
+                  addContact("test:contact", {
                         name: 'Test Contact',
+                        vlid: 'TESTX:XXXXX',
                         homeAddr: 'test addr',
                         currentAddr: 'test addr 2',
                         status: 'DNC'
@@ -60,13 +59,25 @@ export default function DemoDocument() {
                   Test change contact note
             </button>
 
+            <button onClick={() => {
+                  addQuestionForSvalinn("how", {
+                        questionKey: "HOWDEMO",
+                        summaryText: 'NPCFlagStore',
+                        fullText: 'How does the NPCFlagStore work for tracking questions?',
+                        answer: "It works using lots of voodoo and general hell coding."
+                  })
+            }}>Test add question for Svalinn</button>
+
+            <button onClick={() => {
+                  removeQuestionForSvalinn("how", "HOWDEMOX")
+            }}>Test remove question for Svalinn</button>
+
 
             <br />
 
 
             <h1 style={{ 'fontWeight': 'normal' }}>RECOVERED DOCUMENT</h1>
             <h2>state test: count is {count}</h2>
-            <button onClick={() => dangerouslyInitiateHermes('demo')}>Run demo Hermes sequence.</button>
             <button onClick={() => setCount(prev => prev +1)}>inc count</button>
             <button
                   onClick={showTermTest}

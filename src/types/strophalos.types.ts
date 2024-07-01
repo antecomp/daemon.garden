@@ -10,17 +10,19 @@ export interface ContactCardProps {
 	currentAddr: string;
 	status: status;
 	note?: string;
+	hermesGeneratorFilename?: string // generator function that is loaded to initiate hermes with some NPCs (called by Strophalos).
 }
 
 export interface ContactMap {
-	[vlid: VLID]: ContactCardProps
+	[contactKey: string]: ContactCardProps // Key should be the VLID for people, some other key for daemons.
 }
 
 
-export interface StrophalosStore extends ContactMap {
+export interface StrophalosStore {
 	contacts: ContactMap
-	setContact(vlid: VLID, details: Omit<ContactCardProps, 'vlid'>): void // used both to add and wholly modify.
-	deleteContact(vlid: VLID): void
-	setContactNote(vlid: VLID, note: string): void
-	setContactStatus(vlid: VLID, status: status): void
+	addContact(contactKey: string, details: ContactCardProps): void // Has checking for if the contact already exists.
+	setContact(contactKey: string, details: ContactCardProps): void // wholly sets with no checking if it exists (overwrite)
+	deleteContact(contactKey: string): void
+	setContactNote(contactKey: string, note: string): void
+	setContactStatus(contactKey: string, status: status): void
 }

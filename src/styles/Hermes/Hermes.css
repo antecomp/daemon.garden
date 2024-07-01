@@ -31,6 +31,11 @@
 	pointer-events: none;
 }
 
+.hermes-resp-container.inactive {
+	pointer-events: none;
+	opacity: 0.25;
+}
+
 .sender-container .text-preview img {
 	position: absolute;
 	left: 5px;
@@ -49,6 +54,7 @@
 	opacity: 0.5;
 	cursor: pointer;
 	margin-bottom: 1px;
+	user-select: none;
 }
 
 .hermes-resp-container:hover {
@@ -182,4 +188,40 @@
 	100% {
 		opacity: 1;
 	}
+}
+
+
+.hermes-pages {
+	position: absolute;
+	bottom: 25px;
+	left: -11px;
+	background: url('/src/components/Hermes/assets/pagecon.png');
+	width: 10px;
+	height: 64px;
+	display: flex;
+	flex-direction: column;
+	padding-top: 9px;
+	padding-bottom: 9px;;
+}
+
+.hermes-pages.hp-first {
+	background: url('/src/components/Hermes/assets/pagecon_tsel.png');
+}
+
+.hermes-pages.hp-last {
+	background: url('/src/components/Hermes/assets/pagecon_bsel.png');
+}
+
+.hermes-page-opt {
+	width: 100%;
+	display: block;
+	height: auto;
+	flex-grow: 1;
+	cursor: pointer;
+	
+}
+
+.hpo-active {
+	background-color: white;
+	cursor: default;
 }

@@ -6,7 +6,6 @@ import DaeCon from "./Daecon";
 import TooltipWrapper from "../Util/Tooltip/TooltipWrapper";
 import SigilBuilder from "./SigilBuilder";
 import TXRX from './assets/TXRX.gif'
-import labeldemarc from './assets/labeldemarc.png'
 import StatusTerm from "./StatusTerm";
 import SideStatus from "./SideStatus";
 import '@/styles/Battle/Battle.css'

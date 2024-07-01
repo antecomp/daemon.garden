@@ -7,6 +7,7 @@
 	width: 100%;
 	height: 100%;
 	overflow: hidden;
+	user-select: none;
 }
 
 .strophalos-window .window-content td,  .strophalos-window .window-content tr {
@@ -83,6 +84,7 @@
 	line-height: 120%;
 	text-decoration: dotted underline white;
 	cursor: pointer;
+	width: fit-content;
 }
 
 .cc-top li:hover {
@@ -93,6 +95,11 @@
 	content: url('/src/components/Strophalos/assets/action_bullet.png');
 	transform: translateY(5px);
 	position: relative;
+}
+
+.cc-top li.cannot-message {
+	pointer-events: none;
+	opacity: 0.25;
 }
 
 .contact-card-container .cc-top figure {
@@ -170,6 +177,13 @@
 .contact-list > div {
 	height: 100%;
 	overflow: auto;
+}
+
+td .SCNC {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 
