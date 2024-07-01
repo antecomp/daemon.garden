@@ -9,7 +9,7 @@ export interface TooltipProps {
 }
 
 export interface TooltipCSS extends CSSProperties {
-	'--tooltip-delay': string
+	'--tooltip-delay': TooltipProps['delay']
 }
 
 export interface TooltipWrapperProps extends TooltipProps {

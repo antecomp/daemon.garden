@@ -21,12 +21,12 @@ export interface DesktopContextType {
      * Removes a window from the desktop.
      * @param {WindowKey} key - Unique key for the window.
      */
-	removeWindow: Function
+	removeWindow(key: WindowKey): void
 	/**
      * Raises the z-index of a window, bringing it to the front. Will increase z-index ad-infinitum lol.
      * @param {WindowKey} key - Unique key for the window.
      */
-	raiseWindow: Function
+	raiseWindow(key: WindowKey): void
 	/**
 	 * Returns data about a window, can be used to check if a windows exists, if it's a popup etc.
 	 * @param {WindowKey} key - Unique key for the window.

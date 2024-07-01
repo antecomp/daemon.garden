@@ -7,6 +7,11 @@ import ContactItem from './ContactItem'
 import useStophalosStore from '@/stores/strophalosStore'
 import { useState } from 'react'
 
+
+/**
+ * Stophalos is the "contacts" program that provides information about various NPCs the player will interact with throughout the game.
+ * For certain NPCs with dynamic hermes instances attached to them, Stoph is the place to launch those dialogues with the "send message" option on an NPCs contact card.
+ */
 const Strophalos = ({
 	width = "532px",
 	height = "320px",

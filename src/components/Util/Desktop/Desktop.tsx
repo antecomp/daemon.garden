@@ -39,21 +39,19 @@ const Desktop = () => {
 	 * @param {WindowData} data - Data for the window including content and dimensions.
 	 */
 	const addWindow: DesktopContextType['addWindow'] = (key: WindowKey, data: WindowData) => {
-
 		setWindows((prevWindows) => {
 			const newWindows = new Map(prevWindows);
 			// By the nature of this being a map, if the key already exists we overwrite the window (im fine with this behavior.)
 			newWindows.set(key, data);
 			return newWindows;
 		})
-
 	}
 
 	/**
 	* Removes a window from the desktop.
 	* @param {WindowKey} key - Unique key for the window.
 	*/
-	const removeWindow = (key: WindowKey) => {
+	const removeWindow: DesktopContextType['removeWindow'] = (key: WindowKey) => {
 		setWindows((prevWindows) => {
 			const newWindows = new Map(prevWindows);
 			if (!newWindows.delete(key)) { console.error(`Cannot remove window that doesn't exist! Window: ${key} not found.`) }
@@ -65,7 +63,7 @@ const Desktop = () => {
 	 * Raises the z-index of a window, bringing it to the front. Will increase z-index ad-infinitum lol.
 	 * @param {WindowKey} key - Unique key for the window.
 	 */
-	const raiseWindow = (key: WindowKey) => {
+	const raiseWindow: DesktopContextType['raiseWindow'] = (key: WindowKey) => {
 		const win = windows.get(key);
 
 		if (!win) {

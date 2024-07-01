@@ -10,7 +10,7 @@ type HermesGeneratorFunc = () => HermesCollection
 
 async function loadHermesGeneratorForContact(filename: string): Promise<(HermesGeneratorFunc)> {
 	try {
-		const response = await import(`@/data/hermes_dynamic/ST/${filename}.ts`);
+		const response = await import(`@/data/hermes/ST/${filename}.ts`);
 		return response.default as HermesGeneratorFunc;
 	} catch (error) {
 		throw new Error(`Failed to load file: ${error}`)

@@ -8,7 +8,7 @@ import useDesktopContext from '@/hooks/useDesktopContext';
 import SimpleWindow from '@/components/Util/Desktop/SimpleWindow';
 import FauxScript from '@/components/FauxScript/FauxScript';
 import useStophalosStore from '@/stores/strophalosStore';
-import { addQuestionForSvalinn, removeQuestionForSvalinn } from '@/data/hermes_dynamic/ST/ST_Svalinn';
+import { addQuestionForSvalinn, removeQuestionForSvalinn } from '@/data/hermes/ST/ST_Svalinn';
 import { ContactStatus } from '@/types/strophalos.types';
 
 export default function DemoDocument() {
