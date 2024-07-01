@@ -97,6 +97,11 @@
 	position: relative;
 }
 
+.cc-top li.cannot-message {
+	pointer-events: none;
+	opacity: 0.25;
+}
+
 .contact-card-container .cc-top figure {
 	width: 130px;
 	height: 130px;

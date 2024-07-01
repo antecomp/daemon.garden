@@ -37,8 +37,6 @@ function App() {
         theme="dark"
         closeButton={false}
       />
-      {/* Giving Hermes a key based on the current filename ensures itll completely remount when that changes. */}
-      {/* {isHermesActive && currentHermesTree && <Hermes key={currentHermesTree?.filename}/>} */}
 
       {isHermesActive && currentCollection && <HermesDynamic key={currentCollection.collectionKey}/>}
 

@@ -16,7 +16,7 @@ export default function DemoDocument() {
 
       const {dangerouslyInitiateHermes} = useHermesStore();
 
-      const {setContact, deleteContact, setContactNote} = useStophalosStore();
+      const {addContact, deleteContact, setContactNote} = useStophalosStore();
 
       //const connectedNodes = useNSTStore((state) => state.connected)
       //const addNode = useNSTStore((state) => state.addNode)
@@ -37,7 +37,7 @@ export default function DemoDocument() {
 		<>
 
             <button onClick={() => {
-                  setContact("test:contact", {
+                  addContact("test:contact", {
                         name: 'Test Contact',
                         vlid: 'TESTX:XXXXX',
                         homeAddr: 'test addr',

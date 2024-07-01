@@ -4,9 +4,8 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
 /**
- * TODO!! Add property messageFunction?: () => HermesCollection   (undefined means no messages for the NPC, implicitely make offline/DNC). MessageFunction generates the tree and launches Hermes w/ it
+ * Stophalos store is for the NPC "contacts" that provide info about NPCs and the oppurtunity to message some of them.
  */
-
 const useStophalosStore = create<StrophalosStore>()(
 	persist(
 		(set) => ({
@@ -54,6 +53,17 @@ const useStophalosStore = create<StrophalosStore>()(
 								...prev.contacts[contactKey],
 								"status": status
 							}
+						}
+					}
+				})
+			},
+			addContact(contactKey, details) {
+				set((prev) => {
+					if (prev.contacts[contactKey]) throw new Error (`Contact ${contactKey} already exists.`);
+					return {
+						contacts: {
+							...prev.contacts,
+							[contactKey] : details
 						}
 					}
 				})

@@ -26,9 +26,7 @@ const generateOpeningMessage = (coll: HermesCollection) => {
 		name = nodeRender.name
 	}
 
-	const rtn = {...{name, content, renderKey}}
-
-	return rtn;
+	return {...{name, content, renderKey}}
 }
 
 // Remember renderSelf() either returns a string or {name, message} object
@@ -65,11 +63,11 @@ const HermesDynamic = () => {
 
 	const [currentNode, setCurrentNode] = useState(collection!.getRoot());
 
+	const [options, setOptions] = useState<HermesOption[]>([])
+
 	const [optionsPage, setOptionsPage] = useState(0)	
 
 	const optionsOffset = optionsPage * 3;
-
-	const [options, setOptions] = useState<HermesOption[]>([])
 
 	const numPages = (() => {
 		let rtn = Math.floor(options.length /3)
@@ -77,7 +75,6 @@ const HermesDynamic = () => {
 		rtn = rtn + (leftovers ? 1 : 0)
 		return rtn
 	})()
-
 
 	const {displayText} = useTypewriter(previewText, 25, () => {})
 
@@ -97,6 +94,13 @@ const HermesDynamic = () => {
 		}
 	}
 
+	/**
+	 * useEffecting on the current dialogue node to run stuff to grab the next dialogue node and perform the needed actions is the most elegant
+	 * way I could find for something intervenous/timeout'd like this.
+	 * 
+	 * Note: We can't just use setInterval because it would be based on old state data + this effect system easily binds into choice handling too 
+	 * as selecting a choice will also update currentDialogueObject and continue this flow. 
+	 */
 	useEffect(() => {
 		if(!collection) return; // Mainly gaurd for TS to be happy. Should never happen.
 
@@ -121,8 +125,9 @@ const HermesDynamic = () => {
 			displayNextMessage() // Immediately advance it with no timeout when coording.
 			return;
 		}
-
-		const messageTick = setTimeout(displayNextMessage, HERMES_MESSAGE_DELAY)
+		
+		// TODO: In the future we may want to randomize the delay some to make it feel more natural (maybe based on # characters??)
+		const messageTick = setTimeout(displayNextMessage, HERMES_MESSAGE_DELAY) 
 
 		return () => {clearTimeout(messageTick)};
 
@@ -224,8 +229,6 @@ const HermesDynamic = () => {
 			}
 		</div>
 	)
-
-
 }
 
 export default HermesDynamic;

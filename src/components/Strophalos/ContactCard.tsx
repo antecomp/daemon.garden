@@ -4,6 +4,7 @@ import { ContactCardProps } from "@/types/strophalos.types";
 import { calcStatusFilter } from './helpers';
 import { HermesCollection } from '@/types/hermes.types';
 import useDynamicHermesStore from '@/stores/dynamicHermesStore';
+import classNames from 'classnames';
 
 type HermesGeneratorFunc = () => HermesCollection
 
@@ -21,7 +22,7 @@ async function initiateDynamicHermesForContact(hermesGeneratorFilename: string) 
 	const {isActive: isHermesActive, initiateHermes} = useDynamicHermesStore.getState()
 
 	if(isHermesActive) {
-		console.error("ContactCard Precatch: Cannot initiate contacts dynamic hermes instance as Hermes is currently active")
+		console.error("ContactCard Precatch: Cannot initiate contacts dynamic Hermes instance as Hermes is currently active")
 		return;
 	}
 
@@ -34,6 +35,9 @@ async function initiateDynamicHermesForContact(hermesGeneratorFilename: string) 
 }
 
 const ContactCard = ({name, profile = USR, vlid, homeAddr, currentAddr, status, note = "", hermesGeneratorFilename}: ContactCardProps) => {
+
+	const {isActive: isHermesActive} = useDynamicHermesStore();
+
 	return (
 		<div className="contact-card-container">
 			<div className="cc-top">
@@ -49,7 +53,12 @@ const ContactCard = ({name, profile = USR, vlid, homeAddr, currentAddr, status, 
 					<hr />
 					<h2>VLID: {vlid}</h2>
 					<ul>
-						<li onClick={() => {hermesGeneratorFilename && initiateDynamicHermesForContact(hermesGeneratorFilename)}}>send message</li>
+						<li 
+							onClick={() => {hermesGeneratorFilename && initiateDynamicHermesForContact(hermesGeneratorFilename)}}
+							className={classNames({
+								"cannot-message": isHermesActive || !hermesGeneratorFilename || (status != "awake")
+							})}
+						>send message</li>
 						<li>view message history</li>
 					</ul>
 				</div>

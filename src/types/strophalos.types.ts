@@ -20,8 +20,8 @@ export interface ContactMap {
 
 export interface StrophalosStore {
 	contacts: ContactMap
-	// Also add an addContact that does checking for if it already exists? set should be used sparingly.
-	setContact(contactKey: string, details: ContactCardProps): void // used both to add and wholly modify.
+	addContact(contactKey: string, details: ContactCardProps): void // Has checking for if the contact already exists.
+	setContact(contactKey: string, details: ContactCardProps): void // wholly sets with no checking if it exists (overwrite)
 	deleteContact(contactKey: string): void
 	setContactNote(contactKey: string, note: string): void
 	setContactStatus(contactKey: string, status: status): void
