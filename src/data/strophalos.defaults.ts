@@ -1,4 +1,4 @@
-import { ContactMap } from "@/types/strophalos.types";
+import { ContactMap, ContactStatus } from "@/types/strophalos.types";
 import USR from '@/assets/sprites/characters/profile/USER.png'
 import friendX from '@/assets/sprites/characters/profile/friendXpfp.png'
 
@@ -9,7 +9,7 @@ export const DEFAULT_CONTACT_MAP: ContactMap = {
 		profile: USR,
 		homeAddr: "kv-01010",
 		currentAddr: "unknown",
-		status: "awake",
+		status: ContactStatus.Awake,
 		hermesGeneratorFilename: "ST_Svalinn"
 	},
 	"12f6f:ac356": {
@@ -18,7 +18,7 @@ export const DEFAULT_CONTACT_MAP: ContactMap = {
 		vlid: "12f6f:ac356",
 		homeAddr: "hjemme:72ff",
 		currentAddr: "somewhere cool",
-		status: "awake",
+		status: ContactStatus.DoNotContact,
 		note: "OMNI IS AWAKE"
 	}
 }

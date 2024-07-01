@@ -1,6 +1,6 @@
 export const NST_SVG_DIMENSIONS = {
     width: 7650,
-    height: 450
+    height: 1550
 }
 
 export const NODE_CONSTS = {

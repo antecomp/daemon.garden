@@ -10,7 +10,7 @@ import NSTIcon from '@/assets/ui/window/icons/NST.png'
 import NSTStatusBar from "./NSTStatusBar";
 import { useState, createContext, ReactNode } from "react";
 import { NSTContext, TriggerNewConfirmation } from "./NSTracer.types";
-import NSPrompt from "./NSPrompt";
+import NSPrompt, { NSPromptProps } from "./NSPrompt";
 
 export const NSTracerContext = createContext<NSTContext | null>(null);
 
@@ -18,11 +18,11 @@ export const NSTracerContext = createContext<NSTContext | null>(null);
  * NSTracer is the container for our NSNode rendered map. It implements the zoom/pan functionality for navigating through the map. It also acts as the Context/"Hoist" point for the callbacks that Nodes will send out when you attempt to 'connect'
  * @param props - Takes normal WindowProps since this is a window. NST doesnt need anything else :) 
  */
-const NSTracer = ({ width = "650px", height, icon = NSTIcon, className = "NST-window", zIndex = 0, windowKey }: WindowProps) => {
+const NSTracer = ({ width = "650px", height = "500px", icon = NSTIcon, className = "NST-window", zIndex = 0, windowKey }: WindowProps) => {
 
     const [statusNode, setStatusNode] = useState(root);
     const [confirmationText, setConfirmationText] = useState<ReactNode | null>(null);
-    const [confirmationCallback, setConfirmationCallback] = useState<Function>(() => { }) // for some reason putting anything in this function body makes it invoke on render???
+    const [confirmationCallback, setConfirmationCallback] = useState<NSPromptProps['callback']>(() => { }) // for some reason putting anything in this function body makes it invoke on render???
 
     const triggerNewConfirmation: TriggerNewConfirmation = (display, callback) => {
         setConfirmationCallback(() => callback);
@@ -30,7 +30,7 @@ const NSTracer = ({ width = "650px", height, icon = NSTIcon, className = "NST-wi
     };
 
     function NSPrompticideFromTracer() { // NSTracer just completely fucking ignores the eventListeners I have for NSPrompt suicide so let's kill it ourselves :D
-        if (confirmationCallback && confirmationText !== null) confirmationCallback("cancel by NSPrompticide")
+        if (confirmationCallback && confirmationText !== null) confirmationCallback("cancel")
         setConfirmationText(null)
     }
 

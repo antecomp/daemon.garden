@@ -38,7 +38,7 @@ async function loadNoemaFile (inputPath: NoemaMeta['location']) {
 
 /**
  * openNoema creates a new SimpleWindow containing the content of a specified noema (as loaded from its location property). 
- * Mainly use by Mnemosyne, but other windows can open documents if needed.
+ * Mainly used by Mnemosyne, but other windows can open documents if needed.
  * @param noema noema to open  
  * @param desktopContext desktopContext reference, used to call addWindow/raiseWindow etc. Meaning that the caller of this method must have access to desktop context.
  */
@@ -47,6 +47,7 @@ export const openNoema = (noema: NoemaMeta, desktopContext: DesktopContextType):
         try {
                 loadNoemaFile(noema.location).then((data): void =>  {
 
+                // Just raise the window if the noema is already open.
                 if(desktopContext.getWindowData(NOEMA_WINID_PREFIX + noema.name)) {
                     desktopContext.raiseWindow(NOEMA_WINID_PREFIX + noema.name)
                     return;

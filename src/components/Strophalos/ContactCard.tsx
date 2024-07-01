@@ -1,6 +1,6 @@
 import USR from '@/assets/sprites/characters/profile/USER.png'
 import badge from './assets/badge.png'
-import { ContactCardProps } from "@/types/strophalos.types";
+import { ContactCardProps, ContactStatus } from "@/types/strophalos.types";
 import { calcStatusFilter } from './helpers';
 import { HermesCollection } from '@/types/hermes.types';
 import useDynamicHermesStore from '@/stores/dynamicHermesStore';
@@ -48,7 +48,7 @@ const ContactCard = ({name, profile = USR, vlid, homeAddr, currentAddr, status, 
 					<h1>
 						{name} 
 						{/* Badge will hue-rotate based on status */}
-						<img src={badge} style={{filter: calcStatusFilter(status)}} alt="" /> 
+						<img src={badge} style={{filter: calcStatusFilter(status)}} alt="" />  {/* TODO: Just change this to swap out the badge src. This hue rotate is jank. */}
 						<span className="status-def">{status.toUpperCase()}</span></h1>
 					<hr />
 					<h2>VLID: {vlid}</h2>
@@ -56,9 +56,11 @@ const ContactCard = ({name, profile = USR, vlid, homeAddr, currentAddr, status, 
 						<li 
 							onClick={() => {hermesGeneratorFilename && initiateDynamicHermesForContact(hermesGeneratorFilename)}}
 							className={classNames({
-								"cannot-message": isHermesActive || !hermesGeneratorFilename || (status != "awake")
+								"cannot-message": isHermesActive || !hermesGeneratorFilename || (status != ContactStatus.Awake)
 							})}
-						>send message</li>
+						>
+							send message
+						</li>
 						<li>view message history</li>
 					</ul>
 				</div>
