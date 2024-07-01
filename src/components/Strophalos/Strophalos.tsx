@@ -6,8 +6,6 @@ import ContactCard from './ContactCard'
 import ContactItem from './ContactItem'
 import useStophalosStore from '@/stores/strophalosStore'
 import { useState } from 'react'
-import { VLID } from '@/extra.types'
-
 
 const Strophalos = ({
 	width = "532px",
@@ -20,7 +18,7 @@ const Strophalos = ({
 
 	const {contacts} = useStophalosStore();
 
-	const [shownContactVLID, setShownContactVLID] = useState<VLID | null>(null)
+	const [shownContactKey, setShownContactKey] = useState<string | null>(Object.keys(contacts)[0])
 
 	return (
 		<SimpleWindow {...{width, height, icon, className, zIndex, windowKey}}> 
@@ -31,15 +29,14 @@ const Strophalos = ({
 							<div>
 								{
 									// The day that TS can infer type from Object.entries is the day I ascend.
-									Object.entries(contacts).map(([V,info]) => {
-										const vlid = V as VLID
-										return(<ContactItem key={vlid} name={info.name} onClick={() => setShownContactVLID(vlid)}/>)
+									Object.entries(contacts).map(([K,info]) => {
+										return(<ContactItem key={K} name={info.name} onClick={() => setShownContactKey(K)}/>)
 									})
 								}
 							</div>
 						</td>
 						<td>
-							{shownContactVLID && contacts[shownContactVLID] && (<ContactCard {...contacts[shownContactVLID]}/>)}
+							{shownContactKey && contacts[shownContactKey] && (<ContactCard {...contacts[shownContactKey]}/>) || (<p className='SCNC'>Please select contact</p>)}
 						</td>
 					</tr>
 				</tbody>

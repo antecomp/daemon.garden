@@ -23,12 +23,15 @@ export class HermesCollection {
 
 	name: string
 
+	collectionKey: string
+
 	nodes: {
 		root: HermesNode
 		[nodeKey: HermesNodeKey]: HermesNode
 	}
-	constructor(name: string, baseNode: HermesNode) { // We might wanna change this to simply take a "nodes" object so we can initialize with more info straight-up. Reduce setNodes.
+	constructor(name: string, baseNode: HermesNode, collectionKey: string) { // We might wanna change this to simply take a "nodes" object so we can initialize with more info straight-up. Reduce setNodes.
 		this.name = name;
+		this.collectionKey = collectionKey;
 		const rootNode = baseNode
 		rootNode.parent = this
 		this.nodes = {

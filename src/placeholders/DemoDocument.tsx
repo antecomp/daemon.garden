@@ -9,7 +9,7 @@ import SimpleWindow from '@/components/Util/Desktop/SimpleWindow';
 import FauxScript from '@/components/FauxScript/FauxScript';
 import useHermesStore from '@/stores/hermesStore';
 import useStophalosStore from '@/stores/strophalosStore';
-import { addQuestionForSvalinn, removeQuestionForSvalinn } from '@/data/hermes_dynamic/ST_Svalinn';
+import { addQuestionForSvalinn, removeQuestionForSvalinn } from '@/data/hermes_dynamic/ST/ST_Svalinn';
 
 export default function DemoDocument() {
       const [count, setCount] = useState(0);
@@ -39,6 +39,7 @@ export default function DemoDocument() {
             <button onClick={() => {
                   setContact("test:contact", {
                         name: 'Test Contact',
+                        vlid: 'TESTX:XXXXX',
                         homeAddr: 'test addr',
                         currentAddr: 'test addr 2',
                         status: 'DNC'

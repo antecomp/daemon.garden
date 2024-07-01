@@ -10,6 +10,7 @@ export const DEFAULT_CONTACT_MAP: ContactMap = {
 		homeAddr: "kv-01010",
 		currentAddr: "unknown",
 		status: "awake",
+		hermesGeneratorFilename: "ST_Svalinn"
 	},
 	"12f6f:ac356": {
 		name: "Omni",

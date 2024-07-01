@@ -1,5 +1,5 @@
 import { NPCQuestion } from "@/types/NPCFlags.types";
-import { SvalinnFlags } from "./svalinn.flagtypes";
+import { SvalinnFlags } from "../svalinn.flagtypes";
 import useNPCFlagStore from "@/stores/NPCFlagStore";
 import { HermesCollection, HermesNode, HermesOption } from "@/types/hermes.types";
 import { pickRandom } from "@/util/pickRandom";
@@ -91,7 +91,7 @@ const genSTForSvalinn = () => {
 		}
 	}
 
-	const coll = new HermesCollection("Svalinn", svalinnRoot);
+	const coll = new HermesCollection("Svalinn", svalinnRoot, "ST_Svalinn");
 
 	coll.setNode("svalinn_prompt", svalinnPrompt)
 
@@ -207,8 +207,8 @@ const genSTForSvalinn = () => {
 	});
 
 
-	console.log("Dialogue Tree For Svalinn Generated")
-	console.log(coll);
+/* 	console.log("Dialogue Tree For Svalinn Generated")
+	console.log(coll); */
 
 	return coll;
 }

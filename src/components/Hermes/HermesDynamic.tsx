@@ -169,7 +169,7 @@ const HermesDynamic = () => {
 
 		for(let i = 0; i < numPages; i++) {
 			rtn.push(
-				<a className={"hermes-page-opt " + ((optionsPage == i)? 'hpo-active' : '')} onClick={() => setOptionsPage(i)}></a>
+				<a key={`hermes-page-${i}`} className={"hermes-page-opt " + ((optionsPage == i)? 'hpo-active' : '')} onClick={() => setOptionsPage(i)}></a>
 			)
 		}
 
