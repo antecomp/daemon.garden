@@ -63,9 +63,6 @@ export function initiateNodeAction(
 			});
 			break;
 		case "battle":
-			/* console.log("battle trigger");
-			nodeResponseCB(true);
-			/* todo */
 			Modal.open(Battle, {
 				filename: 'anthousai',
 				closable: false,

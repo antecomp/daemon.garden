@@ -6,6 +6,7 @@ import { NODE_CONSTS } from "./NSTracer.config";
 import classNames from "classnames";
 import { findCircleExitPoint, initiateNodeAction } from "./helpers";
 import { NSTracerContext } from "./NSTracer";
+import { NSPromptProps } from "./NSPrompt";
 
 /**
  * Individually rendered "Node" or connection location for the current NSTracer map.
@@ -76,15 +77,15 @@ const NSNode = ({
 	};
 
 	/* confirmationCallback and handleClick deal with the little "connect to node?" tooltip, not the actual handling of the response from battle, dialogue etc. */
-	const confirmationCallback = (response: string): void => {
+	const confirmationCallback: NSPromptProps['callback'] = (response) => {
 		if (response == "connect") {
 			initiateNodeAction(actionProps, handleNodeTriggerResponse);
 		}
-		// else... I cant see this being anything other than connect. But who knows. YAGNI SHMNAGI I aint rewriting the code to be a boolean return on the callback :D
+		// else... Maybe unique prompt for triggering popup for a node you've unlocked but aren't currently at?
 	};
 
 	const handleClick = useCallback(() => {
-		if (connectedNodes.includes(id)) {
+		if (connectedNodes.includes(id)) { // Will be changed for "going to" different nodes.
 			removeNode(id);
 		} else {
 			NSTC?.triggerNewConfirmation(

@@ -1,11 +1,8 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import { NSMAP_DEFAULTS } from "../data/NSMap.defaults";
+import { NSMAP_DEFAULTS } from "@/data/defaults/NSMap.defaults";
 import { NSTSave } from "../data/NSMap.types";
 
-// Todo, slice this up, with partialize for persisting whats needd.
-// Ref: https://docs.pmnd.rs/zustand/guides/slices-pattern
-// https://github.com/pmndrs/zustand/blob/main/docs/integrations/persisting-store-data.md#partialize
 const useNSTStore = create<NSTSave>()(
     persist(
         (set) => ({

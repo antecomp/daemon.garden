@@ -39,7 +39,7 @@ const WindowContainer = ({ children, width, height, icon = eyeIcon, className = 
 
 		setIsClosing(true);
 		setTimeout(() => {
-			removeWindow(windowKey);
+			removeWindow(windowKey!);
 		}, CLOSE_FADE_DURATION)
 
 	}
@@ -50,7 +50,7 @@ const WindowContainer = ({ children, width, height, icon = eyeIcon, className = 
 			centerWindow();
 		}
 		// Automatically raise a window when it is created.
-		raiseWindow(windowKey)
+		raiseWindow(windowKey!)
 	}, [])
 
 	if (!windowKey) {
@@ -67,7 +67,7 @@ const WindowContainer = ({ children, width, height, icon = eyeIcon, className = 
 			onDrag={(_, d) => { setWindowPos({ x: d.x, y: d.y }) }} // Oh you want to externally change position? Fuck you now you have to add your own drag event handler!!! - cool library that doesn't piss me off.
 			scale={1}
 			bounds='#desktop'
-			onMouseDown={() => raiseWindow(windowKey)}  // this can lead to some annoying propagation. Just remember to stopProp on mouseDown because the onClick never triggers :D
+			onMouseDown={() => raiseWindow(windowKey!)}  // this can lead to some annoying propagation. Just remember to stopProp on mouseDown because the onClick never triggers :D
 			nodeRef={windowRef} // literally just so React strictmode will shut the fuck up: https://stackoverflow.com/questions/63603902/finddomnode-is-deprecated-in-strictmode-finddomnode-was-passed-an-instance-of-d
 		>
 			<div
@@ -79,7 +79,7 @@ const WindowContainer = ({ children, width, height, icon = eyeIcon, className = 
 						'zIndex': zIndex,
 						'--fadeDuration': `${CLOSE_FADE_DURATION}ms`
 					} as WindowCSS}
-				onClick={() => raiseWindow(windowKey)}
+				onClick={() => raiseWindow(windowKey!)}
 				ref={windowRef}
 			>
 				<div className="window-handle">

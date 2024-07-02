@@ -1,4 +1,4 @@
-import { SVALINN_DEFAULT_QUESTIONS } from "@/data/hermes_dynamic/ST/ST_Svalinn.defaults";
+import { SVALINN_DEFAULT_QUESTIONS } from "@/data/hermes/ST/ST_Svalinn.defaults";
 import { NPCFlagStore } from "@/types/NPCFlags.types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";

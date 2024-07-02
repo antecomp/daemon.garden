@@ -6,13 +6,11 @@ import '@/styles/Util/Desktop/SimpleWindow.css'
 
 /**
  * SimpleWindow component providing a basic window layout for rendering JSX children. Adds cut-corner border decoration.
- * @component
  * @param {WindowContainerProps} props - These props get directly passed to WindowContainer, and therefore are under the same conventions.
  * @returns {JSX.Element}
  */
 const SimpleWindow = ({children, width, height, icon, className, zIndex = 0, windowKey, initialPosition, isPopup = false}: WindowContainerProps) => {
 	return (
-		//<WindowContainer width={width} height={height} icon={icon} className={className} zIndex={zIndex} windowKey={windowKey} initialPosition={initialPosition}>
 		<WindowContainer {...{width, height, icon, className, zIndex, windowKey, initialPosition, isPopup}}>
 			<div className="window-content">
 				{children}

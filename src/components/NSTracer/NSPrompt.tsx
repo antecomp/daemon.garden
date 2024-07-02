@@ -3,9 +3,9 @@ import { NSTracerContext } from "./NSTracer"
 import '@/styles/NSTracer/NSPrompt.css'
 import { getMousePosition } from "@/util/getMousePosition"
 
-interface NSPromptProps {
+export interface NSPromptProps {
 	display: ReactNode
-	callback: Function
+	callback: (response: "connect" | "cancel" | "traverse") => void;
 }
 
 /**
@@ -28,7 +28,7 @@ const NSPrompt = ({ display, callback }: NSPromptProps) => {
 
 	const handleClickOutside = (event: MouseEvent) => {
 		if (tooltipRef.current && !tooltipRef.current.contains(event.target as Node)) {
-			callback("cancel by suicide")
+			callback("cancel")
 			NSTC?.setConfirmationText(null);
 		}
 	};

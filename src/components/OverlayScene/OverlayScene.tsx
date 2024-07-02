@@ -32,8 +32,7 @@ const OverlayScene = ({file}: {file: string}) => {
 
 
 				loadedScene.forEach(frame => {
-					if (frame.image) {
-						console.log("pain")
+					if (frame.image) { // Attempt to preload images - I have no idea if this works.
 						const preLoadedImage = new Image();
 						preLoadedImage.src = frame.image 
 					}

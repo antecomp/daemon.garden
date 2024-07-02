@@ -88,12 +88,6 @@ const HermesDynamic = () => {
 		setMessages(prev => [...prev, {...{name, content, renderKey}}])
 	}
 
-	const handleDisconnectClick = () => {
-		if(canDisconnect) {
-			closeHermes();
-		}
-	}
-
 	/**
 	 * useEffecting on the current dialogue node to run stuff to grab the next dialogue node and perform the needed actions is the most elegant
 	 * way I could find for something intervenous/timeout'd like this.
@@ -104,20 +98,20 @@ const HermesDynamic = () => {
 	useEffect(() => {
 		if(!collection) return; // Mainly gaurd for TS to be happy. Should never happen.
 
-		if(!currentNode.getGoto || currentNode.getGoto() == null) { // No next, we've hit a leaf.
+		const next = currentNode.getGoto ? currentNode.getGoto() : null;
+
+		if(!next) {
 			setCanDisconnect(true);
 			return;
 		}
 
 		const displayNextMessage = () => {
-			const next = currentNode.getGoto!();
-
 			if(typeof next == 'string') { // Just a direct next key link.
 				const nextNode = collection.getNode(next);
 				addMessage({...generateMessageFromNode(nextNode), renderKeyBase: next})
 				setCurrentNode(nextNode);
 			} else { // Otherwise we have choices.
-				setOptions(next!) // TS cant infer that the check above will prevent next from being null.
+				setOptions(next)
 			}
 		}
 
@@ -220,7 +214,7 @@ const HermesDynamic = () => {
 			<div className="hermes-footer">
 			<img src={ntwrk} alt="" />
 				<span>S-VLID:91ae0:ffc13 R-VLID:{RVLID.current}</span>
-				<span className={`hermes-disconnect ${canDisconnect ? 'can-disconnect' : ''}`} onClick={handleDisconnectClick}>DISCONNECT</span>
+				<span className={`hermes-disconnect ${canDisconnect ? 'can-disconnect' : ''}`} onClick={() => {canDisconnect && closeHermes()}}>DISCONNECT</span>
 			</div>
 			{	(options.length > 3) &&
 				<div className={classNames({"hermes-pages": true, "hp-first": (optionsPage == 0), "hp-last": (optionsPage == numPages - 1)})}>

@@ -1,4 +1,4 @@
-import { DEFAULT_CONTACT_MAP } from "@/data/strophalos.defaults";
+import { DEFAULT_CONTACT_MAP } from "@/data/defaults/strophalos.defaults";
 import { ContactMap, StrophalosStore } from "@/types/strophalos.types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
