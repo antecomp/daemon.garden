@@ -1,4 +1,5 @@
 import random
+import sys
 
 def decision(prob):
     return random.random() < prob
@@ -11,25 +12,9 @@ MOVE_TYPES = {
         'O': "Observe",
         'R': "Repeat", # aka Prolong
         'P': "Prepare",
-        'F': "Familiar" # will be unused for now.
+        'F': "Familiar", # will be unused for now.
+        'X': "NOTHING (test)"
 }
-
-#class StatusEffect:
-#    def __init__(self, name, level, duration):
-#        self.name = name
-#        self.level = level # multiplier for status amount (vuln can be higher/lower)
-#        self.duration = duration
-#
-#    def __getitem__(self, item):
-#        if item == 'level':
-#            return self.level
-#        if item == 'name':
-#            return self.name
-#        if item == 'duration':
-#            return self.duration
-#        print('illegal get on StatusEffect')
-#        return 'ERROR'
-
 
 class Automata:
     def __init__(self, name, health=10, maxhealth=10):
@@ -41,7 +26,8 @@ class Automata:
     def take_damage(self, damage):
         self.health = max(0, self.health - damage)
         if self.health == 0:
-            print("self.name " + "has died")
+            print(f"{self.name} " + "has died")
+            sys.exit(0)
         else:
             print(f"{self.name} takes {damage} damage. Current health: {self.health}")
 
@@ -65,7 +51,7 @@ class Automata:
                 "duration": duration
         }
         self.statuses[status_name] = status
-        print(f"{self.name} gains status: {status_name} for {duration} turns.")
+        print(f"{self.name} gains status: {status_name}{level} for {duration} turns.")
 
     def update_statuses(self):
         expired_statuses = []
@@ -87,19 +73,30 @@ class Automata:
 def calculate_move_outcome(player_seq: list[str], enemy_seq: list[str], current_index: int, player: Automata, enemy: Automata):
     player_current_move = player_seq[current_index]
     enemy_current_move = enemy_seq[current_index]
+    if player_current_move == 'R':
+        print("Player will repeat previous move")
+        player_current_move = player_seq[current_index -1]
+    if enemy_current_move == 'R':
+        print ("Enemy will repeat previous move")
+        enemy_current_move = enemy_seq[current_index -1]
+
     print(f"Player will {MOVE_TYPES[player_current_move]} and Enemy will {MOVE_TYPES[enemy_current_move]}")
 
     # determine temporary statuses enforced by the move before calculating interactions...
     #   aka the "on OP" statuses
     if player_current_move == 'H' or player_current_move == 'P':
         if player.has_status('vul'): 
-            player.add_status('vul', 2, 1)
+            player.add_status('vul',
+                              player.statuses.get('vul')['level'] + 1,
+                              1)
         else:
             player.add_status('vul', 1, 1)
 
     if enemy_current_move == 'H' or enemy_current_move == 'P':
         if enemy.has_status('vul'): 
-            enemy.add_status('vul', 2, 1)
+            enemy.add_status('vul',
+                             enemy.statuses.get('vul')['level'] + 1,
+                             1)
         else:
             enemy.add_status('vul', 1, 1)
 
@@ -134,18 +131,10 @@ def calculate_move_outcome(player_seq: list[str], enemy_seq: list[str], current_
 
     if player_current_move == 'D':
         print("Player defends.")
-        if player.statuses.get('prep', False):
-            player_incoming_mult *= pow(0.5, player.statuses.get('prep', {'level': 0})['level'] + 1) # Defend inversely scales damage based on prep. Baseline 0.5
-        else:
-            player_incoming_mult *= 0.5
-
+        player_incoming_mult = [0.5, 0.75, 0.0][min(2,player.statuses.get('prep', {'level': 0})['level'])] # Defend inversely scales damage based on prep. Baseline 0.5
     if enemy_current_move == 'D':
         print("Enemy defends.")
-        if enemy.statuses.get('prep', False):
-            enemy_incoming_mult *= pow(0.5, enemy.statuses.get('prep', {'level': 0})['level'] + 1) # Defend inversely scales damage based on prep. Baseline 0.5
-        else:
-            enemy_incoming_mult *= 0.5
-
+        enemy_incoming_mult = [0.5, 0.75, 0.0][min(2,enemy.statuses.get('prep', {'level': 0})['level'])] # Defend inversely scales damage based on prep. Baseline 0.5
     
 
     print(f"Player Multipliers: i-{player_incoming_mult} o-{player_outgoing_mult}")
@@ -164,11 +153,17 @@ def calculate_move_outcome(player_seq: list[str], enemy_seq: list[str], current_
 
     # Prepare
     if player_current_move == 'P':
-        player.add_status('prep', 1, 2)
+        player.add_status('prep', 
+                          1 + player.statuses.get('prep', {'level': 0})['level'], # upgrade prep level if prepped already
+                          2)
 
     # Observe 
     if player_current_move == 'O':
-        enemy.add_status('vul', 1, 2)
+        #enemy.add_status('vul', 1, 2)
+        enemy.add_status('vul',
+                         # NOTE: PROA chain multipliers aren't really proportional to risk (3.375, 5.06) - Make PRO a special chain!
+                         1 + player.statuses.get('prep', {'level': 0})['level'], # P + O = Vuln2 (i-2.25)   P + O + <on vuln> = Vuln3 (3.375) - Lower risk, lower reward chain that PA/PRA
+                         2)
 
     # Evade
     if player_current_move == 'E':
@@ -176,16 +171,14 @@ def calculate_move_outcome(player_seq: list[str], enemy_seq: list[str], current_
             print(f"Evade Probability: {1 - pow(0.5, player_outgoing_mult)}")
             if decision(1 - pow(0.5, player_outgoing_mult)): # 0.5 base, then 0.75, then 0.93 
                 print("Player Evades")
+                if player.has_status('prep') and player.statuses.get('prep')['level'] == 2:
+                    print("Player also parries")
+                    enemy.take_damage(player_outgoing_mult / 4)
                 return
             else:
                 print("Player fails to evade")
                 player.take_damage(enemy_outgoing_mult * player_incoming_mult)
                 return
-
-    # Repeat
-    #if player_current_move == 'R':
-        # ignore for now. I want to test other logic.
-
     
     # ENEMY MOVES ######################################################3
 
@@ -199,11 +192,15 @@ def calculate_move_outcome(player_seq: list[str], enemy_seq: list[str], current_
 
     # Prepare
     if enemy_current_move == 'P':
-        enemy.add_status('prep', 1, 2)
+        enemy.add_status('prep', 
+                          1 + enemy.statuses.get('prep', {'level': 0})['level'], # upgrade prep level if prepped already
+                          2)
 
     # Observe 
     if enemy_current_move == 'O':
-        player.add_status('vul', 1, 2)
+        player.add_status('vul',
+                          1 + enemy.statuses.get('prep', {'level': 0})['level'],
+                          2)
 
     # Evade
     if enemy_current_move == 'E':
@@ -211,21 +208,19 @@ def calculate_move_outcome(player_seq: list[str], enemy_seq: list[str], current_
             print(f"Evade Probability: {1 - pow(0.5, enemy_outgoing_mult)}")
             if decision(1 - pow(0.5, enemy_outgoing_mult)): # 0.5 base, then 0.75, then 0.93 
                 print("enemy Evades")
+                if enemy.has_status('prep') and enemy.statuses.get('prep')['level'] == 2:
+                    print("Enemy also parries")
+                    player.take_damage(enemy_outgoing_mult / 4)
                 return
             else:
                 print("enemy fails to evade")
                 enemy.take_damage(player_outgoing_mult * enemy_incoming_mult)
                 return
     
-    # Repeat
-    #if player_current_move == 'R':
-        # ignore for now. I want to test other logic.
+#############################################################################################
 
-
-
-
-player = Automata(input('Player name: '))
-enemy = Automata(input('Dæmon name: '))
+player = Automata("Player")
+enemy = Automata("Daemon")
 
 
 while True:
@@ -244,5 +239,3 @@ while True:
     print(f"Player health: {player.health} and has statuses: {' '.join(player.statuses.keys())}")
     print(f"Enemy health: {enemy.health} and has statuses: {' '.join(enemy.statuses.keys())}")
     print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-
-# NOTE MAKE SURE YOU'RE DO THE STATUS COUNTDOWN FUNC AFTER EVERY MOVE ITERATION - NOT DOING IT IN CALC FUNCTION BCZ OF EARLY RETURNS.
