@@ -1,5 +1,6 @@
 import random
 import sys
+import copy
 
 def decision(prob):
     return random.random() < prob
@@ -26,7 +27,7 @@ class Automata:
     def take_damage(self, damage):
         self.health = max(0, self.health - damage)
         if self.health == 0:
-            print(f"{self.name} " + "has died")
+            print(f"{self.name} takes a fatal {damage} damage and has died!")
             sys.exit(0)
         else:
             print(f"{self.name} takes {damage} damage. Current health: {self.health}")
@@ -219,12 +220,133 @@ def calculate_move_outcome(player_seq: list[str], enemy_seq: list[str], current_
     
 #############################################################################################
 
+
+
+#def gen_enemy_runes():
+#    choices = [''] * 5
+#    choices[0] = random.choice(['A', 'D', 'H', 'E', 'O', 'P',])
+#    for x in range(1,5):
+#        choices[x] = random.choice(['A', 'D', 'H', 'E', 'O', 'P', 'R'])
+#   
+#    # show hint
+#    indices = random.sample(range(len(choices)), 2)
+#    result = [choices[i] if i in indices else '-' for i in range(len(choices))]
+#    print('SVALINNS INSIGHT:')
+#    print(' '.join(result))
+#
+#    return choices
+
+
+
+BASE_AI_WEIGHTS = {
+        "A": {
+            "A": 0,
+            "D": 2,
+            "H": 2,
+            "E": 2,
+            "O": 1,
+            "R": 2,
+            "P": 2
+        },
+        "D": {
+            "A": 2,
+            "D": 0,
+            "H": 2,
+            "E": 2,
+            "O": 2,
+            "R": 2,
+            "P": 2
+        },
+        "H": {
+            "A": 2,
+            "D": 2,
+            "H": 0,
+            "E": 2,
+            "O": 2,
+            "R": 2,
+            "P": 2
+        },
+        "E": {
+            "A": 2,
+            "D": 2,
+            "H": 2,
+            "E": 0,
+            "O": 2,
+            "R": 2,
+            "P": 2
+        },
+        "O": {
+            "A": 6,
+            "D": 1,
+            "H": 1,
+            "E": 1,
+            "O": 0,
+            "R": 1,
+            "P": 1
+        },
+        "R": {
+            "A": 2,
+            "D": 2,
+            "H": 2,
+            "E": 2,
+            "O": 2,
+            "R": 0,
+            "P": 2
+        },
+        "P": {
+            "A": 3,
+            "D": 3,
+            "H": 3,
+            "E": 3,
+            "O": 2,
+            "R": 3,
+            "P": 0
+        },
+}
+
+
+
+def gen_enemy_runes():
+    dynamic_weights: dict = copy.deepcopy(BASE_AI_WEIGHTS)
+
+    def remove_rune_as_option(rune: str):
+        for col in dynamic_weights:
+            dynamic_weights[col][rune] = 0
+        
+    choices = [''] * 5
+
+    # Done seperately to avoid R as openining - Also treat first move with equal weighting
+    current_choice = random.choice(['A', 'D', 'H', 'E', 'O', 'P',])
+    choices[0] = current_choice
+    remove_rune_as_option(current_choice)
+
+    for i in range(1,5):
+        runes = list(dynamic_weights[current_choice].keys())
+        rune_weights = list(dynamic_weights[current_choice].values())
+
+        current_choice = random.choices(runes, weights=rune_weights, k=1)[0]
+        choices[i] = current_choice
+        remove_rune_as_option(current_choice)
+
+    #print(f"DEBUG: DAEMON RUNES = {choices}")
+
+    # show hint
+    indices = random.sample(range(len(choices)), 2)
+    result = [choices[i] if i in indices else '-' for i in range(len(choices))]
+    print('SVALINNS INSIGHT:')
+    print(' '.join(result))
+
+    return choices
+
+
+
 player = Automata("Player")
 enemy = Automata("Daemon")
 
 
 while True:
-    enemy_runes = input("enter daemon runes: ").split()
+    #enemy_runes = input("enter daemon runes: ").split()
+    enemy_runes = gen_enemy_runes()
     player_runes = input("enter player runes: ").split()
     print("---------------------------------------------------------------")
 
