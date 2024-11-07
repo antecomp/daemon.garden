@@ -1,0 +1,30 @@
+@font-face {
+    font-family: 'main';
+    src: url('./assets/compaq.ttf');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: black;
+    color: white;
+    font-family: 'main';
+}
+
+img {
+    image-rendering: pixelated;
+}
+
+.cr {
+    color: rgb(175, 11, 11);
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background: white;
+    margin: 4px 0;
+}
