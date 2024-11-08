@@ -1,0 +1,17 @@
+.uscon {
+    text-align: center;
+}
+
+/* >:3 */
+.uscon .OVRLY {
+    z-index: 2;
+    position: relative;
+}
+
+.uscon .OMMOR {
+    z-index: 1;
+    position: absolute;
+    top: 75px;
+    left: 50%;
+    transform: translateX(-48%);
+}

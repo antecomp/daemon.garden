@@ -1,6 +1,6 @@
 @font-face {
     font-family: 'main';
-    src: url('./assets/compaq.ttf');
+    src: url('./assets/CompaqThin.ttf');
 }
 
 * {
@@ -12,6 +12,10 @@ body {
     background: black;
     color: white;
     font-family: 'main';
+    scrollbar-width: thin;
+    scrollbar-color: white black;
+    background-size: 248px;
+    background-attachment: fixed;
 }
 
 img {
@@ -27,4 +31,23 @@ hr {
     height: 1px;
     background: white;
     margin: 4px 0;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+    background-color: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+    color: white;
+    background-color: white;
+}
+
+::selection {
+    background: hsl(0deg 0% 100% / 26%);
+}
+ 
+::-moz-selection {
+	background: hsl(0deg 0% 100% / 26%);
+	color: white;
 }
